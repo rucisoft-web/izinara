@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="izinara.Executive">
+        <div class="o_izinara_exec o_action h-100 overflow-auto p-3">
+            <div class="o_izinara_exec_body" t-if="state.data">
+                <t t-set="d" t-value="state.data"/>
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h2 class="mb-1">Ringkasan eksekutif Izinara</h2>
+                        <div class="text-muted small mb-3">Indoguna Group · data per <t t-esc="today"/></div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-sm me-2" t-on-click="openDashboard">Buka dashboard</button>
+                        <button class="btn btn-secondary btn-sm" t-on-click="openGuide">Panduan per peran</button>
+                    </div>
+                </div>
+                <p class="o_izinara_exec_lead">
+                    Izinara menyatukan pengurusan izin impor pangan dalam satu alur kerja: izin apa yang wajib untuk tiap
+                    item code, siapa yang mengerjakannya, dokumen mana yang sudah diverifikasi, dan pengapalan mana yang
+                    berisiko tertahan di pelabuhan. Manajemen melihat status kepatuhan secara langsung tanpa menunggu
+                    laporan manual dari lima bagian.
+                </p>
+
+                <!-- KPI -->
+                <h3>Posisi saat ini</h3>
+                <div class="o_izinara_exec_grid">
+                    <div class="o_izinara_exec_kpi">
+                        <div class="o_value"><t t-esc="pct(ex.items_mapped, ex.items_total)"/>%</div>
+                        <div class="o_label">Item code sudah punya template izin</div>
+                        <div class="o_sub"><t t-esc="ex.items_mapped"/> dari <t t-esc="ex.items_total"/> item · <t t-esc="ex.items_non_halal"/> non-halal ditandai</div>
+                    </div>
+                    <div class="o_izinara_exec_kpi">
+                        <div class="o_value"><t t-esc="d.kpi.shipments"/></div>
+                        <div class="o_label">Pengapalan dipantau</div>
+                        <div class="o_sub" t-att-class="d.kpi.shipments_risk ? 'text-danger' : ''"><t t-esc="d.kpi.shipments_risk"/> berisiko (ETA ≤ 14 hari, izin belum lengkap)</div>
+                    </div>
+                    <div class="o_izinara_exec_kpi">
+                        <div class="o_value"><t t-esc="ex.apps_approved"/>/<t t-esc="ex.apps_total"/></div>
+                        <div class="o_label">Pengurusan izin selesai</div>
+                        <div class="o_sub"><t t-esc="d.kpi.apps_open"/> berjalan · <t t-esc="d.kpi.apps_late"/> lewat target</div>
+                    </div>
+                    <div class="o_izinara_exec_kpi">
+                        <t t-set="verified" t-value="verifiedCount"/>
+                        <div class="o_value"><t t-esc="pct(verified, ex.docs_total)"/>%</div>
+                        <div class="o_label">Dokumen terverifikasi</div>
+                        <div class="o_sub"><t t-esc="verified"/> dari <t t-esc="ex.docs_total"/> dokumen · <t t-esc="d.kpi.docs_review"/> menunggu</div>
+                    </div>
+                    <div class="o_izinara_exec_kpi">
+                        <div class="o_value"><t t-if="ex.memo_on_time !== null"><t t-esc="ex.memo_on_time"/>%</t><t t-else="">–</t></div>
+                        <div class="o_label">Memo dijawab tepat waktu</div>
+                        <div class="o_sub"><t t-esc="ex.memo_answered"/> memo dijawab · <t t-esc="d.kpi.memos_late"/> lewat tenggat</div>
+                    </div>
+                    <div class="o_izinara_exec_kpi">
+                        <div class="o_value"><t t-esc="d.kpi.licenses_expiring"/></div>
+                        <div class="o_label">Izin habis ≤ 90 hari</div>
+                        <div class="o_sub"><t t-if="ex.lead_days !== null">Rata-rata lama pengurusan <t t-esc="ex.lead_days"/> hari</t><t t-else="">Perpanjangan diingatkan otomatis</t></div>
+                    </div>
+                </div>
+
+                <!-- MANFAAT -->
+                <h3>Manfaat bagi perusahaan</h3>
+                <div class="o_izinara_exec_grid">
+                    <div class="o_izinara_exec_card">
+                        <h4><i class="fa fa-shield"/>Kepatuhan terjaga</h4>
+                        Setiap item code dipetakan ke izin wajib sesuai kelompoknya (PSAH, PSAI, PSAT, BPOM ML/MD), lengkap
+                        dengan dasar hukum di setiap aktivitas. Kewajiban halal dan non-halal tidak terlewat.
+                    </div>
+                    <div class="o_izinara_exec_card">
+                        <h4><i class="fa fa-ship"/>Barang tidak tertahan</h4>
+                        Kesiapan izin dihitung per pengapalan sebelum ETA. Pengapalan berisiko langsung terlihat, sehingga
+                        risiko demurrage, biaya penumpukan dan reekspor bisa dicegah lebih awal.
+                    </div>
+                    <div class="o_izinara_exec_card">
+                        <h4><i class="fa fa-users"/>Tanggung jawab jelas</h4>
+                        Setiap aktivitas punya bagian, petugas dan target tanggal. Keterlambatan terlihat per bagian, bukan
+                        baru diketahui saat barang tiba.
+                    </div>
+                    <div class="o_izinara_exec_card">
+                        <h4><i class="fa fa-check-square-o"/>Dokumen siap audit</h4>
+                        Dokumen diunggah sekali (banyak file), diperiksa otomatis dan diverifikasi dengan checklist.
+                        Riwayat revisi dan alasan penolakan tersimpan untuk audit dan pemeriksaan instansi.
+                    </div>
+                    <div class="o_izinara_exec_card">
+                        <h4><i class="fa fa-comments"/>Komunikasi terukur</h4>
+                        Memo antar bagian memiliki tenggat dan waktu respons. Hanya Purchasing yang menghubungi prinsipal,
+                        sehingga permintaan ke luar negeri satu pintu dan tidak tumpang tindih.
+                    </div>
+                    <div class="o_izinara_exec_card">
+                        <h4><i class="fa fa-refresh"/>Izin dipakai ulang</h4>
+                        Izin yang sudah terbit tersimpan di register dan dipakai otomatis oleh pengapalan berikutnya.
+                        Perpanjangan diingatkan sebelum habis, sehingga tidak ada pengurusan ganda.
+                    </div>
+                </div>
+
+                <!-- GRAFIK -->
+                <h3>Grafik</h3>
+                <div class="o_izinara_exec_charts">
+                    <div class="o_izinara_exec_chart">
+                        <h4>Kesiapan izin per pengapalan</h4>
+                        <div class="o_bar_row" t-foreach="d.shipments" t-as="s" t-key="s.id">
+                            <div class="o_bar_label" t-att-title="s.partner"><t t-esc="s.name"/></div>
+                            <div class="o_bar_track">
+                                <div class="o_bar_fill" t-att-style="'width:' + s.readiness + '%;background-color:' + (s.risk ? '#c0392b' : '#0f2c59')"/>
+                            </div>
+                            <div class="o_bar_value"><t t-esc="s.readiness"/>% · <t t-esc="s.days_to_eta"/> h</div>
+                        </div>
+                        <div class="o_chart_note">Merah: ETA ≤ 14 hari tetapi izin wajib belum lengkap. "h" = hari menuju ETA.</div>
+                    </div>
+
+                    <div class="o_izinara_exec_chart">
+                        <h4>Progres pengurusan per kelompok</h4>
+                        <div class="o_bar_row" t-foreach="d.groups" t-as="g" t-key="g.code">
+                            <div class="o_bar_label" t-att-title="g.name"><t t-esc="g.name"/></div>
+                            <div class="o_bar_track">
+                                <div class="o_bar_fill" t-att-style="'width:' + pct(g.approved, g.total) + '%;background-color:#0f2c59'"/>
+                                <div class="o_bar_fill" t-att-style="'width:' + pct(g.open - g.late, g.total) + '%;background-color:#9fb3d1'"/>
+                                <div class="o_bar_fill" t-att-style="'width:' + pct(g.late, g.total) + '%;background-color:#c0392b'"/>
+                            </div>
+                            <div class="o_bar_value"><t t-esc="g.approved"/>/<t t-esc="g.total"/></div>
+                        </div>
+                        <div class="o_legend mt-2">
+                            <span class="me-3"><span class="o_dot" style="background-color:#0f2c59"/>Selesai</span>
+                            <span class="me-3"><span class="o_dot" style="background-color:#9fb3d1"/>Berjalan</span>
+                            <span><span class="o_dot" style="background-color:#c0392b"/>Lewat target</span>
+                        </div>
+                    </div>
+
+                    <div class="o_izinara_exec_chart">
+                        <h4>Status dokumen</h4>
+                        <div class="o_donut_wrap">
+                            <svg viewBox="0 0 42 42" class="o_donut">
+                                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#eef2f7" stroke-width="6"/>
+                                <circle t-foreach="docSegments" t-as="seg" t-key="seg.state" cx="21" cy="21" r="15.915"
+                                        fill="transparent" t-att-stroke="seg.color" stroke-width="6"
+                                        t-att-stroke-dasharray="seg.dash" t-att-stroke-dashoffset="seg.offset"/>
+                                <text x="21" y="22" text-anchor="middle" font-size="6" font-weight="600" fill="#0f2c59"><t t-esc="ex.docs_total"/></text>
+                                <text x="21" y="27" text-anchor="middle" font-size="2.6" fill="#6c757d">dokumen</text>
+                            </svg>
+                            <div class="o_legend">
+                                <div t-foreach="docSegments" t-as="seg" t-key="seg.state" class="mb-1">
+                                    <span class="o_dot" t-att-style="'background-color:' + seg.color"/>
+                                    <t t-esc="seg.name"/>: <b><t t-esc="seg.count"/></b> (<t t-esc="seg.pct"/>%)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="o_izinara_exec_chart">
+                        <h4>Register izin &amp; sertifikat</h4>
+                        <div class="o_donut_wrap">
+                            <svg viewBox="0 0 42 42" class="o_donut">
+                                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#eef2f7" stroke-width="6"/>
+                                <circle t-foreach="licenseSegments" t-as="seg" t-key="seg.state" cx="21" cy="21" r="15.915"
+                                        fill="transparent" t-att-stroke="seg.color" stroke-width="6"
+                                        t-att-stroke-dasharray="seg.dash" t-att-stroke-dashoffset="seg.offset"/>
+                                <text x="21" y="22" text-anchor="middle" font-size="6" font-weight="600" fill="#0f2c59"><t t-esc="licenseTotal"/></text>
+                                <text x="21" y="27" text-anchor="middle" font-size="2.6" fill="#6c757d">izin</text>
+                            </svg>
+                            <div class="o_legend">
+                                <div t-foreach="licenseSegments" t-as="seg" t-key="seg.state" class="mb-1">
+                                    <span class="o_dot" t-att-style="'background-color:' + seg.color"/>
+                                    <t t-esc="seg.name"/>: <b><t t-esc="seg.count"/></b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="o_izinara_exec_chart">
+                        <h4>Beban kerja per bagian</h4>
+                        <div class="o_bar_row" t-foreach="d.parties" t-as="p" t-key="p.id">
+                            <div class="o_bar_label" t-att-title="p.name"><t t-esc="p.name"/></div>
+                            <div class="o_bar_track">
+                                <div class="o_bar_fill" t-att-style="'width:' + pct(p.done, maxOpen) + '%;background-color:#0f2c59'"/>
+                                <div class="o_bar_fill" t-att-style="'width:' + pct(p.open - p.late, maxOpen) + '%;background-color:#9fb3d1'"/>
+                                <div class="o_bar_fill" t-att-style="'width:' + pct(p.late, maxOpen) + '%;background-color:#c0392b'"/>
+                            </div>
+                            <div class="o_bar_value"><t t-if="p.memo_on_time !== null"><t t-esc="p.memo_on_time"/>% tepat</t><t t-else="">–</t></div>
+                        </div>
+                        <div class="o_legend mt-2">
+                            <span class="me-3"><span class="o_dot" style="background-color:#0f2c59"/>Aktivitas selesai</span>
+                            <span class="me-3"><span class="o_dot" style="background-color:#9fb3d1"/>Berjalan</span>
+                            <span><span class="o_dot" style="background-color:#c0392b"/>Terlambat</span>
+                        </div>
+                        <div class="o_chart_note">Kolom kanan: persentase memo yang dijawab sebelum tenggat.</div>
+                    </div>
+
+                    <div class="o_izinara_exec_chart">
+                        <h4>Item code per kelompok pengurusan</h4>
+                        <div class="o_bar_row" t-foreach="d.groups" t-as="g" t-key="g.code">
+                            <div class="o_bar_label" t-att-title="g.name"><t t-esc="g.name"/></div>
+                            <div class="o_bar_track">
+                                <div class="o_bar_fill" t-att-style="'width:' + pct(g.items, maxItems) + '%;background-color:#2a5aa0'"/>
+                            </div>
+                            <div class="o_bar_value"><t t-esc="g.items"/> item</div>
+                        </div>
+                        <div class="o_chart_note">Hasil pemetaan item master SAP Indoguna (2.864 item): PSAH 1.777, BPOM ML 568, BPOM MD 333, PSAI 82, PSAT 60, non-pangan 44.</div>
+                    </div>
+                </div>
+
+                <!-- SEBELUM / SESUDAH -->
+                <h3>Tanpa dan dengan Izinara</h3>
+                <table class="table table-bordered o_izinara_exec_table">
+                    <thead><tr><th style="width:22%">Aspek</th><th>Tanpa sistem terpusat</th><th>Dengan Izinara</th></tr></thead>
+                    <tbody>
+                        <tr><td>Izin yang dibutuhkan</td><td>Ditentukan per kasus, bergantung pada pengalaman staf</td><td>Otomatis dari template per item code dan kelompok pangan</td></tr>
+                        <tr><td>Status pengurusan</td><td>Ditanyakan lewat telepon, chat atau email ke tiap bagian</td><td>Satu dashboard: kesiapan per pengapalan, aktivitas terlambat per bagian</td></tr>
+                        <tr><td>Dokumen</td><td>Tersebar di email dan folder pribadi</td><td>Tersimpan per aktivitas, diverifikasi, riwayat revisi tercatat</td></tr>
+                        <tr><td>Komunikasi</td><td>Tidak tercatat, sulit ditelusuri</td><td>Memo bertenggat, waktu respons terukur, ruang diskusi per pengapalan</td></tr>
+                        <tr><td>Masa berlaku izin</td><td>Diketahui saat sudah habis</td><td>Register izin dengan pengingat perpanjangan otomatis</td></tr>
+                        <tr><td>Dasar hukum</td><td>Dicari ulang setiap kali</td><td>Tercantum di setiap jenis izin dan aktivitas</td></tr>
+                    </tbody>
+                </table>
+
+                <!-- RISIKO -->
+                <h3>Risiko yang dikendalikan</h3>
+                <table class="table table-bordered o_izinara_exec_table">
+                    <thead><tr><th style="width:30%">Risiko</th><th>Kontrol di Izinara</th></tr></thead>
+                    <tbody>
+                        <tr><td>Barang tiba sebelum izin lengkap</td><td>Kesiapan izin per pengapalan, tanda merah bila ETA ≤ 14 hari, pengingat ETA harian</td></tr>
+                        <tr><td>Dokumen prinsipal tidak sesuai</td><td>Cek otomatis (jenis file, masa berlaku sampai ETA) dan checklist kriteria oleh bagian verifikator</td></tr>
+                        <tr><td>Produk non-halal tidak ditangani khusus</td><td>Penanda non-halal otomatis dan aktivitas keterangan tidak halal serta pemisahan</td></tr>
+                        <tr><td>Izin kedaluwarsa</td><td>Register izin dengan status berlaku, segera habis dan kedaluwarsa, plus pengingat perpanjangan</td></tr>
+                        <tr><td>Data item master tidak lengkap</td><td>Aturan pemetaan menandai item tanpa template; laporan temuan HS code dan penanda halal</td></tr>
+                    </tbody>
+                </table>
+
+                <!-- TANGKAPAN LAYAR -->
+                <h3>Tangkapan layar</h3>
+                <div class="o_izinara_figure_row">
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'dashboard.jpg'"/><t t-set="caption" t-value="'Dashboard: KPI, kesiapan pengapalan dan beban kerja per bagian.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'kebutuhan-izin.jpg'"/><t t-set="caption" t-value="'Kebutuhan izin per pengapalan: lengkap, diurus atau belum ada.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'verifikasi-dokumen.jpg'"/><t t-set="caption" t-value="'Verifikasi dokumen: banyak file, cek otomatis dan checklist.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'register-izin.jpg'"/><t t-set="caption" t-value="'Register izin dan sertifikat dengan masa berlaku.'"/></t>
+                </div>
+
+                <!-- LANGKAH -->
+                <h3>Langkah penerapan</h3>
+                <ol>
+                    <li><b>Minggu 1:</b> tetapkan petugas tiap bagian dan impor item master SAP; tinjau item tanpa template.</li>
+                    <li><b>Minggu 2:</b> input izin yang sudah dimiliki (NIB, NKV, NIE, SHLN, approval unit usaha) ke register.</li>
+                    <li><b>Minggu 3:</b> jalankan pengapalan berikutnya sepenuhnya lewat Izinara; Purchasing sebagai pintu ke prinsipal.</li>
+                    <li><b>Seterusnya:</b> tinjau dashboard mingguan; evaluasi waktu respons dan keterlambatan per bagian setiap bulan.</li>
+                </ol>
+                <p class="text-muted small">Angka di halaman ini dihitung langsung dari database Izinara. Daftar peraturan perlu dikonfirmasi
+                    berkala ke JDIH instansi terkait.</p>
+            </div>
+        </div>
+    </t>
+</templates>

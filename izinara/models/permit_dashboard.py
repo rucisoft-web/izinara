@@ -111,3 +111,72 @@ class IzinaraDashboard(models.AbstractModel):
                             "days": (today - s.date_planned).days}
                            for s in late_steps.sorted("date_planned")[:10]],
         }
+
+    @api.model
+    def get_executive_data(self):
+        """Angka ringkas untuk halaman Ringkasan eksekutif: dashboard ditambah cakupan item, dokumen dan izin."""
+        data = self.get_dashboard_data()
+        Product = self.env["product.template"]
+        Doc = self.env["izinara.document"]
+        License = self.env["izinara.license"]
+        App = self.env["izinara.application"]
+        Memo = self.env["izinara.memo"]
+
+        item_domain = ["|", ("permit_category", "!=", False), ("permit_template_id", "!=", False)]
+        doc_states = dict(Doc._fields["state"].selection)
+        docs = {state: Doc.search_count([("state", "=", state)]) for state in doc_states}
+        lic_states = dict(License._fields["state"].selection)
+        answered = Memo.search([("state", "in", ("answered", "closed")), ("date_answered", "!=", False)])
+        approved = App.search([("state", "=", "approved"), ("date_start", "!=", False), ("date_issue", "!=", False)])
+        lead_days = [(a.date_issue - a.date_start).days for a in approved if a.date_issue >= a.date_start]
+
+        data["executive"] = {
+            "items_total": Product.search_count(item_domain),
+            "items_mapped": Product.search_count(item_domain + [("permit_template_id", "!=", False)]),
+            "items_non_halal": Product.search_count(item_domain + [("permit_non_halal", "=", True)]),
+            "docs": [{"state": s, "name": doc_states[s], "count": docs[s]} for s in doc_states],
+            "docs_total": sum(docs.values()),
+            "licenses": [{"state": s, "name": lic_states[s], "count": License.search_count([("state", "=", s)])}
+                         for s in lic_states],
+            "apps_total": App.search_count([]),
+            "apps_approved": App.search_count([("state", "=", "approved")]),
+            "memo_answered": len(answered),
+            "memo_on_time": round(100.0 * len(answered.filtered("on_time")) / len(answered)) if answered else None,
+            "lead_days": round(sum(lead_days) / len(lead_days)) if lead_days else None,
+        }
+        return data
+
+    @api.model
+    def get_permit_guide_data(self):
+        """Keterangan, langkah standar, dokumen wajib dan dasar hukum setiap jenis izin untuk menu Panduan."""
+        Type = self.env["izinara.type"]
+        scopes = dict(Type._fields["scope"].selection)
+        lines = self.env["izinara.template.line"].search([])
+        groups_label = dict(self.env["izinara.template"]._fields["food_group"].selection)
+
+        def regs(records):
+            return [{"id": r.id, "name": r.name, "title": r.title or "", "url": r.url or "", "note": r.note or ""}
+                    for r in records]
+
+        result = []
+        for ptype in Type.search([]):
+            used = lines.filtered(lambda l, t=ptype: l.type_id == t)
+            result.append({
+                "id": ptype.id, "code": ptype.code, "name": ptype.name,
+                "scope": ptype.scope, "scope_label": scopes.get(ptype.scope, ""),
+                "authority": ptype.authority or "", "system": ptype.system or "",
+                "party": ptype.party_id.name, "lead_days": ptype.lead_days,
+                "validity_months": ptype.validity_months, "description": ptype.description or "",
+                "legal_basis": ptype.legal_basis or "", "regulations": regs(ptype.regulation_ids),
+                "groups": sorted({groups_label.get(g, g) for g in used.template_id.mapped("food_group") if g}),
+                "templates": [{"name": l.template_id.name, "mandatory": l.mandatory} for l in used],
+                "steps": [{
+                    "id": s.id, "name": s.name, "party": s.party_id.name, "days": s.duration_days,
+                    "instructions": s.instructions or "", "deliverable": s.deliverable or "",
+                    "docs": [{"name": d.name, "required": d.required, "check_expiry": d.check_expiry,
+                              "criteria": [c for c in (d.criteria or "").splitlines() if c.strip()],
+                              "verifier": d.verifier_party_id.name or ""} for d in s.doc_spec_ids],
+                    "regulations": regs(s.regulation_ids),
+                } for s in ptype.step_ids],
+            })
+        return {"scopes": [{"code": c, "name": n} for c, n in Type._fields["scope"].selection], "types": result}

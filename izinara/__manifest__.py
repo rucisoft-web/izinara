@@ -2,7 +2,7 @@
     "name": "Izinara",
     "summary": "Monitoring pengurusan izin impor pangan (daging, ikan, pangan olahan): template aktivitas per item code, "
                "aturan pemetaan item master, pengapalan, tugas per bagian dan register izin/sertifikat",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.1.0",
     "category": "Inventory/Izinara",
     "license": "LGPL-3",
     "author": "Indoguna Group",
@@ -37,6 +37,8 @@
         "web.assets_backend": [
             "izinara/static/src/dashboard/*",
             "izinara/static/src/guide/*",
+            "izinara/static/src/executive/*",
+            "izinara/static/src/permit_guide/*",
         ],
     },
     "installable": True,

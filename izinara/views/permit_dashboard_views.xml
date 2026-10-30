@@ -5,7 +5,15 @@
         <field name="tag">izinara.dashboard</field>
     </record>
     <record id="action_izinara_guide" model="ir.actions.client">
-        <field name="name">Panduan</field>
+        <field name="name">Panduan per peran</field>
         <field name="tag">izinara.guide</field>
+    </record>
+    <record id="action_izinara_executive" model="ir.actions.client">
+        <field name="name">Ringkasan eksekutif</field>
+        <field name="tag">izinara.executive</field>
+    </record>
+    <record id="action_izinara_permit_guide" model="ir.actions.client">
+        <field name="name">Panduan per jenis izin</field>
+        <field name="tag">izinara.permit_guide</field>
     </record>
 </odoo>

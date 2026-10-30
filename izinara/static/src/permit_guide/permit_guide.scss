@@ -1,0 +1,81 @@
+.o_izinara_pg {
+    background-color: $o-view-background-color;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    .o_izinara_pg_side {
+        width: 290px;
+        flex-shrink: 0;
+        border-right: 1px solid $border-color;
+        overflow-y: auto;
+        padding: 0.75rem;
+        .o_scope { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: $text-muted; margin: 0.9rem 0 0.3rem; }
+        .o_item {
+            display: block;
+            padding: 0.35rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            &:hover { background-color: #eef2f7; }
+            &.active { background-color: #e3eaf5; border-left-color: #0f2c59; font-weight: 500; }
+        }
+    }
+    .o_izinara_pg_detail {
+        flex: 1;
+        min-width: 0;
+        overflow-y: auto;
+        padding: 1rem 1.5rem;
+        > div { max-width: 980px; }
+        h2 { font-weight: 600; margin-bottom: 0.25rem; }
+        h3 { font-size: 1.05rem; margin: 1.5rem 0 0.6rem; padding-bottom: 0.3rem; border-bottom: 2px solid #0f2c59; display: inline-block; }
+    }
+    .o_izinara_pg_facts {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 0.5rem 1rem;
+        border: 1px solid $border-color;
+        border-radius: 6px;
+        padding: 0.75rem 1rem;
+        .o_k { font-size: 0.75rem; color: $text-muted; }
+        .o_v { font-weight: 500; }
+    }
+    .o_izinara_pg_note {
+        border-left: 3px solid #2a5aa0;
+        background-color: #f4f7fb;
+        padding: 0.5rem 0.85rem;
+        margin-bottom: 0.5rem;
+        border-radius: 0 4px 4px 0;
+        &.o_warn { border-left-color: #d39e00; background-color: #fdf8ec; }
+        b { color: #0f2c59; }
+    }
+    .o_izinara_pg_step {
+        display: grid;
+        grid-template-columns: 38px 1fr;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        .o_num {
+            width: 32px; height: 32px; border-radius: 50%;
+            background-color: #0f2c59; color: #fff;
+            display: flex; align-items: center; justify-content: center; font-weight: 600;
+        }
+        .o_meta { font-size: 0.8rem; color: $text-muted; margin: 0.15rem 0 0.35rem; }
+        .o_doc {
+            border: 1px solid $border-color;
+            border-radius: 4px;
+            padding: 0.4rem 0.7rem;
+            margin-top: 0.4rem;
+            font-size: 0.85rem;
+            ul { margin: 0.25rem 0 0; padding-left: 1.1rem; }
+        }
+    }
+    .o_badge_reg {
+        display: inline-block;
+        font-size: 0.75rem;
+        background-color: #eef2f7;
+        color: #0f2c59;
+        border-radius: 3px;
+        padding: 0.05rem 0.4rem;
+        margin: 0.15rem 0.25rem 0 0;
+    }
+}

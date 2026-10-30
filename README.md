@@ -6,7 +6,7 @@ memverifikasi dokumen yang diunggah, mencatat komunikasi antar bagian, dan mengi
 
 | Add-on | Isi |
 |---|---|
-| `izinara` | Modul utama. Kelompok PSAH, PSAI, PSAT, BPOM ML dan BPOM MD dengan jenis produk (karkas, daging, jeroan, daging olahan; ikan, krustasea, moluska; sayur/buah). Template aktivitas per item code, aturan pemetaan item master SAP, pengapalan dan kesiapan izin, tugas per bagian, unggah banyak file dengan verifikasi dokumen, memo antar bagian, ruang diskusi per pengapalan, register izin, referensi peraturan di setiap aktivitas, dashboard, dan menu **Panduan** (ringkasan fungsi, panduan per peran, tangkapan layar). Hanya bergantung pada `mail` dan `product`. |
+| `izinara` | Modul utama. Kelompok PSAH, PSAI, PSAT, BPOM ML dan BPOM MD dengan jenis produk (karkas, daging, jeroan, daging olahan; ikan, krustasea, moluska; sayur/buah). Template aktivitas per item code, aturan pemetaan item master SAP, pengapalan dan kesiapan izin, tugas per bagian, unggah banyak file dengan verifikasi dokumen, memo antar bagian, ruang diskusi per pengapalan, register izin, referensi peraturan di setiap aktivitas, dashboard, dan menu **Panduan** dengan tiga submenu: Ringkasan eksekutif (manfaat, grafik dari data langsung), Panduan per peran, dan Panduan per jenis izin (keterangan, langkah, dokumen wajib, dasar hukum). Hanya bergantung pada `mail` dan `product`. |
 | `izinara_demo` | Data demo (terpisah): 6 petugas, 14 item code dari item master, 7 pengapalan di berbagai tahap, dokumen, memo dan izin contoh. |
 | `izinara_theme` | Tema ringan: navbar hitam bergaris biru tua dan halaman login Indoguna Group. |
 

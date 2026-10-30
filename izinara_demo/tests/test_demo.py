@@ -20,3 +20,12 @@ class TestDemo(TransactionCase):
         data = env["izinara.dashboard"].get_dashboard_data()
         self.assertTrue(data["kpi"]["shipments_risk"])
         self.assertTrue(data["late_steps"])
+        ex = env["izinara.dashboard"].get_executive_data()["executive"]
+        self.assertGreater(ex["items_mapped"], 0)
+        self.assertLessEqual(ex["items_mapped"], ex["items_total"])
+        self.assertEqual(ex["docs_total"], env["izinara.document"].search_count([]))
+        self.assertTrue(ex["apps_approved"])
+        guide = env["izinara.dashboard"].get_permit_guide_data()
+        rp = next(t for t in guide["types"] if t["code"] == "RP_KEMENTAN")
+        self.assertIn("Kapan diperlukan", rp["description"])
+        self.assertTrue(all(s["instructions"] for s in rp["steps"]))
