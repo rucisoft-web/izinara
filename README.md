@@ -23,7 +23,25 @@ Peraturan bertanda "cek versi terbaru" perlu dikonfirmasi ke JDIH instansi terka
 | Purchasing | Satu-satunya penghubung dengan prinsipal/eksportir luar negeri |
 | Impor & Kepabeanan | Cek lartas INSW, Persetujuan Impor, PIB, BM/PDRI, SPPB |
 
-## Memasang
+## Memasang di Windows 11 (PowerShell)
+
+Buka PowerShell lalu jalankan:
+
+```powershell
+irm https://raw.githubusercontent.com/rucisoft-web/izinara/claude/project-thread-pf8s62/scripts/install-windows.ps1 -OutFile install-izinara.ps1
+powershell -ExecutionPolicy Bypass -File .\install-izinara.ps1
+```
+
+Skrip ini:
+
+1. Memasang Git dan Docker Desktop lewat `winget` bila belum ada. Setelah itu restart bila diminta, buka Docker Desktop, lalu jalankan skrip sekali lagi.
+2. Mengunduh Izinara ke `%USERPROFILE%\izinara`.
+3. Membuat database `izinara` dan memasang modulnya. Tambahkan `-NoDemo` untuk memasang tanpa data demo.
+4. Menjalankan Odoo dan membuka http://localhost:8069.
+
+Login `admin` / `admin`. Untuk berhenti: `docker compose down`; untuk jalan lagi: `docker compose up -d` dari folder izinara.
+
+## Memasang di server
 
 Tambahkan folder repositori ini ke `addons_path` Odoo 18, lalu pasang `izinara` (dan `izinara_theme` bila ingin
 tema Indoguna). Pasang `izinara_demo` hanya di database percobaan. Dengan Docker:
