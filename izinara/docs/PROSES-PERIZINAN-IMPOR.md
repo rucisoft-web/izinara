@@ -480,8 +480,8 @@ segera habis dan kedaluwarsa.
 
 ## 9. Tangkapan layar
 
-Gambar di bawah diambil dari database demo dan juga tampil di menu **Panduan**. Kotak "Tempat screen capture" diisi
-dengan tangkapan layar portal pemerintah atau dokumen asli; simpan filenya di `izinara/static/img/guide/`.
+Gambar di bawah diambil dari database demo dan juga tampil di menu **Panduan**. Tangkapan layar portal pemerintah
+(SIHALAL, e-Reg BPOM, SINSW, INSW, CEISA) dapat ditambahkan di `izinara/static/img/guide/`.
 
 | | |
 |---|---|
@@ -490,16 +490,7 @@ dengan tangkapan layar portal pemerintah atau dokumen asli; simpan filenya di `i
 | ![Memo](../static/img/guide/memo.jpg)<br>Memo antar bagian | ![Register izin](../static/img/guide/register-izin.jpg)<br>Register izin & sertifikat |
 | ![Item code](../static/img/guide/item-code.jpg)<br>Item code & template izin | ![Template](../static/img/guide/template.jpg)<br>Template pengurusan |
 | ![Pengurusan](../static/img/guide/pengurusan-form.jpg)<br>Pengurusan izin | ![Impor item master](../static/img/guide/impor-item-master.jpg)<br>Impor item master SAP |
-
-Tempat screen capture yang perlu diisi:
-
-| Gambar | Isi yang disarankan |
-|---|---|
-| `[Gambar: email ke prinsipal]` | Email Purchasing ke prinsipal berisi daftar dokumen yang diminta |
-| `[Gambar: e-Reg BPOM]` | Status pengajuan NIE ML/MD di e-reg.pom.go.id |
-| `[Gambar: rancangan label]` | Rancangan label Bahasa Indonesia / stiker pada kemasan |
-| `[Gambar: SIHALAL]` | Status registrasi SHLN di ptsp.halal.go.id |
-| `[Gambar: SINSW/SIMREK]` | Bukti pengajuan RP, RIPH atau rekomendasi KKP |
-| `[Gambar: pelepasan karantina]` | Scan sertifikat pelepasan karantina |
-| `[Gambar: lartas INSW]` | Hasil cek lartas HS code di insw.go.id |
-| `[Gambar: SPPB]` | SPPB dari CEISA |
+| ![Dokumen prinsipal](../static/img/guide/dokumen-prinsipal.jpg)<br>Dokumen prinsipal ditolak, minta revisi | ![Bukti BPOM](../static/img/guide/bukti-pengajuan-bpom.jpg)<br>Bukti pengajuan SKI BPOM |
+| ![Rancangan label](../static/img/guide/rancangan-label.jpg)<br>Rancangan label Bahasa Indonesia | ![SHLN](../static/img/guide/shln.jpg)<br>Sertifikat halal LN untuk SHLN |
+| ![Bukti RP](../static/img/guide/bukti-pengajuan-rp.jpg)<br>Bukti pengajuan RP Kementan | ![Pelepasan karantina](../static/img/guide/pelepasan-karantina.jpg)<br>Sertifikat pelepasan karantina |
+| ![Cek lartas](../static/img/guide/cek-lartas.jpg)<br>Hasil cek lartas INSW | ![SPPB](../static/img/guide/sppb.jpg)<br>SPPB |

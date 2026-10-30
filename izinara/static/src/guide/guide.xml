@@ -114,7 +114,7 @@
                     <h3>Menjawab memo</h3>
                     <p>Memo dari bagian lain masuk ke <t t-call="izinara.GuideLink"><t t-set="xmlid" t-value="'izinara.action_permit_memo'"/><t t-set="label" t-value="'Memo antar bagian'"/></t> (filter <i>Masuk ke bagian saya</i>). Tulis jawaban lalu <b>Kirim jawaban</b> sebelum tenggat; waktu respons tercatat di dashboard.</p>
                     <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'memo.jpg'"/><t t-set="caption" t-value="'Gambar 4. Memo antar bagian: prioritas, tenggat dan status jawaban.'"/></t>
-                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 5. Email/korespondensi Purchasing dengan prinsipal (contoh permintaan dokumen).'"/><t t-set="hint" t-value="'Tempel tangkapan layar email ke prinsipal yang berisi daftar dokumen yang diminta.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'dokumen-prinsipal.jpg'"/><t t-set="caption" t-value="'Gambar 5. Dokumen prinsipal (LoA, CFS, CoA, dll.) yang ditolak verifikator: Purchasing meminta revisi ke prinsipal lalu mengajukan ulang.'"/></t>
                 </t>
 
                 <!-- PANGAN -->
@@ -129,14 +129,14 @@
                         <li>Saat NIE terbit, isi nomor dan masa berlaku lalu <b>Izin terbit</b>. NIE masuk register dan berlaku untuk pengapalan berikutnya.</li>
                     </ol>
                     <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'verifikasi-dokumen.jpg'"/><t t-set="caption" t-value="'Gambar 6. Verifikasi dokumen: banyak file per dokumen, hasil cek otomatis, checklist kriteria, tombol Sesuai/Tolak.'"/></t>
-                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 7. Portal e-Registration BPOM: status pengajuan NIE ML/MD.'"/><t t-set="hint" t-value="'Tempel tangkapan layar halaman status pengajuan di e-reg.pom.go.id.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'bukti-pengajuan-bpom.jpg'"/><t t-set="caption" t-value="'Gambar 7. Bukti pengajuan BPOM (SKI) diunggah dan menunggu verifikasi.'"/></t>
                     <h3>SKI dan label per pengapalan</h3>
                     <ol>
                         <li>Ajukan SKI di e-BPOM/SINSW setelah invoice, packing list dan CoA diterima.</li>
                         <li>Kirim nomor SKI ke bagian Impor sebelum PIB (memo atau ruang diskusi pengapalan).</li>
                         <li>Pastikan stiker label sesuai rancangan sebelum barang dirilis.</li>
                     </ol>
-                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 8. Rancangan label Bahasa Indonesia yang disetujui.'"/><t t-set="hint" t-value="'Tempel foto/scan rancangan label atau stiker label pada kemasan.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'rancangan-label.jpg'"/><t t-set="caption" t-value="'Gambar 8. Rancangan label Bahasa Indonesia terverifikasi (dua file).'"/></t>
                 </t>
 
                 <!-- HALAL -->
@@ -148,7 +148,7 @@
                         <li>Ajukan registrasi di SIHALAL, unggah bukti pengajuan, pantau sampai nomor registrasi terbit.</li>
                         <li>Pastikan label halal Indonesia dan nomor registrasi tercantum, lalu <b>Izin terbit</b>.</li>
                     </ol>
-                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 9. SIHALAL BPJPH: registrasi Sertifikat Halal Luar Negeri.'"/><t t-set="hint" t-value="'Tempel tangkapan layar status registrasi SHLN di ptsp.halal.go.id.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'shln.jpg'"/><t t-set="caption" t-value="'Gambar 9. Sertifikat halal luar negeri untuk registrasi SHLN di SIHALAL, tiga file terverifikasi.'"/></t>
                     <h3>Produk non-halal</h3>
                     <ol>
                         <li>Item babi otomatis bertanda non-halal (dari subgrup PORK atau nama barang). Periksa di <t t-call="izinara.GuideLink"><t t-set="xmlid" t-value="'izinara.action_product_permit'"/><t t-set="label" t-value="'Item code &amp; template izin'"/></t>, filter <i>Non-halal</i>.</li>
@@ -170,7 +170,7 @@
                         <li>Bila terbit, isi nomor, kuota dan masa berlaku. Rekomendasi berlaku untuk item code yang disebut sampai habis masa berlakunya.</li>
                     </ol>
                     <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'pengurusan-form.jpg'"/><t t-set="caption" t-value="'Gambar 11. Pengurusan izin: aktivitas per bagian, dokumen dan referensi peraturan.'"/></t>
-                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 12. SINSW/SIMREK: bukti pengajuan rekomendasi teknis.'"/><t t-set="hint" t-value="'Tempel tangkapan layar status pengajuan RP/RIPH/rekomendasi KKP.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'bukti-pengajuan-rp.jpg'"/><t t-set="caption" t-value="'Gambar 12. Bukti pengajuan Rekomendasi Pemasukan Kementan (SINSW/SIMREK).'"/></t>
                     <h3>Karantina</h3>
                     <ol>
                         <li>Verifikasi health certificate/phytosanitary yang diunggah Purchasing.</li>
@@ -178,7 +178,7 @@
                         <li>Informasikan jadwal pemeriksaan ke bagian Impor lewat ruang diskusi pengapalan.</li>
                     </ol>
                     <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'register-izin.jpg'"/><t t-set="caption" t-value="'Gambar 13. Register izin: nomor, masa berlaku dan status (berlaku, segera habis, kedaluwarsa).'"/></t>
-                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 14. Sertifikat pelepasan karantina.'"/><t t-set="hint" t-value="'Tempel scan sertifikat pelepasan (KH-12/KI-D12/KT-9 atau format terbaru).'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'pelepasan-karantina.jpg'"/><t t-set="caption" t-value="'Gambar 14. Sertifikat pelepasan karantina terverifikasi.'"/></t>
                 </t>
 
                 <!-- IMPOR -->
@@ -193,8 +193,8 @@
                     </ol>
                     <p>Pantau ETA di <t t-call="izinara.GuideLink"><t t-set="xmlid" t-value="'izinara.action_permit_dashboard'"/><t t-set="label" t-value="'Dashboard'"/></t>: pengapalan merah berarti ETA ≤ 14 hari tetapi izin wajib belum lengkap.</p>
                     <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'pengapalan.jpg'"/><t t-set="caption" t-value="'Gambar 15. Pengapalan: tombol Cek siap clearance dan persentase kesiapan izin.'"/></t>
-                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 16. Hasil cek lartas di INSW untuk HS code item.'"/><t t-set="hint" t-value="'Tempel tangkapan layar hasil pencarian lartas di insw.go.id.'"/></t>
-                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 17. SPPB dari CEISA.'"/><t t-set="hint" t-value="'Tempel tangkapan layar/scan SPPB.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'cek-lartas.jpg'"/><t t-set="caption" t-value="'Gambar 16. Hasil cek lartas INSW untuk HS code item.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'sppb.jpg'"/><t t-set="caption" t-value="'Gambar 17. SPPB dari CEISA diunggah bagian Impor.'"/></t>
                 </t>
 
                 <!-- MANAJER -->
@@ -223,8 +223,10 @@
                         <li><b>Memo antar bagian</b> (tampilan pivot): rata-rata waktu respons per bagian.</li>
                     </ul>
                     <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'pengurusan.jpg'"/><t t-set="caption" t-value="'Gambar 21. Pengurusan izin per status (kanban).'"/></t>
-                    <p class="text-muted small">Gambar bertanda "Tempat screen capture" diisi dengan tangkapan layar dari portal pemerintah atau dokumen
-                        asli. Simpan file di <code>izinara/static/img/guide/</code> lalu isi namanya pada template <code>guide.xml</code>.</p>
+                    <p class="text-muted small">Semua gambar diambil dari data demo Izinara. Untuk menambah tangkapan layar portal
+                        pemerintah (SIHALAL, e-Reg BPOM, SINSW, INSW, CEISA), simpan file di <code>izinara/static/img/guide/</code>
+                        lalu ganti nama file pada template <code>guide.xml</code>. Bila sebuah gambar dikosongkan, Panduan
+                        menampilkan kotak "Tempat screen capture".</p>
                 </t>
             </div>
         </div>
