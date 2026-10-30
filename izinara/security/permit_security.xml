@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_import_permit" model="ir.module.category">
+        <field name="name">Izinara</field>
+        <field name="sequence">6</field>
+    </record>
+    <record id="group_permit_user" model="res.groups">
+        <field name="name">Petugas</field>
+        <field name="category_id" ref="module_category_import_permit"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Bagian makanan luar, halal, perizinan, procurement dan impor: mengerjakan aktivitas pengurusan.</field>
+    </record>
+    <record id="group_permit_manager" model="res.groups">
+        <field name="name">Manajer</field>
+        <field name="category_id" ref="module_category_import_permit"/>
+        <field name="implied_ids" eval="[(4, ref('group_permit_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="comment">Mengatur jenis izin, template, aturan pemetaan dan register izin.</field>
+    </record>
+
+    <record id="rule_permit_shipment_company" model="ir.rule">
+        <field name="name">Pengapalan impor: perusahaan sendiri</field>
+        <field name="model_id" ref="model_izinara_shipment"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_permit_application_company" model="ir.rule">
+        <field name="name">Pengurusan izin: perusahaan sendiri</field>
+        <field name="model_id" ref="model_izinara_application"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_permit_license_company" model="ir.rule">
+        <field name="name">Register izin: perusahaan sendiri</field>
+        <field name="model_id" ref="model_izinara_license"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_permit_memo_company" model="ir.rule">
+        <field name="name">Memo antar bagian: perusahaan sendiri</field>
+        <field name="model_id" ref="model_izinara_memo"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_permit_party_list" model="ir.ui.view">
+        <field name="name">izinara.party.list</field>
+        <field name="model">izinara.party</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="user_ids" widget="many2many_avatar_user"/>
+                <field name="responsibility"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_permit_party" model="ir.actions.act_window">
+        <field name="name">Bagian/pihak</field>
+        <field name="res_model">izinara.party</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

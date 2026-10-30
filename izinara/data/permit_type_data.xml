@@ -1,0 +1,1525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="type_nib_api" model="izinara.type">
+        <field name="name">NIB sebagai Angka Pengenal Importir (API-U)</field>
+        <field name="code">NIB_API</field>
+        <field name="sequence">1</field>
+        <field name="authority">Kementerian Investasi/BKPM</field>
+        <field name="system">OSS RBA</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="scope">company</field>
+        <field name="lead_days">7</field>
+        <field name="validity_months">0</field>
+        <field name="legal_basis">UU 6/2023 (Cipta Kerja); PP 28/2025 tentang Penyelenggaraan Perizinan Berusaha Berbasis Risiko; Permendag 16/2025 tentang Kebijakan dan Pengaturan Impor (NIB berlaku sebagai API).</field>
+        <field name="description">Syarat dasar semua impor. NIB juga menjadi akses kepabeanan (registrasi kepabeanan otomatis).</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pp_28_2025'), ref('reg_uu_ciptaker'), ref('reg_permendag_16_2025')])]"/>
+    </record>
+    <record id="type_nib_api_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">10</field>
+        <field name="name">Periksa KBLI perdagangan besar/impor pangan aktif di NIB</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">1</field>
+        <field name="instructions">Cocokkan KBLI dengan komoditas: daging, ikan, pangan olahan, susu, sayur beku.</field>
+        <field name="deliverable">Cetak NIB</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pp_28_2025'), ref('reg_uu_ciptaker'), ref('reg_permendag_16_2025')])]"/>
+    </record>
+    <record id="type_nib_api_step_1_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_nib_api_step_1"/>
+        <field name="sequence">10</field>
+        <field name="name">Cetak NIB</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">File terbaca jelas dan lengkap semua halaman
+Nama perusahaan, produk/item code sesuai pengurusan</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_nib_api_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">20</field>
+        <field name="name">Perbarui data NIB/API-U dan hak akses kepabeanan di OSS</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">3</field>
+        <field name="instructions">Pastikan alamat gudang, penanggung jawab dan NPWP sama dengan data INSW/CEISA.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pp_28_2025'), ref('reg_uu_ciptaker'), ref('reg_permendag_16_2025')])]"/>
+    </record>
+    <record id="type_nib_api_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">30</field>
+        <field name="name">Simpan NIB ke register izin</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">NIB/API</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pp_28_2025'), ref('reg_uu_ciptaker'), ref('reg_permendag_16_2025')])]"/>
+    </record>
+    <record id="type_nib_api_step_3_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_nib_api_step_3"/>
+        <field name="sequence">10</field>
+        <field name="name">NIB/API</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_nkv" model="izinara.type">
+        <field name="name">NKV unit usaha produk hewan (cold storage/meat shop)</field>
+        <field name="code">NKV</field>
+        <field name="sequence">2</field>
+        <field name="authority">Dinas Provinsi bidang Kesmavet</field>
+        <field name="system">OSS / Dinas Provinsi</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="scope">company</field>
+        <field name="lead_days">30</field>
+        <field name="validity_months">60</field>
+        <field name="legal_basis">UU 18/2009 jo. UU 41/2014 Peternakan dan Kesehatan Hewan; PP 95/2012 Kesehatan Masyarakat Veteriner; Permentan tentang Sertifikasi NKV unit usaha produk hewan (cek versi terbaru).</field>
+        <field name="description">Sertifikat higiene-sanitasi gudang/unit usaha produk hewan; dilampirkan saat mengajukan Rekomendasi Pemasukan.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_nkv'), ref('reg_pp_95_2012'), ref('reg_uu_pkh')])]"/>
+    </record>
+    <record id="type_nkv_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_nkv"/>
+        <field name="sequence">10</field>
+        <field name="name">Siapkan dokumen higiene-sanitasi, SOP rantai dingin dan denah gudang</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">7</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_nkv'), ref('reg_pp_95_2012'), ref('reg_uu_pkh')])]"/>
+    </record>
+    <record id="type_nkv_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_nkv"/>
+        <field name="sequence">20</field>
+        <field name="name">Ajukan sertifikasi NKV dan jadwalkan audit dinas</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">14</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_nkv'), ref('reg_pp_95_2012'), ref('reg_uu_pkh')])]"/>
+    </record>
+    <record id="type_nkv_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_nkv"/>
+        <field name="sequence">30</field>
+        <field name="name">Tindak lanjuti temuan audit</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">7</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_nkv'), ref('reg_pp_95_2012'), ref('reg_uu_pkh')])]"/>
+    </record>
+    <record id="type_nkv_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_nkv"/>
+        <field name="sequence">40</field>
+        <field name="name">Simpan sertifikat NKV dan jadwalkan surveilans</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Sertifikat NKV</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_nkv'), ref('reg_pp_95_2012'), ref('reg_uu_pkh')])]"/>
+    </record>
+    <record id="type_nkv_step_4_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_nkv_step_4"/>
+        <field name="sequence">10</field>
+        <field name="name">Sertifikat NKV</field>
+        <field name="check_expiry" eval="True"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor
+Masa berlaku mencakup ETA pengapalan</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_est_approval" model="izinara.type">
+        <field name="name">Persetujuan negara &amp; unit usaha asal (establishment)</field>
+        <field name="code">EST_APPROVAL</field>
+        <field name="sequence">5</field>
+        <field name="authority">Kementan – Ditjen PKH</field>
+        <field name="system">SIMREK Ditjen PKH</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="scope">supplier</field>
+        <field name="lead_days">5</field>
+        <field name="validity_months">12</field>
+        <field name="legal_basis">UU 18/2009 jo. UU 41/2014; PP 95/2012; Permentan 42/2019 tentang Pemasukan Karkas, Daging, Jeroan dan/atau Olahannya; Permentan 19/2025 tentang Persyaratan Pemasukan Produk Hewan dalam Hal Tertentu dari Negara/Zona.</field>
+        <field name="description">Produk hewan hanya boleh dimasukkan dari negara/zona dan unit usaha (RPH, pabrik) yang sudah disetujui Kementan, termasuk penyembelihan halal untuk produk halal.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_42_2019'), ref('reg_permentan_19_2025'), ref('reg_pp_95_2012'), ref('reg_uu_pkh')])]"/>
+    </record>
+    <record id="type_est_approval_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_est_approval"/>
+        <field name="sequence">10</field>
+        <field name="name">Minta nomor establishment, alamat RPH/pabrik dan sertifikat halal penyembelihan</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">3</field>
+        <field name="instructions">Dari eksportir/prinsipal.</field>
+        <field name="deliverable">Data establishment</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_42_2019'), ref('reg_permentan_19_2025'), ref('reg_pp_95_2012'), ref('reg_uu_pkh')])]"/>
+    </record>
+    <record id="type_est_approval_step_1_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_est_approval_step_1"/>
+        <field name="sequence">10</field>
+        <field name="name">Data establishment</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor establishment dan alamat RPH/pabrik
+Bukti penyembelihan halal (untuk produk halal)</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_est_approval_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_est_approval"/>
+        <field name="sequence">20</field>
+        <field name="name">Cek negara/zona dan unit usaha ada di daftar yang disetujui Kementan</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">2</field>
+        <field name="instructions">Daftar unit usaha di SIMREK/Ditjen PKH.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_19_2025'), ref('reg_permentan_42_2019')])]"/>
+    </record>
+    <record id="type_est_approval_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_est_approval"/>
+        <field name="sequence">30</field>
+        <field name="name">Bila belum disetujui: minta prinsipal mengajukan penilaian unit usaha lewat otoritas veteriner negara asal</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">3</field>
+        <field name="instructions">Perizinan menyiapkan daftar persyaratan; Purchasing yang menghubungi prinsipal.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_42_2019'), ref('reg_permentan_19_2025'), ref('reg_pp_95_2012'), ref('reg_uu_pkh')])]"/>
+    </record>
+    <record id="type_est_approval_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_est_approval"/>
+        <field name="sequence">40</field>
+        <field name="name">Pantau penilaian unit usaha di Kementan</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">60</field>
+        <field name="instructions">Proses audit bisa berbulan-bulan; tandai pemasok belum bisa dipakai.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_42_2019'), ref('reg_permentan_19_2025'), ref('reg_pp_95_2012'), ref('reg_uu_pkh')])]"/>
+    </record>
+    <record id="type_est_approval_step_5" model="izinara.type.step">
+        <field name="type_id" ref="type_est_approval"/>
+        <field name="sequence">50</field>
+        <field name="name">Simpan bukti persetujuan unit usaha</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Bukti approval establishment</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_42_2019'), ref('reg_permentan_19_2025'), ref('reg_pp_95_2012'), ref('reg_uu_pkh')])]"/>
+    </record>
+    <record id="type_est_approval_step_5_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_est_approval_step_5"/>
+        <field name="sequence">10</field>
+        <field name="name">Bukti approval establishment</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_rp_kementan" model="izinara.type">
+        <field name="name">Rekomendasi Pemasukan Produk Hewan (RP)</field>
+        <field name="code">RP_KEMENTAN</field>
+        <field name="sequence">10</field>
+        <field name="authority">Kementan – Ditjen PKH</field>
+        <field name="system">SIMREK / SINSW</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="scope">product</field>
+        <field name="lead_days">14</field>
+        <field name="validity_months">12</field>
+        <field name="legal_basis">UU 18/2009 jo. UU 41/2014; PP 95/2012; Permentan 42/2019 (jo. perubahannya); Perpres 32/2022 tentang Neraca Komoditas.</field>
+        <field name="description">Rekomendasi teknis sebelum Persetujuan Impor untuk karkas, daging, jeroan, unggas dan olahannya. Berlaku untuk jenis, HS, negara, unit usaha dan volume yang disebut.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_42_2019'), ref('reg_perpres_32_2022'), ref('reg_pp_95_2012'), ref('reg_uu_pkh')])]"/>
+    </record>
+    <record id="type_rp_kementan_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_rp_kementan"/>
+        <field name="sequence">10</field>
+        <field name="name">Susun rencana impor: jenis, HS 8 digit, volume, negara, unit usaha, pelabuhan</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">3</field>
+        <field name="deliverable">Rencana impor</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perpres_32_2022'), ref('reg_permentan_42_2019')])]"/>
+    </record>
+    <record id="type_rp_kementan_step_1_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_rp_kementan_step_1"/>
+        <field name="sequence">10</field>
+        <field name="name">Rencana impor</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Jenis, HS 8 digit, volume dan negara asal lengkap
+Sesuai alokasi Neraca Komoditas</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_rp_kementan_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_rp_kementan"/>
+        <field name="sequence">20</field>
+        <field name="name">Lengkapi dokumen: NIB, NKV gudang, kapasitas cold storage, kontrak/LoI, sertifikat halal unit usaha</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">3</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_42_2019'), ref('reg_permentan_nkv')])]"/>
+    </record>
+    <record id="type_rp_kementan_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_rp_kementan"/>
+        <field name="sequence">30</field>
+        <field name="name">Ajukan RP di SIMREK/SINSW</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Bukti pengajuan</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_42_2019'), ref('reg_perpres_32_2022'), ref('reg_pp_95_2012'), ref('reg_uu_pkh')])]"/>
+    </record>
+    <record id="type_rp_kementan_step_3_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_rp_kementan_step_3"/>
+        <field name="sequence">10</field>
+        <field name="name">Bukti pengajuan</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor transaksi/aju terbaca
+Nilai dan tanggal sesuai</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_rp_kementan_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_rp_kementan"/>
+        <field name="sequence">40</field>
+        <field name="name">Pantau verifikasi dan jawab koreksi</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">7</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_42_2019'), ref('reg_perpres_32_2022'), ref('reg_pp_95_2012'), ref('reg_uu_pkh')])]"/>
+    </record>
+    <record id="type_rp_kementan_step_5" model="izinara.type.step">
+        <field name="type_id" ref="type_rp_kementan"/>
+        <field name="sequence">50</field>
+        <field name="name">Unduh RP terbit, catat volume dan masa berlaku</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">RP Kementan</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_42_2019'), ref('reg_perpres_32_2022'), ref('reg_pp_95_2012'), ref('reg_uu_pkh')])]"/>
+    </record>
+    <record id="type_rp_kementan_step_5_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_rp_kementan_step_5"/>
+        <field name="sequence">10</field>
+        <field name="name">RP Kementan</field>
+        <field name="check_expiry" eval="True"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor
+Masa berlaku mencakup ETA pengapalan</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_rphp_kkp" model="izinara.type">
+        <field name="name">Rekomendasi Pemasukan Hasil Perikanan</field>
+        <field name="code">RPHP_KKP</field>
+        <field name="sequence">11</field>
+        <field name="authority">KKP – Ditjen PDSPKP</field>
+        <field name="system">SINSW / sistem KKP</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="scope">product</field>
+        <field name="lead_days">14</field>
+        <field name="validity_months">12</field>
+        <field name="legal_basis">UU 31/2004 jo. UU 45/2009 Perikanan; Permen KP tentang Pengendalian Impor Komoditas Perikanan (Permen KP 58/2018 jo. perubahannya, cek versi terbaru); Perpres 32/2022 Neraca Komoditas.</field>
+        <field name="description">Rekomendasi teknis sebelum PI untuk ikan dan hasil perikanan. Peruntukan (hotel, restoran, katering, ritel modern, bahan baku) harus sesuai.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permenkp_impor'), ref('reg_permendag_19_2025'), ref('reg_perpres_32_2022'), ref('reg_uu_perikanan')])]"/>
+    </record>
+    <record id="type_rphp_kkp_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_rphp_kkp"/>
+        <field name="sequence">10</field>
+        <field name="name">Susun rencana impor ikan: jenis, HS, volume, negara, peruntukan</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">3</field>
+        <field name="deliverable">Rencana impor</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permenkp_impor'), ref('reg_permendag_19_2025'), ref('reg_perpres_32_2022'), ref('reg_uu_perikanan')])]"/>
+    </record>
+    <record id="type_rphp_kkp_step_1_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_rphp_kkp_step_1"/>
+        <field name="sequence">10</field>
+        <field name="name">Rencana impor</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Jenis, HS 8 digit, volume dan negara asal lengkap
+Sesuai alokasi Neraca Komoditas</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_rphp_kkp_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_rphp_kkp"/>
+        <field name="sequence">20</field>
+        <field name="name">Lengkapi dokumen: NIB, kapasitas cold storage, kontrak, contoh health certificate</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">3</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permenkp_impor'), ref('reg_permendag_19_2025'), ref('reg_perpres_32_2022'), ref('reg_uu_perikanan')])]"/>
+    </record>
+    <record id="type_rphp_kkp_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_rphp_kkp"/>
+        <field name="sequence">30</field>
+        <field name="name">Ajukan rekomendasi pemasukan hasil perikanan</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">1</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permenkp_impor'), ref('reg_permendag_19_2025'), ref('reg_perpres_32_2022'), ref('reg_uu_perikanan')])]"/>
+    </record>
+    <record id="type_rphp_kkp_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_rphp_kkp"/>
+        <field name="sequence">40</field>
+        <field name="name">Pantau verifikasi dan jawab koreksi</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">7</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permenkp_impor'), ref('reg_permendag_19_2025'), ref('reg_perpres_32_2022'), ref('reg_uu_perikanan')])]"/>
+    </record>
+    <record id="type_rphp_kkp_step_5" model="izinara.type.step">
+        <field name="type_id" ref="type_rphp_kkp"/>
+        <field name="sequence">50</field>
+        <field name="name">Unduh rekomendasi terbit, catat volume dan masa berlaku</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Rekomendasi KKP</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permenkp_impor'), ref('reg_permendag_19_2025'), ref('reg_perpres_32_2022'), ref('reg_uu_perikanan')])]"/>
+    </record>
+    <record id="type_rphp_kkp_step_5_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_rphp_kkp_step_5"/>
+        <field name="sequence">10</field>
+        <field name="name">Rekomendasi KKP</field>
+        <field name="check_expiry" eval="True"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor
+Masa berlaku mencakup ETA pengapalan</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_riph" model="izinara.type">
+        <field name="name">Rekomendasi Impor Produk Hortikultura (RIPH)</field>
+        <field name="code">RIPH</field>
+        <field name="sequence">12</field>
+        <field name="authority">Kementan – Ditjen Hortikultura</field>
+        <field name="system">SIMPEL/SINSW</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="scope">product</field>
+        <field name="lead_days">14</field>
+        <field name="validity_months">12</field>
+        <field name="legal_basis">UU 13/2010 Hortikultura; Permentan tentang RIPH (Permentan 39/2019 jo. perubahannya). Hanya untuk HS yang termasuk lartas hortikultura di INSW.</field>
+        <field name="description">Untuk sayur/buah segar atau beku yang termasuk lartas. Cek HS di INSW dulu; bila tidak wajib, tandai selesai dengan catatan.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_riph'), ref('reg_permendag_18_2025'), ref('reg_uu_horti')])]"/>
+    </record>
+    <record id="type_riph_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_riph"/>
+        <field name="sequence">10</field>
+        <field name="name">Cek HS di INSW apakah wajib RIPH</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Hasil cek INSW</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_riph'), ref('reg_permendag_18_2025'), ref('reg_uu_horti')])]"/>
+    </record>
+    <record id="type_riph_step_1_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_riph_step_1"/>
+        <field name="sequence">10</field>
+        <field name="name">Hasil cek INSW</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Semua HS item sudah dicek
+Daftar lartas border/post-border tercatat</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_riph_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_riph"/>
+        <field name="sequence">20</field>
+        <field name="name">Lengkapi dokumen RIPH</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">3</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_riph'), ref('reg_permendag_18_2025'), ref('reg_uu_horti')])]"/>
+    </record>
+    <record id="type_riph_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_riph"/>
+        <field name="sequence">30</field>
+        <field name="name">Ajukan RIPH</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">1</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_riph'), ref('reg_permendag_18_2025'), ref('reg_uu_horti')])]"/>
+    </record>
+    <record id="type_riph_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_riph"/>
+        <field name="sequence">40</field>
+        <field name="name">Pantau dan unduh RIPH terbit</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">7</field>
+        <field name="deliverable">RIPH</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permentan_riph'), ref('reg_permendag_18_2025'), ref('reg_uu_horti')])]"/>
+    </record>
+    <record id="type_riph_step_4_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_riph_step_4"/>
+        <field name="sequence">10</field>
+        <field name="name">RIPH</field>
+        <field name="check_expiry" eval="True"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor
+Masa berlaku mencakup ETA pengapalan</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_psat" model="izinara.type">
+        <field name="name">Registrasi PSAT impor (pangan segar asal tumbuhan)</field>
+        <field name="code">PSAT</field>
+        <field name="sequence">13</field>
+        <field name="authority">Badan Pangan Nasional</field>
+        <field name="system">e-PSAT</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="scope">product</field>
+        <field name="lead_days">21</field>
+        <field name="validity_months">60</field>
+        <field name="legal_basis">UU 18/2012 Pangan; PP 86/2019 Keamanan Pangan; Peraturan Badan Pangan Nasional tentang pendaftaran PSAT (cek versi terbaru).</field>
+        <field name="description">Izin edar untuk sayur/buah segar atau beku tanpa pengolahan lanjut.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbadan_psat'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_psat_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_psat"/>
+        <field name="sequence">10</field>
+        <field name="name">Kumpulkan spesifikasi, CoA dan dokumen produsen</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">5</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbadan_psat'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_psat_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_psat"/>
+        <field name="sequence">20</field>
+        <field name="name">Ajukan registrasi PSAT</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">2</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbadan_psat'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_psat_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_psat"/>
+        <field name="sequence">30</field>
+        <field name="name">Pantau evaluasi dan jawab koreksi</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">12</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbadan_psat'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_psat_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_psat"/>
+        <field name="sequence">40</field>
+        <field name="name">Catat nomor registrasi dan label</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">2</field>
+        <field name="deliverable">Nomor PSAT</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbadan_psat'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_psat_step_4_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_psat_step_4"/>
+        <field name="sequence">10</field>
+        <field name="name">Nomor PSAT</field>
+        <field name="check_expiry" eval="True"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor
+Masa berlaku mencakup ETA pengapalan</field>
+        <field name="verifier_party_id" ref="party_pangan"/>
+    </record>
+    <record id="type_pi_kemendag" model="izinara.type">
+        <field name="name">Persetujuan Impor (PI) Kemendag</field>
+        <field name="code">PI_KEMENDAG</field>
+        <field name="sequence">20</field>
+        <field name="authority">Kemendag – Ditjen Perdagangan Luar Negeri</field>
+        <field name="system">INATRADE / SINSW</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="scope">product</field>
+        <field name="lead_days">14</field>
+        <field name="validity_months">12</field>
+        <field name="legal_basis">Permendag 16/2025 tentang Kebijakan dan Pengaturan Impor; Permendag 18/2025 tentang Kebijakan dan Pengaturan Impor Barang Pertanian dan Peternakan (jo. perubahannya); Permendag 19/2025 tentang Kebijakan dan Pengaturan Impor Garam dan Komoditas Perikanan; Perpres 32/2022 Neraca Komoditas.</field>
+        <field name="description">Diterbitkan berdasarkan rekomendasi teknis (RP/KKP/RIPH) dan Neraca Komoditas. Catat volume dan realisasi.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permendag_16_2025'), ref('reg_permendag_18_2025'), ref('reg_permendag_19_2025'), ref('reg_perpres_32_2022')])]"/>
+    </record>
+    <record id="type_pi_kemendag_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_pi_kemendag"/>
+        <field name="sequence">10</field>
+        <field name="name">Pastikan rekomendasi teknis (RP/KKP/RIPH) sudah terbit</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="duration_days">1</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permendag_16_2025'), ref('reg_permendag_18_2025'), ref('reg_permendag_19_2025'), ref('reg_perpres_32_2022')])]"/>
+    </record>
+    <record id="type_pi_kemendag_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_pi_kemendag"/>
+        <field name="sequence">20</field>
+        <field name="name">Ajukan PI di SINSW sesuai Neraca Komoditas</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Bukti pengajuan</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permendag_16_2025'), ref('reg_perpres_32_2022')])]"/>
+    </record>
+    <record id="type_pi_kemendag_step_2_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_pi_kemendag_step_2"/>
+        <field name="sequence">10</field>
+        <field name="name">Bukti pengajuan</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor transaksi/aju terbaca
+Nilai dan tanggal sesuai</field>
+        <field name="verifier_party_id" ref="party_impor"/>
+    </record>
+    <record id="type_pi_kemendag_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_pi_kemendag"/>
+        <field name="sequence">30</field>
+        <field name="name">Pantau penerbitan PI</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="duration_days">7</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permendag_16_2025'), ref('reg_permendag_18_2025'), ref('reg_permendag_19_2025'), ref('reg_perpres_32_2022')])]"/>
+    </record>
+    <record id="type_pi_kemendag_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_pi_kemendag"/>
+        <field name="sequence">40</field>
+        <field name="name">Catat nomor PI, volume, pelabuhan dan masa berlaku</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">PI</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permendag_16_2025'), ref('reg_permendag_18_2025'), ref('reg_permendag_19_2025'), ref('reg_perpres_32_2022')])]"/>
+    </record>
+    <record id="type_pi_kemendag_step_4_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_pi_kemendag_step_4"/>
+        <field name="sequence">10</field>
+        <field name="name">PI</field>
+        <field name="check_expiry" eval="True"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor
+Masa berlaku mencakup ETA pengapalan</field>
+        <field name="verifier_party_id" ref="party_impor"/>
+    </record>
+    <record id="type_pi_kemendag_step_5" model="izinara.type.step">
+        <field name="type_id" ref="type_pi_kemendag"/>
+        <field name="sequence">50</field>
+        <field name="name">Bila diwajibkan: atur verifikasi Laporan Surveyor (LS) di pelabuhan muat</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">3</field>
+        <field name="deliverable">LS</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permendag_16_2025')])]"/>
+    </record>
+    <record id="type_pi_kemendag_step_5_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_pi_kemendag_step_5"/>
+        <field name="sequence">10</field>
+        <field name="name">LS</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor</field>
+        <field name="verifier_party_id" ref="party_impor"/>
+    </record>
+    <record id="type_ml_bpom" model="izinara.type">
+        <field name="name">Izin edar pangan olahan ML (BPOM)</field>
+        <field name="code">ML_BPOM</field>
+        <field name="sequence">30</field>
+        <field name="authority">BPOM</field>
+        <field name="system">e-Registration BPOM</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="scope">product</field>
+        <field name="lead_days">60</field>
+        <field name="validity_months">60</field>
+        <field name="legal_basis">UU 18/2012 Pangan; PP 86/2019 Keamanan Pangan; Peraturan BPOM tentang Pendaftaran Pangan Olahan (Per BPOM 27/2017 jo. perubahannya, cek versi terbaru); Per BPOM 31/2018 jo. 20/2021 tentang Label Pangan Olahan.</field>
+        <field name="description">Nomor ML wajib sebelum pangan olahan impor diedarkan. Berlaku 5 tahun dan dipakai untuk SKI tiap pengapalan.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_reg'), ref('reg_perbpom_label'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_ml_bpom_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_ml_bpom"/>
+        <field name="sequence">10</field>
+        <field name="name">Minta dokumen prinsipal: LoA, Certificate of Free Sale/Health Certificate, GMP/HACCP/ISO 22000, komposisi, spesifikasi, CoA, alur proses, foto label asli</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">14</field>
+        <field name="deliverable">Dokumen prinsipal</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_reg'), ref('reg_perbpom_label'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_ml_bpom_step_1_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_ml_bpom_step_1"/>
+        <field name="sequence">10</field>
+        <field name="name">Dokumen prinsipal</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Surat penunjukan (LoA) bertanggal dan ditandatangani prinsipal
+Certificate of Free Sale/Health Certificate dari otoritas negara asal
+Sertifikat GMP/HACCP/ISO 22000 masih berlaku
+Komposisi lengkap 100% dan spesifikasi produk
+CoA lot terbaru</field>
+        <field name="verifier_party_id" ref="party_pangan"/>
+    </record>
+    <record id="type_ml_bpom_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_ml_bpom"/>
+        <field name="sequence">20</field>
+        <field name="name">Tentukan kategori pangan, cek BTP, klaim dan batas cemaran</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">3</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_reg'), ref('reg_perbpom_label'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_ml_bpom_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_ml_bpom"/>
+        <field name="sequence">30</field>
+        <field name="name">Susun rancangan label Bahasa Indonesia (nama, komposisi, berat bersih, importir, negara asal, kedaluwarsa, kode produksi, logo halal/keterangan tidak halal)</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">3</field>
+        <field name="deliverable">Rancangan label</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_label'), ref('reg_pp_42_2024')])]"/>
+    </record>
+    <record id="type_ml_bpom_step_3_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_ml_bpom_step_3"/>
+        <field name="sequence">10</field>
+        <field name="name">Rancangan label</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nama produk, komposisi, berat bersih, negara asal
+Nama dan alamat importir (Indoguna)
+Tanggal kedaluwarsa dan kode produksi
+Logo halal Indonesia atau keterangan tidak halal sesuai status produk</field>
+        <field name="verifier_party_id" ref="party_pangan"/>
+    </record>
+    <record id="type_ml_bpom_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_ml_bpom"/>
+        <field name="sequence">40</field>
+        <field name="name">Ajukan di e-Registration BPOM dan bayar PNBP</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Bukti bayar</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_reg'), ref('reg_perbpom_label'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_ml_bpom_step_4_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_ml_bpom_step_4"/>
+        <field name="sequence">10</field>
+        <field name="name">Bukti bayar</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor transaksi/aju terbaca
+Nilai dan tanggal sesuai</field>
+        <field name="verifier_party_id" ref="party_pangan"/>
+    </record>
+    <record id="type_ml_bpom_step_5" model="izinara.type.step">
+        <field name="type_id" ref="type_ml_bpom"/>
+        <field name="sequence">50</field>
+        <field name="name">Tanggapi tambahan data hasil evaluasi</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">20</field>
+        <field name="instructions">Data yang harus datang dari prinsipal diminta lewat Purchasing.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_reg'), ref('reg_perbpom_label'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_ml_bpom_step_6" model="izinara.type.step">
+        <field name="type_id" ref="type_ml_bpom"/>
+        <field name="sequence">60</field>
+        <field name="name">Unduh NIE ML dan catat masa berlaku</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">NIE ML</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_reg'), ref('reg_perbpom_label'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_ml_bpom_step_6_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_ml_bpom_step_6"/>
+        <field name="sequence">10</field>
+        <field name="name">NIE ML</field>
+        <field name="check_expiry" eval="True"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor
+Masa berlaku mencakup ETA pengapalan</field>
+        <field name="verifier_party_id" ref="party_pangan"/>
+    </record>
+    <record id="type_shln" model="izinara.type">
+        <field name="name">Registrasi Sertifikat Halal Luar Negeri (SHLN)</field>
+        <field name="code">SHLN</field>
+        <field name="sequence">40</field>
+        <field name="authority">BPJPH</field>
+        <field name="system">SIHALAL</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="scope">product</field>
+        <field name="lead_days">14</field>
+        <field name="validity_months">0</field>
+        <field name="legal_basis">UU 33/2014 Jaminan Produk Halal jo. UU 6/2023; PP 42/2024 tentang Penyelenggaraan Bidang Jaminan Produk Halal (kewajiban bersertifikat halal untuk produk luar negeri paling lambat 17 Oktober 2026); Keputusan Kepala BPJPH tentang registrasi SHLN dan Lembaga Halal Luar Negeri yang diakui.</field>
+        <field name="description">Sertifikat halal produsen luar negeri wajib diregistrasi di BPJPH sebelum produk beredar. Hanya dari Lembaga Halal Luar Negeri (LHLN) yang punya kerja sama saling pengakuan dengan BPJPH. Masa berlaku mengikuti sertifikat asal.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pp_42_2024'), ref('reg_kepkaban_shln'), ref('reg_uu_jph'), ref('reg_uu_ciptaker')])]"/>
+    </record>
+    <record id="type_shln_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_shln"/>
+        <field name="sequence">10</field>
+        <field name="name">Minta sertifikat halal produsen beserta daftar produk dan nomor establishment</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">7</field>
+        <field name="deliverable">Sertifikat halal LN</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pp_42_2024'), ref('reg_kepkaban_shln'), ref('reg_uu_jph'), ref('reg_uu_ciptaker')])]"/>
+    </record>
+    <record id="type_shln_step_1_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_shln_step_1"/>
+        <field name="sequence">10</field>
+        <field name="name">Sertifikat halal LN</field>
+        <field name="check_expiry" eval="True"/>
+        <field name="criteria">Diterbitkan Lembaga Halal Luar Negeri yang diakui BPJPH
+Nama dan alamat produsen/establishment sesuai
+Daftar produk mencakup item code yang diimpor
+Masih berlaku saat ETA</field>
+        <field name="verifier_party_id" ref="party_halal"/>
+    </record>
+    <record id="type_shln_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_shln"/>
+        <field name="sequence">20</field>
+        <field name="name">Cek lembaga penerbit termasuk LHLN yang diakui BPJPH</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="duration_days">1</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_kepkaban_shln'), ref('reg_pp_42_2024')])]"/>
+    </record>
+    <record id="type_shln_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_shln"/>
+        <field name="sequence">30</field>
+        <field name="name">Ajukan registrasi SHLN di SIHALAL dan bayar</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Bukti pengajuan</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pp_42_2024'), ref('reg_kepkaban_shln'), ref('reg_uu_jph'), ref('reg_uu_ciptaker')])]"/>
+    </record>
+    <record id="type_shln_step_3_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_shln_step_3"/>
+        <field name="sequence">10</field>
+        <field name="name">Bukti pengajuan</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor transaksi/aju terbaca
+Nilai dan tanggal sesuai</field>
+        <field name="verifier_party_id" ref="party_halal"/>
+    </record>
+    <record id="type_shln_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_shln"/>
+        <field name="sequence">40</field>
+        <field name="name">Pantau verifikasi sampai nomor registrasi terbit</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="duration_days">10</field>
+        <field name="deliverable">Nomor registrasi SHLN</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pp_42_2024'), ref('reg_kepkaban_shln'), ref('reg_uu_jph'), ref('reg_uu_ciptaker')])]"/>
+    </record>
+    <record id="type_shln_step_4_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_shln_step_4"/>
+        <field name="sequence">10</field>
+        <field name="name">Nomor registrasi SHLN</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor</field>
+        <field name="verifier_party_id" ref="party_halal"/>
+    </record>
+    <record id="type_shln_step_5" model="izinara.type.step">
+        <field name="type_id" ref="type_shln"/>
+        <field name="sequence">50</field>
+        <field name="name">Pastikan label halal Indonesia dan nomor registrasi tercantum di label/stiker</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="duration_days">2</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_label'), ref('reg_pp_42_2024')])]"/>
+    </record>
+    <record id="type_halal_sh" model="izinara.type">
+        <field name="name">Sertifikat halal Indonesia (produk dipotong/dikemas ulang)</field>
+        <field name="code">HALAL_SH</field>
+        <field name="sequence">41</field>
+        <field name="authority">BPJPH, LPH, Komite Fatwa</field>
+        <field name="system">SIHALAL</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="scope">product</field>
+        <field name="lead_days">30</field>
+        <field name="validity_months">0</field>
+        <field name="legal_basis">UU 33/2014 jo. UU 6/2023; PP 42/2024.</field>
+        <field name="description">Untuk produk yang dipotong, diporsi atau dikemas ulang oleh Indoguna dengan merek/label sendiri.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pp_42_2024'), ref('reg_uu_jph'), ref('reg_uu_ciptaker')])]"/>
+    </record>
+    <record id="type_halal_sh_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_halal_sh"/>
+        <field name="sequence">10</field>
+        <field name="name">Tetapkan Penyelia Halal dan dokumen Sistem Jaminan Produk Halal (SJPH)</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="duration_days">7</field>
+        <field name="deliverable">Manual SJPH</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pp_42_2024'), ref('reg_uu_jph'), ref('reg_uu_ciptaker')])]"/>
+    </record>
+    <record id="type_halal_sh_step_1_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_halal_sh_step_1"/>
+        <field name="sequence">10</field>
+        <field name="name">Manual SJPH</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">File terbaca jelas dan lengkap semua halaman
+Nama perusahaan, produk/item code sesuai pengurusan</field>
+        <field name="verifier_party_id" ref="party_halal"/>
+    </record>
+    <record id="type_halal_sh_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_halal_sh"/>
+        <field name="sequence">20</field>
+        <field name="name">Daftar di SIHALAL dan pilih LPH</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="duration_days">2</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pp_42_2024'), ref('reg_uu_jph'), ref('reg_uu_ciptaker')])]"/>
+    </record>
+    <record id="type_halal_sh_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_halal_sh"/>
+        <field name="sequence">30</field>
+        <field name="name">Audit LPH di fasilitas</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="duration_days">14</field>
+        <field name="deliverable">Laporan audit</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pp_42_2024'), ref('reg_uu_jph'), ref('reg_uu_ciptaker')])]"/>
+    </record>
+    <record id="type_halal_sh_step_3_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_halal_sh_step_3"/>
+        <field name="sequence">10</field>
+        <field name="name">Laporan audit</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">File terbaca jelas dan lengkap semua halaman
+Nama perusahaan, produk/item code sesuai pengurusan</field>
+        <field name="verifier_party_id" ref="party_halal"/>
+    </record>
+    <record id="type_halal_sh_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_halal_sh"/>
+        <field name="sequence">40</field>
+        <field name="name">Sidang fatwa dan terbit sertifikat halal</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="duration_days">7</field>
+        <field name="deliverable">Sertifikat halal</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pp_42_2024'), ref('reg_uu_jph'), ref('reg_uu_ciptaker')])]"/>
+    </record>
+    <record id="type_halal_sh_step_4_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_halal_sh_step_4"/>
+        <field name="sequence">10</field>
+        <field name="name">Sertifikat halal</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor</field>
+        <field name="verifier_party_id" ref="party_halal"/>
+    </record>
+    <record id="type_halal_sh_step_5" model="izinara.type.step">
+        <field name="type_id" ref="type_halal_sh"/>
+        <field name="sequence">50</field>
+        <field name="name">Pelihara SJPH, laporkan perubahan bahan/fasilitas</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="duration_days">0</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pp_42_2024'), ref('reg_uu_jph'), ref('reg_uu_ciptaker')])]"/>
+    </record>
+    <record id="type_nonhalal" model="izinara.type">
+        <field name="name">Keterangan tidak halal &amp; pemisahan produk non-halal</field>
+        <field name="code">NONHALAL</field>
+        <field name="sequence">42</field>
+        <field name="authority">BPJPH (pengawasan)</field>
+        <field name="system">–</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="scope">product</field>
+        <field name="lead_days">3</field>
+        <field name="validity_months">0</field>
+        <field name="legal_basis">UU 33/2014 jo. UU 6/2023 (produk dari bahan yang diharamkan wajib mencantumkan keterangan tidak halal); PP 42/2024.</field>
+        <field name="description">Untuk daging babi dan olahannya: label 'tidak halal', penyimpanan, alat dan pengiriman terpisah.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_jph'), ref('reg_pp_42_2024'), ref('reg_perbpom_label')])]"/>
+    </record>
+    <record id="type_nonhalal_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_nonhalal"/>
+        <field name="sequence">10</field>
+        <field name="name">Tandai item sebagai non-halal di master barang</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="duration_days">1</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_jph'), ref('reg_pp_42_2024'), ref('reg_perbpom_label')])]"/>
+    </record>
+    <record id="type_nonhalal_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_nonhalal"/>
+        <field name="sequence">20</field>
+        <field name="name">Pastikan keterangan tidak halal pada label/stiker</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Foto label</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_jph'), ref('reg_pp_42_2024'), ref('reg_perbpom_label')])]"/>
+    </record>
+    <record id="type_nonhalal_step_2_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_nonhalal_step_2"/>
+        <field name="sequence">10</field>
+        <field name="name">Foto label</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Stiker terbaca dan menempel rapi
+Isi stiker sama dengan rancangan disetujui</field>
+        <field name="verifier_party_id" ref="party_halal"/>
+    </record>
+    <record id="type_nonhalal_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_nonhalal"/>
+        <field name="sequence">30</field>
+        <field name="name">Verifikasi pemisahan gudang, alat potong dan pengiriman</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Checklist pemisahan</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_jph'), ref('reg_pp_42_2024'), ref('reg_perbpom_label')])]"/>
+    </record>
+    <record id="type_nonhalal_step_3_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_nonhalal_step_3"/>
+        <field name="sequence">10</field>
+        <field name="name">Checklist pemisahan</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Area simpan non-halal terpisah dan berlabel
+Alat potong/kemas terpisah
+Pengiriman tidak dicampur produk halal</field>
+        <field name="verifier_party_id" ref="party_halal"/>
+    </record>
+    <record id="type_lartas_check" model="izinara.type">
+        <field name="name">Cek HS dan lartas di INSW</field>
+        <field name="code">LARTAS_CHECK</field>
+        <field name="sequence">50</field>
+        <field name="authority">LNSW</field>
+        <field name="system">INSW</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="scope">shipment</field>
+        <field name="lead_days">1</field>
+        <field name="validity_months">0</field>
+        <field name="legal_basis">Permendag 16/2025; PMK tentang Penetapan Sistem Klasifikasi Barang dan Pembebanan Tarif Bea Masuk (BTKI).</field>
+        <field name="description">Memastikan izin yang ditempelkan template sesuai dengan lartas HS terbaru.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permendag_16_2025'), ref('reg_pmk_btki')])]"/>
+    </record>
+    <record id="type_lartas_check_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">10</field>
+        <field name="name">Konfirmasi HS 8 digit tiap item di invoice</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="duration_days">1</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pmk_btki')])]"/>
+    </record>
+    <record id="type_lartas_check_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">20</field>
+        <field name="name">Cek lartas border/post-border tiap HS di INSW</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Hasil cek INSW</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permendag_16_2025'), ref('reg_pmk_btki')])]"/>
+    </record>
+    <record id="type_lartas_check_step_2_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_lartas_check_step_2"/>
+        <field name="sequence">10</field>
+        <field name="name">Hasil cek INSW</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Semua HS item sudah dicek
+Daftar lartas border/post-border tercatat</field>
+        <field name="verifier_party_id" ref="party_impor"/>
+    </record>
+    <record id="type_lartas_check_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">30</field>
+        <field name="name">Laporkan bila izin di template berbeda dengan INSW</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="duration_days">0</field>
+        <field name="instructions">Perbarui template barang di menu Konfigurasi bila perlu.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permendag_16_2025'), ref('reg_pmk_btki')])]"/>
+    </record>
+    <record id="type_ski_bpom" model="izinara.type">
+        <field name="name">SKI BPOM (border/post-border) per pengapalan</field>
+        <field name="code">SKI_BPOM</field>
+        <field name="sequence">51</field>
+        <field name="authority">BPOM</field>
+        <field name="system">e-BPOM / SINSW</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="scope">shipment</field>
+        <field name="lead_days">5</field>
+        <field name="validity_months">0</field>
+        <field name="legal_basis">Peraturan BPOM 28/2023 tentang Pengawasan Pemasukan Obat dan Makanan ke Wilayah Indonesia (jo. perubahannya).</field>
+        <field name="description">Surat Keterangan Impor untuk setiap pengapalan pangan olahan ber-NIE ML.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_28_2023'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_ski_bpom_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_ski_bpom"/>
+        <field name="sequence">10</field>
+        <field name="name">Terima invoice, packing list, CoA per lot dan health certificate</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">1</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_28_2023'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_ski_bpom_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_ski_bpom"/>
+        <field name="sequence">20</field>
+        <field name="name">Ajukan SKI per NIE di e-BPOM/SINSW</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Bukti pengajuan</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_28_2023'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_ski_bpom_step_2_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_ski_bpom_step_2"/>
+        <field name="sequence">10</field>
+        <field name="name">Bukti pengajuan</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor transaksi/aju terbaca
+Nilai dan tanggal sesuai</field>
+        <field name="verifier_party_id" ref="party_pangan"/>
+    </record>
+    <record id="type_ski_bpom_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_ski_bpom"/>
+        <field name="sequence">30</field>
+        <field name="name">Pantau persetujuan SKI</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">2</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_28_2023'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_ski_bpom_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_ski_bpom"/>
+        <field name="sequence">40</field>
+        <field name="name">Kirim nomor SKI ke bagian impor untuk PIB</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">SKI</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_28_2023'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_ski_bpom_step_4_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_ski_bpom_step_4"/>
+        <field name="sequence">10</field>
+        <field name="name">SKI</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor</field>
+        <field name="verifier_party_id" ref="party_pangan"/>
+    </record>
+    <record id="type_label_id" model="izinara.type">
+        <field name="name">Pelabelan Bahasa Indonesia sebelum edar</field>
+        <field name="code">LABEL_ID</field>
+        <field name="sequence">52</field>
+        <field name="authority">BPOM (pengawasan)</field>
+        <field name="system">–</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="scope">shipment</field>
+        <field name="lead_days">3</field>
+        <field name="validity_months">0</field>
+        <field name="legal_basis">UU 18/2012 Pangan; PP 86/2019; Per BPOM 31/2018 jo. 20/2021 tentang Label Pangan Olahan.</field>
+        <field name="description">Stiker label sesuai rancangan yang disetujui saat registrasi.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_label'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_label_id_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_label_id"/>
+        <field name="sequence">10</field>
+        <field name="name">Cetak stiker label sesuai rancangan yang disetujui</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">2</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_label'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_label_id_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_label_id"/>
+        <field name="sequence">20</field>
+        <field name="name">Tempel dan verifikasi sampel sebelum dirilis ke gudang jual</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Foto label</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_label'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_label_id_step_2_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_label_id_step_2"/>
+        <field name="sequence">10</field>
+        <field name="name">Foto label</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Stiker terbaca dan menempel rapi
+Isi stiker sama dengan rancangan disetujui</field>
+        <field name="verifier_party_id" ref="party_pangan"/>
+    </record>
+    <record id="type_quarantine_animal" model="izinara.type">
+        <field name="name">Karantina hewan (produk hewan)</field>
+        <field name="code">QUARANTINE_ANIMAL</field>
+        <field name="sequence">60</field>
+        <field name="authority">Badan Karantina Indonesia (Barantin)</field>
+        <field name="system">Best Trust / PTK Online</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="scope">shipment</field>
+        <field name="lead_days">3</field>
+        <field name="validity_months">0</field>
+        <field name="legal_basis">UU 21/2019 Karantina Hewan, Ikan, dan Tumbuhan; PP 29/2023 Peraturan Pelaksanaan UU 21/2019; Perpres 45/2023 Badan Karantina Indonesia.</field>
+        <field name="description">Sertifikat kesehatan veteriner negara asal, pemeriksaan dokumen/fisik/lab, sertifikat pelepasan.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_karantina'), ref('reg_pp_29_2023'), ref('reg_perpres_45_2023'), ref('reg_permentan_42_2019')])]"/>
+    </record>
+    <record id="type_quarantine_animal_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_quarantine_animal"/>
+        <field name="sequence">10</field>
+        <field name="name">Pastikan veterinary health certificate dan sertifikat halal penyembelihan asli dari negara asal</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">3</field>
+        <field name="deliverable">Health certificate</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_karantina'), ref('reg_permentan_42_2019'), ref('reg_pp_42_2024')])]"/>
+    </record>
+    <record id="type_quarantine_animal_step_1_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_quarantine_animal_step_1"/>
+        <field name="sequence">10</field>
+        <field name="name">Health certificate</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Asli dan ditandatangani otoritas veteriner/kompeten negara asal
+Nomor establishment sesuai daftar yang disetujui
+Produk, jumlah karton dan berat sesuai packing list
+Tanggal produksi/penyembelihan tercantum</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_quarantine_animal_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_quarantine_animal"/>
+        <field name="sequence">20</field>
+        <field name="name">Laporkan rencana pemasukan sebelum barang tiba</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Nomor permohonan</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_karantina'), ref('reg_pp_29_2023'), ref('reg_perpres_45_2023'), ref('reg_permentan_42_2019')])]"/>
+    </record>
+    <record id="type_quarantine_animal_step_2_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_quarantine_animal_step_2"/>
+        <field name="sequence">10</field>
+        <field name="name">Nomor permohonan</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">File terbaca jelas dan lengkap semua halaman
+Nama perusahaan, produk/item code sesuai pengurusan</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_quarantine_animal_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_quarantine_animal"/>
+        <field name="sequence">30</field>
+        <field name="name">Dampingi pemeriksaan dokumen/fisik/uji lab</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">2</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_karantina'), ref('reg_pp_29_2023'), ref('reg_perpres_45_2023'), ref('reg_permentan_42_2019')])]"/>
+    </record>
+    <record id="type_quarantine_animal_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_quarantine_animal"/>
+        <field name="sequence">40</field>
+        <field name="name">Terima sertifikat pelepasan karantina dan kirim ke bagian impor</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Sertifikat pelepasan</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_karantina'), ref('reg_pp_29_2023'), ref('reg_perpres_45_2023'), ref('reg_permentan_42_2019')])]"/>
+    </record>
+    <record id="type_quarantine_animal_step_4_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_quarantine_animal_step_4"/>
+        <field name="sequence">10</field>
+        <field name="name">Sertifikat pelepasan</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_quarantine_fish" model="izinara.type">
+        <field name="name">Karantina ikan</field>
+        <field name="code">QUARANTINE_FISH</field>
+        <field name="sequence">61</field>
+        <field name="authority">Badan Karantina Indonesia (Barantin)</field>
+        <field name="system">Best Trust / PTK Online</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="scope">shipment</field>
+        <field name="lead_days">3</field>
+        <field name="validity_months">0</field>
+        <field name="legal_basis">UU 21/2019; PP 29/2023; Perpres 45/2023.</field>
+        <field name="description">Health certificate ikan dari otoritas negara asal, pemeriksaan dan pelepasan karantina.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_karantina'), ref('reg_pp_29_2023'), ref('reg_perpres_45_2023')])]"/>
+    </record>
+    <record id="type_quarantine_fish_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_quarantine_fish"/>
+        <field name="sequence">10</field>
+        <field name="name">Pastikan health certificate ikan asli dari negara asal</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">3</field>
+        <field name="deliverable">Health certificate</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_karantina'), ref('reg_pp_29_2023'), ref('reg_perpres_45_2023')])]"/>
+    </record>
+    <record id="type_quarantine_fish_step_1_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_quarantine_fish_step_1"/>
+        <field name="sequence">10</field>
+        <field name="name">Health certificate</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Asli dan ditandatangani otoritas veteriner/kompeten negara asal
+Nomor establishment sesuai daftar yang disetujui
+Produk, jumlah karton dan berat sesuai packing list
+Tanggal produksi/penyembelihan tercantum</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_quarantine_fish_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_quarantine_fish"/>
+        <field name="sequence">20</field>
+        <field name="name">Laporkan rencana pemasukan sebelum barang tiba</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">1</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_karantina'), ref('reg_pp_29_2023'), ref('reg_perpres_45_2023')])]"/>
+    </record>
+    <record id="type_quarantine_fish_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_quarantine_fish"/>
+        <field name="sequence">30</field>
+        <field name="name">Dampingi pemeriksaan dokumen/fisik/uji lab</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">2</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_karantina'), ref('reg_pp_29_2023'), ref('reg_perpres_45_2023')])]"/>
+    </record>
+    <record id="type_quarantine_fish_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_quarantine_fish"/>
+        <field name="sequence">40</field>
+        <field name="name">Terima sertifikat pelepasan karantina dan kirim ke bagian impor</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Sertifikat pelepasan</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_karantina'), ref('reg_pp_29_2023'), ref('reg_perpres_45_2023')])]"/>
+    </record>
+    <record id="type_quarantine_fish_step_4_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_quarantine_fish_step_4"/>
+        <field name="sequence">10</field>
+        <field name="name">Sertifikat pelepasan</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_quarantine_plant" model="izinara.type">
+        <field name="name">Karantina tumbuhan</field>
+        <field name="code">QUARANTINE_PLANT</field>
+        <field name="sequence">62</field>
+        <field name="authority">Badan Karantina Indonesia (Barantin)</field>
+        <field name="system">Best Trust / PTK Online</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="scope">shipment</field>
+        <field name="lead_days">3</field>
+        <field name="validity_months">0</field>
+        <field name="legal_basis">UU 21/2019; PP 29/2023; Perpres 45/2023.</field>
+        <field name="description">Phytosanitary certificate negara asal untuk sayur/buah segar atau beku.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_karantina'), ref('reg_pp_29_2023'), ref('reg_perpres_45_2023')])]"/>
+    </record>
+    <record id="type_quarantine_plant_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_quarantine_plant"/>
+        <field name="sequence">10</field>
+        <field name="name">Pastikan phytosanitary certificate asli dari negara asal</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">3</field>
+        <field name="deliverable">Phytosanitary</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_karantina'), ref('reg_pp_29_2023'), ref('reg_perpres_45_2023')])]"/>
+    </record>
+    <record id="type_quarantine_plant_step_1_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_quarantine_plant_step_1"/>
+        <field name="sequence">10</field>
+        <field name="name">Phytosanitary</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Diterbitkan NPPO negara asal
+Produk dan jumlah sesuai packing list
+Bebas OPTK sesuai pernyataan tambahan</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_quarantine_plant_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_quarantine_plant"/>
+        <field name="sequence">20</field>
+        <field name="name">Laporkan rencana pemasukan sebelum barang tiba</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">1</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_karantina'), ref('reg_pp_29_2023'), ref('reg_perpres_45_2023')])]"/>
+    </record>
+    <record id="type_quarantine_plant_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_quarantine_plant"/>
+        <field name="sequence">30</field>
+        <field name="name">Dampingi pemeriksaan dan terima pelepasan karantina</field>
+        <field name="party_id" ref="party_perizinan"/>
+        <field name="duration_days">2</field>
+        <field name="deliverable">Sertifikat pelepasan</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_karantina'), ref('reg_pp_29_2023'), ref('reg_perpres_45_2023')])]"/>
+    </record>
+    <record id="type_quarantine_plant_step_3_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_quarantine_plant_step_3"/>
+        <field name="sequence">10</field>
+        <field name="name">Sertifikat pelepasan</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor</field>
+        <field name="verifier_party_id" ref="party_perizinan"/>
+    </record>
+    <record id="type_coo" model="izinara.type">
+        <field name="name">Surat Keterangan Asal (SKA/CoO) untuk tarif preferensi</field>
+        <field name="code">COO</field>
+        <field name="sequence">70</field>
+        <field name="authority">Otoritas negara asal / DJBC</field>
+        <field name="system">e-SKA / CEISA</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="scope">shipment</field>
+        <field name="lead_days">3</field>
+        <field name="validity_months">0</field>
+        <field name="legal_basis">PMK tentang tata cara pengenaan tarif bea masuk dalam rangka perjanjian internasional (AANZFTA, IA-CEPA, IJEPA, ACFTA, AKFTA, RCEP, dll.).</field>
+        <field name="description">Tidak wajib, tetapi tanpa SKA tarif preferensi tidak bisa dipakai.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pmk_fta'), ref('reg_uu_pabean')])]"/>
+    </record>
+    <record id="type_coo_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_coo"/>
+        <field name="sequence">10</field>
+        <field name="name">Minta SKA/CoO ke eksportir sebelum kapal berangkat</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">3</field>
+        <field name="deliverable">SKA</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pmk_fta')])]"/>
+    </record>
+    <record id="type_coo_step_1_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_coo_step_1"/>
+        <field name="sequence">10</field>
+        <field name="name">SKA</field>
+        <field name="check_expiry" eval="True"/>
+        <field name="criteria">Form sesuai perjanjian (mis. AANZFTA Form AANZ)
+HS dan uraian barang sama dengan invoice
+Ditandatangani otoritas penerbit</field>
+        <field name="verifier_party_id" ref="party_purchasing"/>
+    </record>
+    <record id="type_coo_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_coo"/>
+        <field name="sequence">20</field>
+        <field name="name">Cek kesesuaian SKA dengan invoice dan HS</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="duration_days">1</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pmk_fta'), ref('reg_uu_pabean')])]"/>
+    </record>
+    <record id="type_customs_pib" model="izinara.type">
+        <field name="name">PIB (BC 2.0), pembayaran BM/PDRI dan SPPB</field>
+        <field name="code">CUSTOMS_PIB</field>
+        <field name="sequence">80</field>
+        <field name="authority">DJBC</field>
+        <field name="system">CEISA</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="scope">shipment</field>
+        <field name="lead_days">3</field>
+        <field name="validity_months">0</field>
+        <field name="legal_basis">UU 10/1995 jo. UU 17/2006 Kepabeanan; PMK tentang Ketentuan Kepabeanan di Bidang Impor (cek versi terbaru); ketentuan PPN dan PPh Pasal 22 impor.</field>
+        <field name="description">Dokumen pemberitahuan impor setelah semua lartas terpenuhi. Barang keluar setelah SPPB.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_pabean'), ref('reg_pmk_impor'), ref('reg_permendag_16_2025')])]"/>
+    </record>
+    <record id="type_customs_pib_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">10</field>
+        <field name="name">Pastikan prinsipal mengirim dokumen pengapalan asli (invoice, packing list, B/L-AWB, SKA, health certificate)</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">2</field>
+        <field name="deliverable">Dokumen asli</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_pabean'), ref('reg_pmk_impor'), ref('reg_permendag_16_2025')])]"/>
+    </record>
+    <record id="type_customs_pib_step_1_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_customs_pib_step_1"/>
+        <field name="sequence">10</field>
+        <field name="name">Dokumen asli</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Invoice, packing list dan B/L/AWB asli diterima
+Nama barang dan HS sama di semua dokumen</field>
+        <field name="verifier_party_id" ref="party_impor"/>
+    </record>
+    <record id="type_customs_pib_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">20</field>
+        <field name="name">Kumpulkan dokumen PIB: invoice, packing list, B/L-AWB, polis asuransi, SKA, PI, SKI, sertifikat karantina</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="duration_days">1</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_permendag_16_2025'), ref('reg_perbpom_28_2023'), ref('reg_uu_karantina')])]"/>
+    </record>
+    <record id="type_customs_pib_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">30</field>
+        <field name="name">Hitung dan bayar BM, PPN, PPh 22 lewat billing</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Bukti bayar</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_pmk_impor'), ref('reg_uu_pabean')])]"/>
+    </record>
+    <record id="type_customs_pib_step_3_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_customs_pib_step_3"/>
+        <field name="sequence">10</field>
+        <field name="name">Bukti bayar</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor transaksi/aju terbaca
+Nilai dan tanggal sesuai</field>
+        <field name="verifier_party_id" ref="party_impor"/>
+    </record>
+    <record id="type_customs_pib_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">40</field>
+        <field name="name">Kirim PIB BC 2.0 lewat CEISA/PPJK</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Nomor aju PIB</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_pabean'), ref('reg_pmk_impor'), ref('reg_permendag_16_2025')])]"/>
+    </record>
+    <record id="type_customs_pib_step_4_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_customs_pib_step_4"/>
+        <field name="sequence">10</field>
+        <field name="name">Nomor aju PIB</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">File terbaca jelas dan lengkap semua halaman
+Nama perusahaan, produk/item code sesuai pengurusan</field>
+        <field name="verifier_party_id" ref="party_impor"/>
+    </record>
+    <record id="type_customs_pib_step_5" model="izinara.type.step">
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">50</field>
+        <field name="name">Tangani jalur merah/kuning dan SPTNP bila ada</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="duration_days">3</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_pabean'), ref('reg_pmk_impor'), ref('reg_permendag_16_2025')])]"/>
+    </record>
+    <record id="type_customs_pib_step_6" model="izinara.type.step">
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">60</field>
+        <field name="name">Terima SPPB, keluarkan kontainer reefer ke gudang</field>
+        <field name="party_id" ref="party_impor"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">SPPB</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_pabean'), ref('reg_pmk_impor'), ref('reg_permendag_16_2025')])]"/>
+    </record>
+    <record id="type_customs_pib_step_6_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_customs_pib_step_6"/>
+        <field name="sequence">10</field>
+        <field name="name">SPPB</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor SPPB dan tanggal terbaca
+Nomor kontainer sesuai B/L</field>
+        <field name="verifier_party_id" ref="party_impor"/>
+    </record>
+    <record id="type_md_bpom" model="izinara.type">
+        <field name="name">Izin edar pangan olahan MD (produksi dalam negeri)</field>
+        <field name="code">MD_BPOM</field>
+        <field name="sequence">31</field>
+        <field name="authority">BPOM</field>
+        <field name="system">e-Registration BPOM</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="scope">product</field>
+        <field name="lead_days">45</field>
+        <field name="validity_months">60</field>
+        <field name="legal_basis">UU 18/2012 Pangan; PP 86/2019 Keamanan Pangan; Peraturan BPOM tentang Pendaftaran Pangan Olahan; Per BPOM 31/2018 jo. 20/2021 Label Pangan Olahan.</field>
+        <field name="description">Untuk pangan olahan produksi dalam negeri. Bila diproduksi/dikemas oleh Indoguna dengan merek sendiri, Indoguna mendaftarkan MD; bila dibeli dari produsen lokal, cukup verifikasi nomor MD pemasok.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_reg'), ref('reg_perbpom_label'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_md_bpom_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_md_bpom"/>
+        <field name="sequence">10</field>
+        <field name="name">Tentukan: produksi sendiri (daftar MD) atau produk pemasok (verifikasi MD)</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">1</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_reg'), ref('reg_perbpom_label'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_md_bpom_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_md_bpom"/>
+        <field name="sequence">20</field>
+        <field name="name">Siapkan izin usaha industri, hasil pemeriksaan sarana/CPPOB, komposisi, proses dan rancangan label</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">10</field>
+        <field name="deliverable">Rancangan label</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_reg'), ref('reg_perbpom_label'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_md_bpom_step_2_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_md_bpom_step_2"/>
+        <field name="sequence">10</field>
+        <field name="name">Rancangan label</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nama produk, komposisi, berat bersih, negara asal
+Nama dan alamat importir (Indoguna)
+Tanggal kedaluwarsa dan kode produksi
+Logo halal Indonesia atau keterangan tidak halal sesuai status produk</field>
+        <field name="verifier_party_id" ref="party_pangan"/>
+    </record>
+    <record id="type_md_bpom_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_md_bpom"/>
+        <field name="sequence">30</field>
+        <field name="name">Ajukan MD di e-Registration BPOM dan bayar PNBP</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">1</field>
+        <field name="deliverable">Bukti bayar</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_reg'), ref('reg_perbpom_label'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_md_bpom_step_3_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_md_bpom_step_3"/>
+        <field name="sequence">10</field>
+        <field name="name">Bukti bayar</field>
+        <field name="check_expiry" eval="False"/>
+        <field name="criteria">Nomor transaksi/aju terbaca
+Nilai dan tanggal sesuai</field>
+        <field name="verifier_party_id" ref="party_pangan"/>
+    </record>
+    <record id="type_md_bpom_step_4" model="izinara.type.step">
+        <field name="type_id" ref="type_md_bpom"/>
+        <field name="sequence">40</field>
+        <field name="name">Tanggapi evaluasi dan unduh NIE MD</field>
+        <field name="party_id" ref="party_pangan"/>
+        <field name="duration_days">25</field>
+        <field name="deliverable">NIE MD</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_perbpom_reg'), ref('reg_perbpom_label'), ref('reg_pp_86_2019'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_md_bpom_step_4_doc_1" model="izinara.doc.spec">
+        <field name="type_step_id" ref="type_md_bpom_step_4"/>
+        <field name="sequence">10</field>
+        <field name="name">NIE MD</field>
+        <field name="check_expiry" eval="True"/>
+        <field name="criteria">Nomor dan tanggal terbit terbaca
+Item/HS, volume dan negara asal sesuai rencana impor
+Masa berlaku mencakup ETA pengapalan</field>
+        <field name="verifier_party_id" ref="party_pangan"/>
+    </record>
+    <record id="type_local_supplier" model="izinara.type">
+        <field name="name">Verifikasi legalitas produk &amp; pemasok lokal</field>
+        <field name="code">LOCAL_SUPPLIER</field>
+        <field name="sequence">90</field>
+        <field name="authority">Internal</field>
+        <field name="system">Cek BPOM / SIHALAL</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="scope">product</field>
+        <field name="lead_days">7</field>
+        <field name="validity_months">12</field>
+        <field name="legal_basis">UU 18/2012 Pangan; UU 33/2014 jo. UU 6/2023; PP 42/2024.</field>
+        <field name="description">Untuk item asal Indonesia: izin edar MD/PIRT atau PSAT, sertifikat halal, NKV pemasok produk hewan.</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_pangan'), ref('reg_uu_jph'), ref('reg_pp_42_2024')])]"/>
+    </record>
+    <record id="type_local_supplier_step_1" model="izinara.type.step">
+        <field name="type_id" ref="type_local_supplier"/>
+        <field name="sequence">10</field>
+        <field name="name">Minta NIB, izin edar MD/PIRT/PSAT, sertifikat halal dan NKV pemasok</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">5</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_pangan'), ref('reg_uu_jph'), ref('reg_pp_42_2024')])]"/>
+    </record>
+    <record id="type_local_supplier_step_2" model="izinara.type.step">
+        <field name="type_id" ref="type_local_supplier"/>
+        <field name="sequence">20</field>
+        <field name="name">Verifikasi sertifikat halal di SIHALAL dan izin edar di cekbpom</field>
+        <field name="party_id" ref="party_halal"/>
+        <field name="duration_days">1</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_jph'), ref('reg_uu_pangan')])]"/>
+    </record>
+    <record id="type_local_supplier_step_3" model="izinara.type.step">
+        <field name="type_id" ref="type_local_supplier"/>
+        <field name="sequence">30</field>
+        <field name="name">Simpan dokumen dan catat masa berlaku</field>
+        <field name="party_id" ref="party_purchasing"/>
+        <field name="duration_days">1</field>
+        <field name="regulation_ids" eval="[(6, 0, [ref('reg_uu_pangan'), ref('reg_uu_jph'), ref('reg_pp_42_2024')])]"/>
+    </record>
+</odoo>

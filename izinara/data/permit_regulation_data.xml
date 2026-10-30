@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="reg_uu_pangan" model="izinara.regulation">
+        <field name="code">UU_PANGAN</field>
+        <field name="name">UU 18/2012</field>
+        <field name="title">Pangan</field>
+        <field name="issuer">DPR &amp; Presiden</field>
+        <field name="year">2012</field>
+    </record>
+    <record id="reg_uu_jph" model="izinara.regulation">
+        <field name="code">UU_JPH</field>
+        <field name="name">UU 33/2014</field>
+        <field name="title">Jaminan Produk Halal</field>
+        <field name="issuer">DPR &amp; Presiden</field>
+        <field name="year">2014</field>
+        <field name="note">Diubah oleh UU 6/2023</field>
+    </record>
+    <record id="reg_uu_ciptaker" model="izinara.regulation">
+        <field name="code">UU_CIPTAKER</field>
+        <field name="name">UU 6/2023</field>
+        <field name="title">Penetapan Perppu 2/2022 tentang Cipta Kerja menjadi Undang-Undang</field>
+        <field name="issuer">DPR &amp; Presiden</field>
+        <field name="year">2023</field>
+    </record>
+    <record id="reg_uu_pkh" model="izinara.regulation">
+        <field name="code">UU_PKH</field>
+        <field name="name">UU 18/2009 jo. UU 41/2014</field>
+        <field name="title">Peternakan dan Kesehatan Hewan</field>
+        <field name="issuer">DPR &amp; Presiden</field>
+        <field name="year">2014</field>
+    </record>
+    <record id="reg_uu_perikanan" model="izinara.regulation">
+        <field name="code">UU_PERIKANAN</field>
+        <field name="name">UU 31/2004 jo. UU 45/2009</field>
+        <field name="title">Perikanan</field>
+        <field name="issuer">DPR &amp; Presiden</field>
+        <field name="year">2009</field>
+    </record>
+    <record id="reg_uu_horti" model="izinara.regulation">
+        <field name="code">UU_HORTI</field>
+        <field name="name">UU 13/2010</field>
+        <field name="title">Hortikultura</field>
+        <field name="issuer">DPR &amp; Presiden</field>
+        <field name="year">2010</field>
+    </record>
+    <record id="reg_uu_karantina" model="izinara.regulation">
+        <field name="code">UU_KARANTINA</field>
+        <field name="name">UU 21/2019</field>
+        <field name="title">Karantina Hewan, Ikan, dan Tumbuhan</field>
+        <field name="issuer">DPR &amp; Presiden</field>
+        <field name="year">2019</field>
+    </record>
+    <record id="reg_uu_pabean" model="izinara.regulation">
+        <field name="code">UU_PABEAN</field>
+        <field name="name">UU 10/1995 jo. UU 17/2006</field>
+        <field name="title">Kepabeanan</field>
+        <field name="issuer">DPR &amp; Presiden</field>
+        <field name="year">2006</field>
+    </record>
+    <record id="reg_pp_86_2019" model="izinara.regulation">
+        <field name="code">PP_86_2019</field>
+        <field name="name">PP 86/2019</field>
+        <field name="title">Keamanan Pangan</field>
+        <field name="issuer">Presiden</field>
+        <field name="year">2019</field>
+    </record>
+    <record id="reg_pp_95_2012" model="izinara.regulation">
+        <field name="code">PP_95_2012</field>
+        <field name="name">PP 95/2012</field>
+        <field name="title">Kesehatan Masyarakat Veteriner dan Kesejahteraan Hewan</field>
+        <field name="issuer">Presiden</field>
+        <field name="year">2012</field>
+    </record>
+    <record id="reg_pp_42_2024" model="izinara.regulation">
+        <field name="code">PP_42_2024</field>
+        <field name="name">PP 42/2024</field>
+        <field name="title">Penyelenggaraan Bidang Jaminan Produk Halal</field>
+        <field name="issuer">Presiden</field>
+        <field name="year">2024</field>
+        <field name="note">Produk luar negeri wajib bersertifikat halal paling lambat 17 Oktober 2026</field>
+    </record>
+    <record id="reg_pp_29_2023" model="izinara.regulation">
+        <field name="code">PP_29_2023</field>
+        <field name="name">PP 29/2023</field>
+        <field name="title">Peraturan Pelaksanaan UU 21/2019 tentang Karantina Hewan, Ikan, dan Tumbuhan</field>
+        <field name="issuer">Presiden</field>
+        <field name="year">2023</field>
+    </record>
+    <record id="reg_pp_28_2025" model="izinara.regulation">
+        <field name="code">PP_28_2025</field>
+        <field name="name">PP 28/2025</field>
+        <field name="title">Penyelenggaraan Perizinan Berusaha Berbasis Risiko</field>
+        <field name="issuer">Presiden</field>
+        <field name="year">2025</field>
+        <field name="url">https://jdih.kemenkeu.go.id/api/download/b71d04f2-c2be-4eaa-9637-c944ae584f46/2025PP028.pdf</field>
+    </record>
+    <record id="reg_perpres_32_2022" model="izinara.regulation">
+        <field name="code">PERPRES_32_2022</field>
+        <field name="name">Perpres 32/2022</field>
+        <field name="title">Neraca Komoditas</field>
+        <field name="issuer">Presiden</field>
+        <field name="year">2022</field>
+        <field name="note">Cek perubahan terbaru</field>
+    </record>
+    <record id="reg_perpres_45_2023" model="izinara.regulation">
+        <field name="code">PERPRES_45_2023</field>
+        <field name="name">Perpres 45/2023</field>
+        <field name="title">Badan Karantina Indonesia</field>
+        <field name="issuer">Presiden</field>
+        <field name="year">2023</field>
+    </record>
+    <record id="reg_permendag_16_2025" model="izinara.regulation">
+        <field name="code">PERMENDAG_16_2025</field>
+        <field name="name">Permendag 16/2025</field>
+        <field name="title">Kebijakan dan Pengaturan Impor</field>
+        <field name="issuer">Kementerian Perdagangan</field>
+        <field name="year">2025</field>
+        <field name="url">https://peraturan.bpk.go.id/Details/323106</field>
+    </record>
+    <record id="reg_permendag_18_2025" model="izinara.regulation">
+        <field name="code">PERMENDAG_18_2025</field>
+        <field name="name">Permendag 18/2025</field>
+        <field name="title">Kebijakan dan Pengaturan Impor Barang Pertanian dan Peternakan</field>
+        <field name="issuer">Kementerian Perdagangan</field>
+        <field name="year">2025</field>
+        <field name="url">https://peraturan.bpk.go.id/Details/323120</field>
+        <field name="note">Sudah diubah; cek perubahan terbaru</field>
+    </record>
+    <record id="reg_permendag_19_2025" model="izinara.regulation">
+        <field name="code">PERMENDAG_19_2025</field>
+        <field name="name">Permendag 19/2025</field>
+        <field name="title">Kebijakan dan Pengaturan Impor Garam dan Komoditas Perikanan</field>
+        <field name="issuer">Kementerian Perdagangan</field>
+        <field name="year">2025</field>
+        <field name="url">https://peraturan.bpk.go.id/Details/323136</field>
+    </record>
+    <record id="reg_permentan_42_2019" model="izinara.regulation">
+        <field name="code">PERMENTAN_42_2019</field>
+        <field name="name">Permentan 42/2019</field>
+        <field name="title">Pemasukan Karkas, Daging, Jeroan, dan/atau Olahannya ke dalam Wilayah Negara Republik Indonesia</field>
+        <field name="issuer">Kementerian Pertanian</field>
+        <field name="year">2019</field>
+        <field name="url">https://peraturan.bpk.go.id/Download/195208/Permentan%20Nomor%2042%20Tahun%202019.pdf</field>
+        <field name="note">Cek perubahan terbaru</field>
+    </record>
+    <record id="reg_permentan_19_2025" model="izinara.regulation">
+        <field name="code">PERMENTAN_19_2025</field>
+        <field name="name">Permentan 19/2025</field>
+        <field name="title">Persyaratan Pemasukan Produk Hewan dalam Hal Tertentu yang Berasal dari Negara atau Zona dalam Suatu Negara Asal Pemasukan</field>
+        <field name="issuer">Kementerian Pertanian</field>
+        <field name="year">2025</field>
+        <field name="url">https://peraturan.bpk.go.id/Details/323268</field>
+    </record>
+    <record id="reg_permentan_nkv" model="izinara.regulation">
+        <field name="code">PERMENTAN_NKV</field>
+        <field name="name">Permentan 11/2020</field>
+        <field name="title">Sertifikasi Nomor Kontrol Veteriner Unit Usaha Produk Hewan</field>
+        <field name="issuer">Kementerian Pertanian</field>
+        <field name="year">2020</field>
+        <field name="note">Cek versi terbaru</field>
+    </record>
+    <record id="reg_permentan_riph" model="izinara.regulation">
+        <field name="code">PERMENTAN_RIPH</field>
+        <field name="name">Permentan 39/2019</field>
+        <field name="title">Rekomendasi Impor Produk Hortikultura</field>
+        <field name="issuer">Kementerian Pertanian</field>
+        <field name="year">2019</field>
+        <field name="note">Sudah beberapa kali diubah; cek versi terbaru dan lartas HS di INSW</field>
+    </record>
+    <record id="reg_permenkp_impor" model="izinara.regulation">
+        <field name="code">PERMENKP_IMPOR</field>
+        <field name="name">Permen KP 58/2018</field>
+        <field name="title">Rekomendasi Pemasukan Komoditas Perikanan Selain Ikan Hidup</field>
+        <field name="issuer">Kementerian Kelautan dan Perikanan</field>
+        <field name="year">2018</field>
+        <field name="url">https://peraturan.bpk.go.id/Download/158697/Permen%20KP%2058%20Tahun-2018.pdf</field>
+        <field name="note">Cek perubahan terbaru</field>
+    </record>
+    <record id="reg_perbpom_reg" model="izinara.regulation">
+        <field name="code">PERBPOM_REG</field>
+        <field name="name">Per BPOM 27/2017</field>
+        <field name="title">Pendaftaran Pangan Olahan</field>
+        <field name="issuer">BPOM</field>
+        <field name="year">2017</field>
+        <field name="note">Sudah diubah beberapa kali; cek versi terbaru</field>
+    </record>
+    <record id="reg_perbpom_label" model="izinara.regulation">
+        <field name="code">PERBPOM_LABEL</field>
+        <field name="name">Per BPOM 31/2018 jo. 20/2021</field>
+        <field name="title">Label Pangan Olahan</field>
+        <field name="issuer">BPOM</field>
+        <field name="year">2021</field>
+    </record>
+    <record id="reg_perbpom_28_2023" model="izinara.regulation">
+        <field name="code">PERBPOM_28_2023</field>
+        <field name="name">Per BPOM 28/2023</field>
+        <field name="title">Pengawasan Pemasukan Obat dan Makanan ke dalam Wilayah Indonesia</field>
+        <field name="issuer">BPOM</field>
+        <field name="year">2023</field>
+        <field name="url">https://peraturan.go.id/files/peraturan-bpom-no-28-tahun-2023.pdf</field>
+        <field name="note">Cek perubahan terbaru</field>
+    </record>
+    <record id="reg_perbadan_psat" model="izinara.regulation">
+        <field name="code">PERBADAN_PSAT</field>
+        <field name="name">Peraturan Badan Pangan Nasional</field>
+        <field name="title">Pendaftaran Pangan Segar Asal Tumbuhan</field>
+        <field name="issuer">Badan Pangan Nasional</field>
+        <field name="year">2023</field>
+        <field name="note">Cek nomor dan versi terbaru</field>
+    </record>
+    <record id="reg_kepkaban_shln" model="izinara.regulation">
+        <field name="code">KEPKABAN_SHLN</field>
+        <field name="name">Keputusan Kepala BPJPH</field>
+        <field name="title">Registrasi Sertifikat Halal Luar Negeri dan Lembaga Halal Luar Negeri yang diakui</field>
+        <field name="issuer">BPJPH</field>
+        <field name="year">2024</field>
+        <field name="note">Cek daftar LHLN yang berlaku</field>
+    </record>
+    <record id="reg_pmk_impor" model="izinara.regulation">
+        <field name="code">PMK_IMPOR</field>
+        <field name="name">PMK Ketentuan Kepabeanan di Bidang Impor</field>
+        <field name="title">Ketentuan Kepabeanan di Bidang Impor</field>
+        <field name="issuer">Kementerian Keuangan</field>
+        <field name="year">2023</field>
+        <field name="note">Cek nomor dan versi terbaru</field>
+    </record>
+    <record id="reg_pmk_btki" model="izinara.regulation">
+        <field name="code">PMK_BTKI</field>
+        <field name="name">PMK 26/2022</field>
+        <field name="title">Penetapan Sistem Klasifikasi Barang dan Pembebanan Tarif Bea Masuk atas Barang Impor (BTKI 2022)</field>
+        <field name="issuer">Kementerian Keuangan</field>
+        <field name="year">2022</field>
+        <field name="note">Cek perubahan terbaru</field>
+    </record>
+    <record id="reg_pmk_fta" model="izinara.regulation">
+        <field name="code">PMK_FTA</field>
+        <field name="name">PMK Tarif Preferensi FTA</field>
+        <field name="title">Tata cara pengenaan tarif bea masuk dalam rangka perjanjian internasional (AANZFTA, IA-CEPA, IJEPA, ACFTA, AKFTA, RCEP)</field>
+        <field name="issuer">Kementerian Keuangan</field>
+        <field name="year">2022</field>
+        <field name="note">Satu PMK per perjanjian</field>
+    </record>
+</odoo>

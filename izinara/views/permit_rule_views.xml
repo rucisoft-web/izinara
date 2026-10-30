@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_permit_rule_list" model="ir.ui.view">
+        <field name="name">izinara.rule.list</field>
+        <field name="model">izinara.rule</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="origin"/>
+                <field name="group_codes"/>
+                <field name="subgroups"/>
+                <field name="hs_prefixes"/>
+                <field name="keywords"/>
+                <field name="halal"/>
+                <field name="template_id"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_permit_rule" model="ir.actions.act_window">
+        <field name="name">Aturan pemetaan item</field>
+        <field name="res_model">izinara.rule</field>
+        <field name="view_mode">list</field>
+        <field name="help" type="html">
+            <p>Aturan dibaca dari atas ke bawah; aturan pertama yang cocok menentukan template item.</p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="izinara.GuideLink">
+        <a class="o_izinara_link" t-on-click.prevent="() => this.open(xmlid)"><t t-esc="label"/></a>
+    </t>
+
+    <t t-name="izinara.GuideFigure">
+        <figure class="o_izinara_figure">
+            <a t-if="img" t-att-href="'/izinara/static/img/guide/' + img" target="_blank" title="Buka ukuran penuh">
+                <img t-att-src="'/izinara/static/img/guide/' + img" t-att-alt="caption" loading="lazy"/>
+            </a>
+            <div t-else="" class="o_izinara_figure_placeholder">
+                <i class="fa fa-picture-o fa-2x mb-2"/>
+                <div class="fw-bold">Tempat screen capture</div>
+                <small t-esc="hint"/>
+            </div>
+            <figcaption t-esc="caption"/>
+        </figure>
+    </t>
+
+    <t t-name="izinara.Guide">
+        <div class="o_izinara_guide o_action h-100 overflow-auto p-3">
+            <h2 class="mb-3">Panduan Izinara</h2>
+            <ul class="nav nav-tabs mb-3">
+                <li class="nav-item" t-foreach="tabs" t-as="tab" t-key="tab[0]">
+                    <a href="#" class="nav-link" t-att-class="{ active: state.tab === tab[0] }"
+                       t-on-click.prevent="() => this.state.tab = tab[0]" t-esc="tab[1]"/>
+                </li>
+            </ul>
+            <div class="o_izinara_guide_body">
+
+                <!-- RINGKASAN -->
+                <t t-if="state.tab === 'summary'">
+                    <p class="lead">Izinara memantau pengurusan izin impor pangan Indoguna dari rencana impor sampai
+                        barang keluar pelabuhan: izin apa yang dibutuhkan tiap item code, siapa mengerjakan apa,
+                        dokumen apa yang sudah diverifikasi, dan izin mana yang segera habis.</p>
+                    <div class="o_izinara_guide_grid">
+                        <div class="o_izinara_guide_feature">
+                            <h4>Template izin per item code</h4>
+                            Setiap item code masuk kelompok PSAH, PSAI, PSAT, BPOM ML atau BPOM MD dan mendapat template
+                            berisi izin wajib/opsional serta aktivitas tiap bagian. Aturan pemetaan mengisi template
+                            otomatis dari item master SAP; template bisa dipilih manual.
+                        </div>
+                        <div class="o_izinara_guide_feature">
+                            <h4>Pengapalan &amp; kesiapan izin</h4>
+                            Purchasing mencatat PO, eksportir, ETA dan item. Izinara menghitung izin yang dibutuhkan,
+                            menandai yang sudah dimiliki, dan menampilkan persentase kesiapan sampai "siap clearance".
+                        </div>
+                        <div class="o_izinara_guide_feature">
+                            <h4>Aktivitas per bagian</h4>
+                            Setiap pengurusan dipecah menjadi aktivitas berurutan dengan bagian, petugas, target tanggal,
+                            petunjuk, dokumen wajib dan referensi peraturan. Petugas berikutnya otomatis mendapat tugas.
+                        </div>
+                        <div class="o_izinara_guide_feature">
+                            <h4>Unggah &amp; verifikasi dokumen</h4>
+                            Satu dokumen boleh berisi banyak file (PDF, JPG, DOC, XLS, dll.). Cek otomatis: ada file,
+                            jenis file diizinkan, file tidak kosong, masa berlaku mencakup ETA. Verifikator mencentang
+                            checklist kriteria lalu menerima atau menolak dengan catatan perbaikan.
+                        </div>
+                        <div class="o_izinara_guide_feature">
+                            <h4>Komunikasi antar bagian</h4>
+                            Memo antar bagian dengan penerima, prioritas dan tenggat; waktu respons tercatat. Diskusi di
+                            setiap aktivitas/dokumen, dan ruang diskusi per pengapalan. Hanya Purchasing yang menghubungi
+                            prinsipal luar negeri.
+                        </div>
+                        <div class="o_izinara_guide_feature">
+                            <h4>Register izin &amp; pengingat</h4>
+                            Semua izin yang terbit (NIB, NKV, RP, PI, NIE ML/MD, SHLN, dll.) tersimpan dengan masa
+                            berlaku dan dipakai ulang oleh pengapalan berikutnya. Pengingat perpanjangan otomatis.
+                        </div>
+                        <div class="o_izinara_guide_feature">
+                            <h4>Dashboard</h4>
+                            KPI, kesiapan tiap pengapalan, beban kerja dan waktu respons per bagian, progres per
+                            kelompok dan jenis izin, aktivitas paling terlambat, izin segera habis.
+                        </div>
+                        <div class="o_izinara_guide_feature">
+                            <h4>Dasar hukum</h4>
+                            Setiap jenis izin dan aktivitas mencantumkan peraturan acuannya (menu Konfigurasi &gt;
+                            Referensi peraturan). Peraturan bertanda "cek versi terbaru" perlu dikonfirmasi ke JDIH.
+                        </div>
+                    </div>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'dashboard.jpg'"/><t t-set="caption" t-value="'Gambar 1. Dashboard: KPI, kesiapan pengapalan, beban kerja per bagian dan izin segera habis.'"/></t>
+                    <h3>Alur singkat</h3>
+                    <ol>
+                        <li>Purchasing membuat pengapalan, lalu <b>Hitung izin yang diperlukan</b> dan <b>Buat &amp; mulai pengurusan</b>.</li>
+                        <li>Setiap bagian mengerjakan aktivitasnya di <b>Tugas per bagian</b>: unggah dokumen, ajukan verifikasi, tandai selesai.</li>
+                        <li>Verifikator memeriksa dokumen di <b>Verifikasi dokumen</b>.</li>
+                        <li>Saat izin terbit, isi nomor dan masa berlaku lalu tekan <b>Izin terbit</b>.</li>
+                        <li>Bila kesiapan 100%, tekan <b>Cek siap clearance</b>; setelah SPPB, <b>Barang keluar</b>.</li>
+                    </ol>
+                </t>
+
+                <!-- PURCHASING -->
+                <t t-if="state.tab === 'purchasing'">
+                    <p>Purchasing adalah satu-satunya bagian yang berhubungan dengan prinsipal/eksportir luar negeri.</p>
+                    <h3>Membuat rencana impor</h3>
+                    <ol>
+                        <li>Buka <t t-call="izinara.GuideLink"><t t-set="xmlid" t-value="'izinara.action_permit_shipment'"/><t t-set="label" t-value="'Pengapalan impor'"/></t> &gt; New.</li>
+                        <li>Isi eksportir, produsen/unit usaha asal (establishment), negara, No. PO, ETD/ETA dan item code beserta jumlahnya.</li>
+                        <li>Tekan <b>Hitung izin yang diperlukan</b>. Tab <i>Kebutuhan izin</i> menunjukkan izin yang sudah lengkap, sedang diurus, atau belum ada.</li>
+                        <li>Tekan <b>Buat &amp; mulai pengurusan</b>. Aktivitas dibagikan ke tiap bagian.</li>
+                        <li>Bila ada peringatan "barang belum punya template", minta manajer melengkapinya.</li>
+                    </ol>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'kebutuhan-izin.jpg'"/><t t-set="caption" t-value="'Gambar 2. Pengapalan impor, tab Kebutuhan izin: izin lengkap (hijau), sedang diurus, atau belum ada.'"/></t>
+                    <h3>Meminta dokumen ke prinsipal</h3>
+                    <ol>
+                        <li>Buka <t t-call="izinara.GuideLink"><t t-set="xmlid" t-value="'izinara.action_permit_step'"/><t t-set="label" t-value="'Tugas per bagian'"/></t>, filter <i>Tugas saya</i>.</li>
+                        <li>Buka aktivitas (mis. "Minta dokumen prinsipal"), baca petunjuk dan kriteria dokumen.</li>
+                        <li>Di tab <i>Dokumen</i>, buka dokumen, unggah semua file dari prinsipal (boleh beberapa), isi nomor dan tanggal berlaku bila diminta, lalu <b>Ajukan verifikasi</b>.</li>
+                        <li>Bila dokumen ditolak, Anda mendapat tugas perbaikan berisi catatan verifikator. Minta revisi ke prinsipal dan ajukan lagi.</li>
+                        <li>Setelah semua dokumen wajib terverifikasi, tekan <b>Tandai selesai</b>.</li>
+                    </ol>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'aktivitas.jpg'"/><t t-set="caption" t-value="'Gambar 3. Aktivitas: petugas, target, dokumen wajib dan status verifikasinya, tombol Tandai selesai dan Kirim memo.'"/></t>
+                    <h3>Menjawab memo</h3>
+                    <p>Memo dari bagian lain masuk ke <t t-call="izinara.GuideLink"><t t-set="xmlid" t-value="'izinara.action_permit_memo'"/><t t-set="label" t-value="'Memo antar bagian'"/></t> (filter <i>Masuk ke bagian saya</i>). Tulis jawaban lalu <b>Kirim jawaban</b> sebelum tenggat; waktu respons tercatat di dashboard.</p>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'memo.jpg'"/><t t-set="caption" t-value="'Gambar 4. Memo antar bagian: prioritas, tenggat dan status jawaban.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 5. Email/korespondensi Purchasing dengan prinsipal (contoh permintaan dokumen).'"/><t t-set="hint" t-value="'Tempel tangkapan layar email ke prinsipal yang berisi daftar dokumen yang diminta.'"/></t>
+                </t>
+
+                <!-- PANGAN -->
+                <t t-if="state.tab === 'pangan'">
+                    <p>Bagian Makanan Luar mengurus izin edar pangan olahan (BPOM ML/MD), label Bahasa Indonesia, SKI BPOM per pengapalan, dan registrasi PSAT.</p>
+                    <h3>Registrasi ML/MD</h3>
+                    <ol>
+                        <li>Buka <t t-call="izinara.GuideLink"><t t-set="xmlid" t-value="'izinara.action_permit_application'"/><t t-set="label" t-value="'Pengurusan izin'"/></t>, cari jenis "Izin edar pangan olahan ML/MD".</li>
+                        <li>Tunggu dokumen prinsipal dari Purchasing terverifikasi (Anda verifikatornya: buka <t t-call="izinara.GuideLink"><t t-set="xmlid" t-value="'izinara.action_permit_document'"/><t t-set="label" t-value="'Verifikasi dokumen'"/></t>, centang setiap kriteria, lalu <b>Sesuai, verifikasi</b> atau <b>Tolak</b> dengan catatan).</li>
+                        <li>Kerjakan aktivitas: kategori pangan, rancangan label, pengajuan e-Reg, tanggapan evaluasi. Unggah bukti di setiap aktivitas.</li>
+                        <li>Bila evaluator meminta data dari prinsipal, kirim memo ke Purchasing dari aktivitas tersebut (<b>Kirim memo ke bagian lain</b>).</li>
+                        <li>Saat NIE terbit, isi nomor dan masa berlaku lalu <b>Izin terbit</b>. NIE masuk register dan berlaku untuk pengapalan berikutnya.</li>
+                    </ol>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'verifikasi-dokumen.jpg'"/><t t-set="caption" t-value="'Gambar 6. Verifikasi dokumen: banyak file per dokumen, hasil cek otomatis, checklist kriteria, tombol Sesuai/Tolak.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 7. Portal e-Registration BPOM: status pengajuan NIE ML/MD.'"/><t t-set="hint" t-value="'Tempel tangkapan layar halaman status pengajuan di e-reg.pom.go.id.'"/></t>
+                    <h3>SKI dan label per pengapalan</h3>
+                    <ol>
+                        <li>Ajukan SKI di e-BPOM/SINSW setelah invoice, packing list dan CoA diterima.</li>
+                        <li>Kirim nomor SKI ke bagian Impor sebelum PIB (memo atau ruang diskusi pengapalan).</li>
+                        <li>Pastikan stiker label sesuai rancangan sebelum barang dirilis.</li>
+                    </ol>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 8. Rancangan label Bahasa Indonesia yang disetujui.'"/><t t-set="hint" t-value="'Tempel foto/scan rancangan label atau stiker label pada kemasan.'"/></t>
+                </t>
+
+                <!-- HALAL -->
+                <t t-if="state.tab === 'halal'">
+                    <p>Bagian Halal mengurus registrasi Sertifikat Halal Luar Negeri (SHLN), sertifikat halal untuk produk yang dipotong/dikemas ulang, dan keterangan tidak halal untuk produk babi.</p>
+                    <h3>Registrasi SHLN</h3>
+                    <ol>
+                        <li>Verifikasi sertifikat halal produsen yang diunggah Purchasing: lembaga penerbit diakui BPJPH, nama dan alamat produsen sesuai, daftar produk mencakup item code, masih berlaku saat ETA.</li>
+                        <li>Ajukan registrasi di SIHALAL, unggah bukti pengajuan, pantau sampai nomor registrasi terbit.</li>
+                        <li>Pastikan label halal Indonesia dan nomor registrasi tercantum, lalu <b>Izin terbit</b>.</li>
+                    </ol>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 9. SIHALAL BPJPH: registrasi Sertifikat Halal Luar Negeri.'"/><t t-set="hint" t-value="'Tempel tangkapan layar status registrasi SHLN di ptsp.halal.go.id.'"/></t>
+                    <h3>Produk non-halal</h3>
+                    <ol>
+                        <li>Item babi otomatis bertanda non-halal (dari subgrup PORK atau nama barang). Periksa di <t t-call="izinara.GuideLink"><t t-set="xmlid" t-value="'izinara.action_product_permit'"/><t t-set="label" t-value="'Item code &amp; template izin'"/></t>, filter <i>Non-halal</i>.</li>
+                        <li>Kerjakan aktivitas "Keterangan tidak halal": foto label dan checklist pemisahan gudang, alat dan pengiriman.</li>
+                    </ol>
+                    <p>Register SHLN memberi pengingat perpanjangan sebelum masa berlaku sertifikat asal habis.</p>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'item-code.jpg'"/><t t-set="caption" t-value="'Gambar 10. Item code &amp; template izin: kelompok pangan, jenis produk dan penanda non-halal.'"/></t>
+                </t>
+
+                <!-- PERIZINAN -->
+                <t t-if="state.tab === 'perizinan'">
+                    <p>Bagian Perizinan mengurus NIB/NKV, persetujuan unit usaha asal, Rekomendasi Pemasukan Kementan (PSAH), rekomendasi KKP (PSAI), RIPH (PSAT) dan karantina.</p>
+                    <h3>Rekomendasi teknis</h3>
+                    <ol>
+                        <li>Buka tugas di <t t-call="izinara.GuideLink"><t t-set="xmlid" t-value="'izinara.action_permit_step'"/><t t-set="label" t-value="'Tugas per bagian'"/></t> (filter <i>Bagian saya</i>).</li>
+                        <li>Cek unit usaha asal di daftar Kementan. Bila belum disetujui, kirim memo eskalasi ke Purchasing agar prinsipal mengajukan penilaian.</li>
+                        <li>Lengkapi dokumen (NIB, NKV gudang, rencana impor), ajukan di SIMREK/SINSW, unggah bukti pengajuan.</li>
+                        <li>Bila ditolak, tekan <b>Ditolak</b> dan isi alasannya; setelah diperbaiki, <b>Proses ulang</b>.</li>
+                        <li>Bila terbit, isi nomor, kuota dan masa berlaku. Rekomendasi berlaku untuk item code yang disebut sampai habis masa berlakunya.</li>
+                    </ol>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'pengurusan-form.jpg'"/><t t-set="caption" t-value="'Gambar 11. Pengurusan izin: aktivitas per bagian, dokumen dan referensi peraturan.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 12. SINSW/SIMREK: bukti pengajuan rekomendasi teknis.'"/><t t-set="hint" t-value="'Tempel tangkapan layar status pengajuan RP/RIPH/rekomendasi KKP.'"/></t>
+                    <h3>Karantina</h3>
+                    <ol>
+                        <li>Verifikasi health certificate/phytosanitary yang diunggah Purchasing.</li>
+                        <li>Laporkan rencana pemasukan sebelum barang tiba, dampingi pemeriksaan, unggah sertifikat pelepasan.</li>
+                        <li>Informasikan jadwal pemeriksaan ke bagian Impor lewat ruang diskusi pengapalan.</li>
+                    </ol>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'register-izin.jpg'"/><t t-set="caption" t-value="'Gambar 13. Register izin: nomor, masa berlaku dan status (berlaku, segera habis, kedaluwarsa).'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 14. Sertifikat pelepasan karantina.'"/><t t-set="hint" t-value="'Tempel scan sertifikat pelepasan (KH-12/KI-D12/KT-9 atau format terbaru).'"/></t>
+                </t>
+
+                <!-- IMPOR -->
+                <t t-if="state.tab === 'impor'">
+                    <p>Bagian Impor &amp; Kepabeanan mengurus cek lartas INSW, Persetujuan Impor (PI) Kemendag, PIB, pembayaran BM/PDRI dan SPPB.</p>
+                    <ol>
+                        <li><b>Cek lartas:</b> konfirmasi HS 8 digit tiap item dan cek lartas di INSW. Bila berbeda dengan izin di template, laporkan ke manajer agar template diperbarui.</li>
+                        <li><b>PI:</b> pastikan rekomendasi teknis sudah terbit (lihat tab <i>Kebutuhan izin</i> pengapalan), ajukan PI di SINSW, catat nomor dan volume.</li>
+                        <li><b>PIB:</b> kumpulkan dokumen (invoice, packing list, B/L, SKA, PI, SKI, sertifikat karantina). Semua tersedia di tombol <i>Dokumen</i> pada pengapalan.</li>
+                        <li>Bayar billing, kirim PIB lewat CEISA/PPJK, tangani jalur merah/kuning, unggah SPPB.</li>
+                        <li>Di pengapalan, tekan <b>Cek siap clearance</b> lalu <b>Barang keluar (SPPB)</b>.</li>
+                    </ol>
+                    <p>Pantau ETA di <t t-call="izinara.GuideLink"><t t-set="xmlid" t-value="'izinara.action_permit_dashboard'"/><t t-set="label" t-value="'Dashboard'"/></t>: pengapalan merah berarti ETA ≤ 14 hari tetapi izin wajib belum lengkap.</p>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'pengapalan.jpg'"/><t t-set="caption" t-value="'Gambar 15. Pengapalan: tombol Cek siap clearance dan persentase kesiapan izin.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 16. Hasil cek lartas di INSW untuk HS code item.'"/><t t-set="hint" t-value="'Tempel tangkapan layar hasil pencarian lartas di insw.go.id.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="false"/><t t-set="caption" t-value="'Gambar 17. SPPB dari CEISA.'"/><t t-set="hint" t-value="'Tempel tangkapan layar/scan SPPB.'"/></t>
+                </t>
+
+                <!-- MANAJER -->
+                <t t-if="state.tab === 'manager'">
+                    <p>Manajer memantau progres, mengatur petugas dan menjaga konfigurasi tetap sesuai peraturan.</p>
+                    <h3>Persiapan awal</h3>
+                    <ol>
+                        <li><b>Bagian/pihak:</b> isi petugas tiap bagian. Petugas pertama menjadi penanggung jawab default aktivitas.</li>
+                        <li><b>Impor item master:</b> unggah laporan item master SAP (.xlsx/.csv). Item dibuat/diperbarui dan template dipasang oleh aturan pemetaan.</li>
+                        <li><b>Register izin:</b> input izin yang sudah dimiliki (NIB, NKV, NIE ML, SHLN, approval unit usaha) supaya tidak diurus ulang.</li>
+                    </ol>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'bagian.jpg'"/><t t-set="caption" t-value="'Gambar 18. Bagian/pihak dan petugasnya.'"/></t>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'impor-item-master.jpg'"/><t t-set="caption" t-value="'Gambar 19. Impor item master SAP (.xlsx/.csv).'"/></t>
+                    <h3>Mengatur template</h3>
+                    <ol>
+                        <li><b>Template pengurusan:</b> atur izin wajib/opsional, aktivitas, durasi, dokumen wajib dan kriteria verifikasi per template. Tombol <i>Muat aktivitas standar</i> mengisi dari langkah standar jenis izin.</li>
+                        <li><b>Item code &amp; template izin:</b> pilih template manual untuk item code tertentu; pilihan manual tidak ditimpa aturan.</li>
+                        <li><b>Aturan pemetaan:</b> ubah urutan atau kondisi (negara, grup, subgrup, HS, kata di nama, halal).</li>
+                        <li><b>Jenis izin &amp; referensi peraturan:</b> perbarui dasar hukum bila peraturan berubah.</li>
+                    </ol>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'template.jpg'"/><t t-set="caption" t-value="'Gambar 20. Template pengurusan: izin wajib/opsional dan aktivitas per bagian.'"/></t>
+                    <h3>Memantau</h3>
+                    <ul>
+                        <li><b>Dashboard:</b> pengapalan berisiko, aktivitas terlambat, dokumen menunggu verifikasi, memo lewat tenggat, waktu respons tiap bagian.</li>
+                        <li><b>Laporan &gt; Analisis pengurusan:</b> pivot/grafik per bagian, jenis izin, kelompok.</li>
+                        <li><b>Memo antar bagian</b> (tampilan pivot): rata-rata waktu respons per bagian.</li>
+                    </ul>
+                    <t t-call="izinara.GuideFigure"><t t-set="img" t-value="'pengurusan.jpg'"/><t t-set="caption" t-value="'Gambar 21. Pengurusan izin per status (kanban).'"/></t>
+                    <p class="text-muted small">Gambar bertanda "Tempat screen capture" diisi dengan tangkapan layar dari portal pemerintah atau dokumen
+                        asli. Simpan file di <code>izinara/static/img/guide/</code> lalu isi namanya pada template <code>guide.xml</code>.</p>
+                </t>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_permit_item_import_form" model="ir.ui.view">
+        <field name="name">izinara.item.import.form</field>
+        <field name="model">izinara.item.import</field>
+        <field name="arch" type="xml">
+            <form>
+                <p class="text-muted" invisible="result">
+                    Unggah laporan item master SAP (kolom ITEMCODE, ITEMNAME, 01.Country, 02.Category, 03.Group,
+                    04.SubGroup, 05.Brand, 11. HS Code, U_Non_Halal). Barang dicocokkan dengan Internal Reference
+                    (item code), lalu aturan pemetaan menetapkan template izin.
+                </p>
+                <group invisible="result">
+                    <field name="file" filename="file_name"/>
+                    <field name="file_name" invisible="1"/>
+                    <field name="create_missing"/>
+                    <field name="apply_rules"/>
+                </group>
+                <field name="result" invisible="not result" nolabel="1"/>
+                <footer>
+                    <button name="action_import" type="object" string="Impor" class="btn-primary" invisible="result"/>
+                    <button string="Tutup" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_permit_item_import" model="ir.actions.act_window">
+        <field name="name">Impor item master</field>
+        <field name="res_model">izinara.item.import</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

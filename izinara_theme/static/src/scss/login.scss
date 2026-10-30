@@ -1,0 +1,34 @@
+// Halaman login Indoguna Group: latar hitam ke navy, kartu putih.
+$izinara-navy: #0f2c59;
+$izinara-black: #111418;
+
+body.o_izinara_login {
+    background: linear-gradient(160deg, $izinara-black 0%, #0a1f3f 60%, $izinara-navy 100%);
+    min-height: 100%;
+
+    .card, .o_database_list {
+        border-radius: 10px;
+        border-top: 4px solid #2a5aa0 !important;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+    .o_izinara_brand {
+        color: $izinara-navy;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        text-align: center;
+        margin-bottom: 0.25rem;
+    }
+    .o_izinara_tagline {
+        color: #5b6575;
+        font-size: 0.85rem;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    .btn-primary {
+        background-color: $izinara-navy;
+        border-color: $izinara-navy;
+        &:hover, &:focus { background-color: #0a1f3f; border-color: #0a1f3f; }
+    }
+}

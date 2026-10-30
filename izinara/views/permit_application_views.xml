@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_permit_application_list" model="ir.ui.view">
+        <field name="name">izinara.application.list</field>
+        <field name="model">izinara.application</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="overdue" decoration-muted="state in ('cancel', 'rejected')">
+                <field name="overdue" column_invisible="1"/>
+                <field name="name"/>
+                <field name="type_id"/>
+                <field name="party_id"/>
+                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="shipment_id" optional="show"/>
+                <field name="food_group" optional="show"/>
+                <field name="product_tmpl_ids" widget="many2many_tags" optional="hide"/>
+                <field name="date_deadline"/>
+                <field name="progress" widget="progressbar"/>
+                <field name="activity_ids" widget="list_activity" optional="show"/>
+                <field name="state" widget="badge" decoration-info="state == 'progress'"
+                       decoration-warning="state == 'submitted'" decoration-success="state == 'approved'"
+                       decoration-danger="state == 'rejected'"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_permit_application_kanban" model="ir.ui.view">
+        <field name="name">izinara.application.kanban</field>
+        <field name="model">izinara.application</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_kanban_small_column" group_create="0" quick_create="0">
+                <field name="state"/>
+                <field name="overdue"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between">
+                            <field name="name" class="fw-bold"/>
+                            <span t-if="record.overdue.raw_value" class="badge text-bg-danger">Terlambat</span>
+                        </div>
+                        <field name="type_id"/>
+                        <field name="party_id" class="text-muted"/>
+                        <field name="shipment_id" class="text-muted"/>
+                        <field name="progress" widget="progressbar"/>
+                        <footer>
+                            <field name="date_deadline"/>
+                            <div class="ms-auto d-flex gap-1">
+                                <field name="activity_ids" widget="kanban_activity"/>
+                                <field name="user_id" widget="many2one_avatar_user"/>
+                            </div>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="view_permit_application_form" model="ir.ui.view">
+        <field name="name">izinara.application.form</field>
+        <field name="model">izinara.application</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_start" type="object" string="Mulai pengurusan" class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_submit" type="object" string="Sudah diajukan ke instansi"
+                            invisible="state != 'progress'"/>
+                    <button name="action_approve" type="object" string="Izin terbit" class="btn-primary"
+                            invisible="state not in ('progress', 'submitted')"/>
+                    <button name="action_reject" type="object" string="Ditolak"
+                            invisible="state not in ('progress', 'submitted')"/>
+                    <button name="action_restart" type="object" string="Proses ulang" invisible="state != 'rejected'"/>
+                    <button name="action_cancel" type="object" string="Batal"
+                            invisible="state in ('approved', 'cancel')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,progress,submitted,approved"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                        <h3><field name="type_id" placeholder="Jenis izin"/></h3>
+                    </div>
+                    <div class="alert alert-warning" role="status" invisible="not doc_review_count and not memo_open_count">
+                        <span invisible="not doc_review_count"><field name="doc_review_count" class="fw-bold"/> dokumen menunggu verifikasi. </span>
+                        <span invisible="not memo_open_count"><field name="memo_open_count" class="fw-bold"/> memo antar bagian belum dijawab.</span>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="authority"/>
+                            <field name="party_id"/>
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                            <field name="template_id"/>
+                            <field name="food_group"/>
+                            <field name="shipment_id"/>
+                            <field name="partner_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_deadline"/>
+                            <field name="date_submitted"/>
+                            <field name="progress" widget="progressbar"/>
+                            <field name="overdue" invisible="not overdue"/>
+                        </group>
+                    </group>
+                    <group string="Hasil" invisible="state not in ('progress', 'submitted', 'approved', 'rejected')">
+                        <group>
+                            <field name="permit_number" readonly="state == 'approved'"/>
+                            <field name="date_issue" readonly="state == 'approved'"/>
+                            <field name="date_expiry" readonly="state == 'approved'"/>
+                            <field name="quota"/>
+                        </group>
+                        <group>
+                            <field name="license_id"/>
+                            <field name="reject_reason" invisible="state not in ('progress', 'submitted', 'rejected')"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Aktivitas" name="steps">
+                            <field name="step_ids">
+                                <list editable="bottom" create="1" decoration-success="done" decoration-danger="overdue">
+                                    <field name="overdue" column_invisible="1"/>
+                                    <field name="app_state" column_invisible="1"/>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="party_id"/>
+                                    <field name="user_id" widget="many2one_avatar_user"/>
+                                    <field name="date_planned"/>
+                                    <field name="doc_status" string="Dok. terverifikasi"/>
+                                    <field name="deliverable" optional="hide"/>
+                                    <field name="note" optional="show"/>
+                                    <field name="instructions" optional="hide"/>
+                                    <field name="done"/>
+                                    <field name="done_date" optional="hide"/>
+                                    <field name="done_by_id" optional="hide"/>
+                                    <button name="action_done" type="object" string="Selesai" icon="fa-check"
+                                            class="btn-primary" invisible="done or app_state not in ('progress', 'submitted')"/>
+                                    <button name="action_undo" type="object" string="Batalkan" icon="fa-undo"
+                                            invisible="not done or app_state == 'approved'"/>
+                                    <button name="action_open" type="object" string="Buka" icon="fa-folder-open"
+                                            title="Unggah dokumen, diskusi dan referensi peraturan"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Dokumen" name="documents">
+                            <field name="document_ids" readonly="1">
+                                <list decoration-success="state == 'verified'" decoration-warning="state == 'review'"
+                                      decoration-danger="state == 'rejected'">
+                                    <field name="step_id"/>
+                                    <field name="name"/>
+                                    <field name="required"/>
+                                    <field name="file_count"/>
+                                    <field name="verifier_party_id"/>
+                                    <field name="state" widget="badge" decoration-success="state == 'verified'"
+                                           decoration-warning="state == 'review'" decoration-danger="state == 'rejected'"/>
+                                    <button name="action_open" type="object" icon="fa-external-link" title="Buka"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Dasar hukum" name="regulations">
+                            <field name="legal_basis" readonly="1"/>
+                            <field name="regulation_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="title"/>
+                                    <field name="url" widget="url"/>
+                                    <field name="note"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Memo" name="memos">
+                            <field name="memo_ids" context="{'default_application_id': id, 'default_shipment_id': shipment_id, 'default_from_party_id': party_id}">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="subject"/>
+                                    <field name="from_party_id"/>
+                                    <field name="to_party_id"/>
+                                    <field name="date_deadline"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Item code" name="products">
+                            <field name="product_tmpl_ids">
+                                <list>
+                                    <field name="default_code"/>
+                                    <field name="name"/>
+                                    <field name="permit_hs_code"/>
+                                    <field name="permit_origin_label"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Catatan" name="note">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="view_permit_application_search" model="ir.ui.view">
+        <field name="name">izinara.application.search</field>
+        <field name="model">izinara.application</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="type_id"/>
+                <field name="shipment_id"/>
+                <field name="product_tmpl_ids" string="Item code"/>
+                <field name="user_id"/>
+                <filter name="mine" string="PIC saya" domain="[('user_id', '=', uid)]"/>
+                <filter name="open" string="Berjalan" domain="[('state', 'in', ('draft', 'progress', 'submitted'))]"/>
+                <filter name="overdue" string="Terlambat" domain="[('overdue', '=', True)]"/>
+                <filter name="approved" string="Terbit" domain="[('state', '=', 'approved')]"/>
+                <group>
+                    <filter name="group_party" string="Bagian" context="{'group_by': 'party_id'}"/>
+                    <filter name="group_type" string="Jenis izin" context="{'group_by': 'type_id'}"/>
+                    <filter name="group_food" string="Kelompok pengurusan" context="{'group_by': 'food_group'}"/>
+                    <filter name="group_shipment" string="Pengapalan" context="{'group_by': 'shipment_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="view_permit_application_pivot" model="ir.ui.view">
+        <field name="name">izinara.application.pivot</field>
+        <field name="model">izinara.application</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="party_id" type="row"/>
+                <field name="state" type="col"/>
+            </pivot>
+        </field>
+    </record>
+    <record id="view_permit_application_graph" model="ir.ui.view">
+        <field name="name">izinara.application.graph</field>
+        <field name="model">izinara.application</field>
+        <field name="arch" type="xml">
+            <graph type="bar" stacked="1">
+                <field name="type_id"/>
+                <field name="state"/>
+            </graph>
+        </field>
+    </record>
+    <record id="action_permit_application" model="ir.actions.act_window">
+        <field name="name">Pengurusan izin</field>
+        <field name="res_model">izinara.application</field>
+        <field name="view_mode">kanban,list,form,pivot,graph</field>
+        <field name="context">{'search_default_open': 1}</field>
+    </record>
+    <record id="action_permit_application_analysis" model="ir.actions.act_window">
+        <field name="name">Analisis pengurusan</field>
+        <field name="res_model">izinara.application</field>
+        <field name="view_mode">pivot,graph,list</field>
+    </record>
+
+    <!-- Tugas per bagian -->
+    <record id="view_permit_step_list" model="ir.ui.view">
+        <field name="name">izinara.application.step.list</field>
+        <field name="model">izinara.application.step</field>
+        <field name="arch" type="xml">
+            <list create="0" decoration-success="done" decoration-danger="overdue">
+                <field name="overdue" column_invisible="1"/>
+                <field name="app_state" column_invisible="1"/>
+                <field name="date_planned"/>
+                <field name="party_id"/>
+                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="name"/>
+                <field name="application_id"/>
+                <field name="type_id"/>
+                <field name="shipment_id" optional="show"/>
+                <field name="doc_status" string="Dok."/>
+                <field name="done"/>
+                <button name="action_done" type="object" string="Selesai" icon="fa-check" class="btn-primary"
+                        invisible="done or app_state not in ('progress', 'submitted')"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_permit_step_search" model="ir.ui.view">
+        <field name="name">izinara.application.step.search</field>
+        <field name="model">izinara.application.step</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="party_id"/>
+                <field name="user_id"/>
+                <field name="application_id"/>
+                <field name="shipment_id"/>
+                <filter name="mine" string="Tugas saya" domain="[('user_id', '=', uid)]"/>
+                <filter name="my_party" string="Bagian saya" domain="[('party_id.user_ids', 'in', uid)]"/>
+                <separator/>
+                <filter name="todo" string="Belum selesai"
+                        domain="[('done', '=', False), ('app_state', 'in', ('progress', 'submitted'))]"/>
+                <filter name="late" string="Terlambat"
+                        domain="[('done', '=', False), ('app_state', 'in', ('progress', 'submitted')), ('date_planned', '&lt;', context_today().strftime('%Y-%m-%d'))]"/>
+                <group>
+                    <filter name="group_party" string="Bagian" context="{'group_by': 'party_id'}"/>
+                    <filter name="group_user" string="Petugas" context="{'group_by': 'user_id'}"/>
+                    <filter name="group_type" string="Jenis izin" context="{'group_by': 'type_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_permit_step" model="ir.actions.act_window">
+        <field name="name">Tugas per bagian</field>
+        <field name="res_model">izinara.application.step</field>
+        <field name="view_mode">list</field>
+        <field name="context">{'search_default_todo': 1, 'search_default_group_party': 1}</field>
+    </record>
+</odoo>

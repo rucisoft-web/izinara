@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="rule_01" model="izinara.rule">
+        <field name="sequence">5</field>
+        <field name="name">Lokal: kemasan &amp; non-pangan</field>
+        <field name="template_id" ref="template_t_local_nonfood"/>
+        <field name="origin">domestic</field>
+        <field name="halal">any</field>
+        <field name="group_codes">L,O</field>
+    </record>
+    <record id="rule_02" model="izinara.rule">
+        <field name="sequence">6</field>
+        <field name="name">Lokal: pangan olahan (HS 16)</field>
+        <field name="template_id" ref="template_t_local_md"/>
+        <field name="origin">domestic</field>
+        <field name="halal">any</field>
+        <field name="hs_prefixes">1601,1602,1604,1605</field>
+    </record>
+    <record id="rule_03" model="izinara.rule">
+        <field name="sequence">7</field>
+        <field name="name">Lokal: daging &amp; unggas (PSAH)</field>
+        <field name="template_id" ref="template_t_local_psah"/>
+        <field name="origin">domestic</field>
+        <field name="halal">any</field>
+        <field name="group_codes">A,C</field>
+    </record>
+    <record id="rule_04" model="izinara.rule">
+        <field name="sequence">8</field>
+        <field name="name">Lokal: ikan &amp; seafood (PSAI)</field>
+        <field name="template_id" ref="template_t_local_psai"/>
+        <field name="origin">domestic</field>
+        <field name="halal">any</field>
+        <field name="group_codes">B</field>
+    </record>
+    <record id="rule_05" model="izinara.rule">
+        <field name="sequence">9</field>
+        <field name="name">Lokal: sayur &amp; buah (PSAT)</field>
+        <field name="template_id" ref="template_t_local_psat"/>
+        <field name="origin">domestic</field>
+        <field name="halal">any</field>
+        <field name="group_codes">E</field>
+        <field name="hs_prefixes">07,08</field>
+    </record>
+    <record id="rule_06" model="izinara.rule">
+        <field name="sequence">10</field>
+        <field name="name">Lokal: pangan olahan lain (MD)</field>
+        <field name="template_id" ref="template_t_local_md"/>
+        <field name="origin">domestic</field>
+        <field name="halal">any</field>
+    </record>
+    <record id="rule_07" model="izinara.rule">
+        <field name="sequence">20</field>
+        <field name="name">Kemasan &amp; non-pangan</field>
+        <field name="template_id" ref="template_t_nonfood"/>
+        <field name="origin">any</field>
+        <field name="halal">any</field>
+        <field name="group_codes">L,O</field>
+    </record>
+    <record id="rule_08" model="izinara.rule">
+        <field name="sequence">30</field>
+        <field name="name">Olahan daging non-halal (HS 1601/1602)</field>
+        <field name="template_id" ref="template_t_proc_pork"/>
+        <field name="origin">any</field>
+        <field name="halal">non_halal</field>
+        <field name="group_codes">A,D</field>
+        <field name="hs_prefixes">1601,1602</field>
+    </record>
+    <record id="rule_09" model="izinara.rule">
+        <field name="sequence">31</field>
+        <field name="name">Olahan daging (HS 1601/1602)</field>
+        <field name="template_id" ref="template_t_proc_meat"/>
+        <field name="origin">any</field>
+        <field name="halal">any</field>
+        <field name="group_codes">A,D</field>
+        <field name="hs_prefixes">1601,1602</field>
+    </record>
+    <record id="rule_10" model="izinara.rule">
+        <field name="sequence">32</field>
+        <field name="name">Olahan ikan (HS 1604/1605)</field>
+        <field name="template_id" ref="template_t_proc_seafood"/>
+        <field name="origin">any</field>
+        <field name="halal">any</field>
+        <field name="group_codes">B,D,H</field>
+        <field name="hs_prefixes">1604,1605</field>
+    </record>
+    <record id="rule_11" model="izinara.rule">
+        <field name="sequence">33</field>
+        <field name="name">Seafood olahan</field>
+        <field name="template_id" ref="template_t_proc_seafood"/>
+        <field name="origin">any</field>
+        <field name="halal">any</field>
+        <field name="group_codes">D,H</field>
+        <field name="subgroups">PROCESSED SEAFOOD,CAVIAR</field>
+    </record>
+    <record id="rule_12" model="izinara.rule">
+        <field name="sequence">34</field>
+        <field name="name">Delikatesen non-halal</field>
+        <field name="template_id" ref="template_t_proc_pork"/>
+        <field name="origin">any</field>
+        <field name="halal">non_halal</field>
+        <field name="group_codes">D</field>
+    </record>
+    <record id="rule_13" model="izinara.rule">
+        <field name="sequence">35</field>
+        <field name="name">Delikatesen &amp; daging olahan</field>
+        <field name="template_id" ref="template_t_proc_meat"/>
+        <field name="origin">any</field>
+        <field name="halal">any</field>
+        <field name="group_codes">D</field>
+    </record>
+    <record id="rule_14" model="izinara.rule">
+        <field name="sequence">40</field>
+        <field name="name">Daging babi</field>
+        <field name="template_id" ref="template_t_pork"/>
+        <field name="origin">any</field>
+        <field name="halal">non_halal</field>
+        <field name="group_codes">A</field>
+    </record>
+    <record id="rule_15" model="izinara.rule">
+        <field name="sequence">41</field>
+        <field name="name">Daging merah</field>
+        <field name="template_id" ref="template_t_meat_halal"/>
+        <field name="origin">any</field>
+        <field name="halal">any</field>
+        <field name="group_codes">A</field>
+    </record>
+    <record id="rule_16" model="izinara.rule">
+        <field name="sequence">50</field>
+        <field name="name">Unggas</field>
+        <field name="template_id" ref="template_t_poultry"/>
+        <field name="origin">any</field>
+        <field name="halal">any</field>
+        <field name="group_codes">C</field>
+    </record>
+    <record id="rule_17" model="izinara.rule">
+        <field name="sequence">60</field>
+        <field name="name">Ikan &amp; seafood</field>
+        <field name="template_id" ref="template_t_seafood"/>
+        <field name="origin">any</field>
+        <field name="halal">any</field>
+        <field name="group_codes">B</field>
+    </record>
+    <record id="rule_18" model="izinara.rule">
+        <field name="sequence">70</field>
+        <field name="name">Susu &amp; olahan susu</field>
+        <field name="template_id" ref="template_t_dairy"/>
+        <field name="origin">any</field>
+        <field name="halal">any</field>
+        <field name="group_codes">F</field>
+    </record>
+    <record id="rule_19" model="izinara.rule">
+        <field name="sequence">80</field>
+        <field name="name">Sayur &amp; buah beku (HS 07/08)</field>
+        <field name="template_id" ref="template_t_fresh_plant"/>
+        <field name="origin">any</field>
+        <field name="halal">any</field>
+        <field name="group_codes">E</field>
+        <field name="hs_prefixes">07,08</field>
+    </record>
+    <record id="rule_20" model="izinara.rule">
+        <field name="sequence">90</field>
+        <field name="name">Pangan olahan non-halal</field>
+        <field name="template_id" ref="template_t_processed_nh"/>
+        <field name="origin">any</field>
+        <field name="halal">non_halal</field>
+    </record>
+    <record id="rule_21" model="izinara.rule">
+        <field name="sequence">99</field>
+        <field name="name">Pangan olahan lain</field>
+        <field name="template_id" ref="template_t_processed"/>
+        <field name="origin">any</field>
+        <field name="halal">any</field>
+    </record>
+</odoo>

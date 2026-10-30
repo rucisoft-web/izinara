@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_permit_root" name="Izinara" sequence="60" web_icon="izinara,static/description/icon.png"
+              groups="group_permit_user"/>
+    <menuitem id="menu_permit_dashboard" action="action_permit_dashboard" parent="menu_permit_root" sequence="5"/>
+    <menuitem id="menu_permit_shipment" action="action_permit_shipment" parent="menu_permit_root" sequence="10"/>
+    <menuitem id="menu_permit_application" action="action_permit_application" parent="menu_permit_root" sequence="20"/>
+    <menuitem id="menu_permit_step" action="action_permit_step" parent="menu_permit_root" sequence="30"/>
+    <menuitem id="menu_permit_document" action="action_permit_document" parent="menu_permit_root" sequence="33"/>
+    <menuitem id="menu_permit_memo" action="action_permit_memo" parent="menu_permit_root" sequence="36"/>
+    <menuitem id="menu_permit_license" action="action_permit_license" parent="menu_permit_root" sequence="40"/>
+    <menuitem id="menu_permit_report" name="Laporan" parent="menu_permit_root" sequence="50"/>
+    <menuitem id="menu_permit_analysis" action="action_permit_application_analysis" parent="menu_permit_report" sequence="10"/>
+    <menuitem id="menu_izinara_guide" action="action_izinara_guide" parent="menu_permit_root" sequence="80"/>
+    <menuitem id="menu_permit_config" name="Konfigurasi" parent="menu_permit_root" sequence="90"/>
+    <menuitem id="menu_permit_products" action="action_product_permit" parent="menu_permit_config" sequence="10"/>
+    <menuitem id="menu_permit_template" action="action_permit_template" parent="menu_permit_config" sequence="20"/>
+    <menuitem id="menu_permit_type" action="action_permit_type" parent="menu_permit_config" sequence="30"/>
+    <menuitem id="menu_permit_rule" action="action_permit_rule" parent="menu_permit_config" sequence="40"/>
+    <menuitem id="menu_permit_regulation" action="action_permit_regulation" parent="menu_permit_config" sequence="35"/>
+    <menuitem id="menu_permit_party" action="action_permit_party" parent="menu_permit_config" sequence="50"/>
+    <menuitem id="menu_permit_item_import" action="action_permit_item_import" parent="menu_permit_config" sequence="60"
+              groups="group_permit_manager"/>
+</odoo>

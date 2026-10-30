@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_permit_type_list" model="ir.ui.view">
+        <field name="name">izinara.type.list</field>
+        <field name="model">izinara.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="authority"/>
+                <field name="party_id"/>
+                <field name="scope"/>
+                <field name="lead_days"/>
+                <field name="validity_months"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_permit_type_form" model="ir.ui.view">
+        <field name="name">izinara.type.form</field>
+        <field name="model">izinara.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title"><h1><field name="name"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="authority"/>
+                            <field name="system"/>
+                            <field name="party_id"/>
+                            <field name="scope"/>
+                        </group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="lead_days"/>
+                            <field name="validity_months"/>
+                            <field name="renew_days"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <group string="Dasar hukum">
+                        <field name="legal_basis" nolabel="1" colspan="2"/>
+                    </group>
+                    <field name="regulation_ids">
+                        <list>
+                            <field name="name"/>
+                            <field name="title"/>
+                            <field name="url" widget="url"/>
+                            <field name="note"/>
+                        </list>
+                    </field>
+                    <group string="Keterangan">
+                        <field name="description" nolabel="1" colspan="2"/>
+                    </group>
+                    <notebook>
+                        <page string="Langkah standar" name="steps">
+                            <field name="step_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="party_id"/>
+                                    <field name="duration_days"/>
+                                    <field name="deliverable"/>
+                                    <field name="regulation_ids" widget="many2many_tags" optional="show"/>
+                                    <field name="instructions" optional="hide"/>
+                                </list>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="party_id"/>
+                                        <field name="duration_days"/>
+                                        <field name="deliverable"/>
+                                        <field name="instructions"/>
+                                        <field name="regulation_ids" widget="many2many_tags"/>
+                                    </group>
+                                    <field name="doc_spec_ids">
+                                        <list editable="bottom">
+                                            <field name="sequence" widget="handle"/>
+                                            <field name="name"/>
+                                            <field name="required"/>
+                                            <field name="extensions"/>
+                                            <field name="check_expiry"/>
+                                            <field name="verifier_party_id"/>
+                                            <field name="criteria"/>
+                                        </list>
+                                    </field>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_permit_type_search" model="ir.ui.view">
+        <field name="name">izinara.type.search</field>
+        <field name="model">izinara.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="authority"/>
+                <filter name="archived" string="Diarsipkan" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter name="group_party" string="Bagian" context="{'group_by': 'party_id'}"/>
+                    <filter name="group_scope" string="Cakupan" context="{'group_by': 'scope'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_permit_type" model="ir.actions.act_window">
+        <field name="name">Jenis izin &amp; dasar hukum</field>
+        <field name="res_model">izinara.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
