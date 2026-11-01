@@ -1,34 +1,52 @@
-// Halaman login Indoguna Group: latar hitam ke navy, kartu putih.
+// Halaman login Indoguna Group: navy bergaris diagonal dengan pita merah, kartu putih.
 $izinara-navy: #0f2c59;
-$izinara-black: #111418;
+$izinara-navy-dark: #0a1f3f;
+$izinara-navy-deep: #071530;
+$izinara-red: #c8102e;
 
 body.o_izinara_login {
-    background: linear-gradient(160deg, $izinara-black 0%, #0a1f3f 60%, $izinara-navy 100%);
+    background:
+        linear-gradient(115deg, transparent 0 58%, rgba(200, 16, 46, 0.9) 58% 59.5%, transparent 59.5% 61%,
+                        rgba(255, 255, 255, 0.55) 61% 61.4%, transparent 61.4%),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 16px),
+        linear-gradient(160deg, $izinara-navy-deep 0%, $izinara-navy-dark 55%, $izinara-navy 100%);
+    background-attachment: fixed;
     min-height: 100%;
 
     .card, .o_database_list {
-        border-radius: 10px;
-        border-top: 4px solid #2a5aa0 !important;
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+        border-radius: 0 0 10px 10px;
+        border-top: 5px solid $izinara-navy !important;
+        border-image: linear-gradient(90deg, $izinara-red 0 33%, #ffffff 33% 36%, $izinara-navy 36% 100%) 1 !important;
+        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
     }
     .o_izinara_brand {
         color: $izinara-navy;
-        font-weight: 600;
-        letter-spacing: 0.08em;
+        font-weight: 700;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         text-align: center;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.15rem;
+        &::after {
+            content: "";
+            display: block;
+            width: 48px;
+            height: 3px;
+            margin: 0.35rem auto 0;
+            background: linear-gradient(90deg, $izinara-red 0 60%, $izinara-navy 60% 100%);
+        }
     }
     .o_izinara_tagline {
         color: #5b6575;
         font-size: 0.85rem;
         text-align: center;
-        margin-bottom: 1rem;
+        margin: 0.4rem 0 1rem;
     }
     .btn-primary {
         background-color: $izinara-navy;
         border-color: $izinara-navy;
-        &:hover, &:focus { background-color: #0a1f3f; border-color: #0a1f3f; }
+        border-bottom: 3px solid $izinara-red;
+        &:hover, &:focus { background-color: $izinara-navy-dark; border-color: $izinara-navy-dark; border-bottom-color: $izinara-red; }
     }
+    a { color: $izinara-navy; }
 }
