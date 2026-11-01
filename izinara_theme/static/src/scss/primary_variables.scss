@@ -1,16 +1,9 @@
-// Indoguna Group: biru tua (navy) dan merah.
+// Indoguna Group: biru tua (navy) dan hitam.
 $izinara-navy: #0f2c59;
 $izinara-navy-dark: #0a1f3f;
-$izinara-navy-deep: #071530;
-$izinara-red: #c8102e;
-$izinara-red-dark: #9e0b23;
+$izinara-black: #111418;
 $izinara-line: #2a5aa0;
 $izinara-bg: #f5f7fa;
-
-// Garis khas: merah tebal, celah putih, garis navy tipis.
-$izinara-stripe: 0 3px 0 $izinara-red, 0 5px 0 #ffffff, 0 6px 0 $izinara-navy;
-// Pola garis diagonal halus untuk latar gelap.
-$izinara-diagonal: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 16px);
 
 $o-community-color: $izinara-navy;
 $o-enterprise-color: $izinara-navy;

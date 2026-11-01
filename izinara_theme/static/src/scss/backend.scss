@@ -1,17 +1,8 @@
-// Tema Indoguna Group: navy dan merah dengan garis aksen. Hanya CSS, tanpa gambar atau font web.
-@mixin izinara-accent-top($width: 4px, $red: 72px) {
-    border-top: $width solid $izinara-navy;
-    border-image: linear-gradient(90deg, $izinara-red 0 $red, $izinara-navy $red 100%) 1;
-}
-
+// Tema ringan: navbar hitam bergaris navy, latar abu sangat muda, aksen navy. Tanpa gambar atau font web.
 .o_web_client {
-    // Navbar: navy bergaris diagonal, garis merah-putih-navy di bawah
     .o_navbar .o_main_navbar {
-        background: $izinara-diagonal, linear-gradient(90deg, $izinara-navy-deep 0%, $izinara-navy 100%);
-        border-bottom: 0;
-        box-shadow: $izinara-stripe;
-        position: relative;
-        z-index: 2;
+        background: linear-gradient(90deg, $izinara-black 0%, $izinara-navy-dark 100%);
+        border-bottom: 3px solid $izinara-line;
 
         .o_menu_brand {
             font-weight: 600;
@@ -20,129 +11,55 @@
                 content: "Indoguna Group";
                 margin-left: 0.6rem;
                 padding-left: 0.6rem;
-                border-left: 3px solid $izinara-red;
+                border-left: 1px solid rgba(255, 255, 255, 0.35);
                 font-size: 0.72rem;
-                font-weight: 500;
-                letter-spacing: 0.1em;
+                font-weight: 400;
+                letter-spacing: 0.08em;
                 text-transform: uppercase;
-                opacity: 0.85;
+                opacity: 0.75;
             }
         }
         .o_menu_sections .o_nav_entry,
         .o_menu_sections .dropdown-toggle {
-            border-bottom: 3px solid transparent;
-            &:hover { background-color: rgba(255, 255, 255, 0.08); border-bottom-color: rgba(200, 16, 46, 0.6); }
-            &.show, &.active { background-color: rgba(255, 255, 255, 0.1); border-bottom-color: $izinara-red; }
+            &:hover, &.show { background-color: rgba(255, 255, 255, 0.08); }
         }
     }
-    .o_action_manager { padding-top: 6px; }
-
     .o_action_manager .o_view_controller .o_content,
     .o_permit_dashboard {
         background-color: $izinara-bg;
     }
-
-    // Panel kontrol: judul navy dengan garis merah kecil
-    .o_control_panel {
-        border-bottom: 1px solid #dfe5ee;
-        .breadcrumb-item.active, .o_last_breadcrumb_item {
-            color: $izinara-navy-dark;
-            font-weight: 600;
-        }
-    }
-
-    // Tombol
-    .btn-primary {
-        background-color: $izinara-navy;
-        border-color: $izinara-navy;
-        &:hover, &:focus { background-color: $izinara-navy-dark; border-color: $izinara-red; }
-    }
-    .btn-danger { background-color: $izinara-red; border-color: $izinara-red; }
-
-    // Form: garis atas merah-navy, statusbar aktif navy
     .o_form_view .o_form_sheet_bg .o_form_sheet {
-        @include izinara-accent-top();
-        border-radius: 0 0 6px 6px;
-        box-shadow: 0 1px 3px rgba(10, 31, 63, 0.08);
+        border-top: 3px solid $izinara-navy;
+        border-radius: 6px;
     }
-    .o_form_view .o_form_sheet .oe_title h1 {
-        color: $izinara-navy-dark;
-    }
-    .o_statusbar_status .o_arrow_button_current {
-        background-color: $izinara-navy !important;
-        color: #fff !important;
-        &::after { border-left-color: $izinara-navy !important; }
-    }
-    .o_form_view .nav-tabs .nav-link.active {
-        border-top: 3px solid $izinara-red;
-        color: $izinara-navy-dark;
-        font-weight: 500;
-    }
-
-    // Daftar: kepala tabel bergaris navy
-    .o_list_renderer .o_list_table thead th {
-        color: $izinara-navy-dark;
-        border-bottom: 2px solid $izinara-navy;
-    }
-    .o_list_renderer .o_group_header {
-        border-left: 3px solid $izinara-red;
-    }
-
-    // Kanban: garis kiri navy, merah saat disorot
     .o_kanban_renderer .o_kanban_record {
         border-radius: 6px;
-        border-left: 3px solid $izinara-navy;
-        &:hover { border-left-color: $izinara-red; }
     }
-    .o_kanban_renderer .o_kanban_header_title {
-        border-bottom: 2px solid $izinara-navy;
+    .o_list_renderer .o_list_table thead th {
+        color: $izinara-navy-dark;
+    }
+    .o_control_panel .breadcrumb-item.active {
+        color: $izinara-navy-dark;
     }
 
     // Dashboard Izinara
     .o_permit_dashboard {
-        h2 {
-            color: $izinara-navy-dark;
-            font-weight: 600;
-            padding-left: 0.6rem;
-            border-left: 4px solid $izinara-red;
-        }
         .o_permit_kpi {
-            @include izinara-accent-top(4px, 36px);
-            box-shadow: 0 1px 3px rgba(10, 31, 63, 0.08);
-            &:hover { box-shadow: 0 3px 10px rgba(10, 31, 63, 0.15); }
+            border-top: 3px solid $izinara-navy;
+            box-shadow: 0 1px 2px rgba(10, 31, 63, 0.06);
+            &:hover { border-color: $izinara-line; }
         }
         .o_permit_kpi_value { color: $izinara-navy-dark; }
         .o_permit_card {
-            box-shadow: 0 1px 3px rgba(10, 31, 63, 0.08);
-            h4 {
-                color: $izinara-navy-dark;
-                font-weight: 600;
-                padding-bottom: 0.4rem;
-                border-bottom: 2px solid $izinara-navy;
-                border-image: linear-gradient(90deg, $izinara-red 0 32px, #dfe5ee 32px 100%) 1;
-            }
+            box-shadow: 0 1px 2px rgba(10, 31, 63, 0.06);
+            h4 { color: $izinara-navy-dark; font-weight: 600; }
         }
-        .o_permit_group { border-left-color: $izinara-navy; &:hover { border-left-color: $izinara-red; } }
+        .o_permit_group { border-left-color: $izinara-navy; }
         .progress-bar.bg-info { background-color: $izinara-line !important; }
+        h2 { color: $izinara-black; font-weight: 600; }
     }
-
-    // Halaman Panduan dan Ringkasan eksekutif
-    .o_izinara_exec, .o_izinara_pg, .o_izinara_guide {
-        h2 { padding-left: 0.6rem; border-left: 4px solid $izinara-red; color: $izinara-navy-dark; }
-        h3 { border-bottom: 3px solid $izinara-navy; border-image: linear-gradient(90deg, $izinara-red 0 36px, $izinara-navy 36px 100%) 1; }
-    }
-    .o_izinara_exec .o_izinara_exec_kpi { @include izinara-accent-top(4px, 36px); }
-    .o_izinara_exec_table th { border-bottom: 3px solid $izinara-red; }
-    .o_izinara_pg .o_izinara_pg_side .o_item.active { border-left-color: $izinara-red; }
-    .o_izinara_pg .o_izinara_pg_step .o_num { box-shadow: 0 0 0 2px #fff, 0 0 0 4px $izinara-red; }
-    .o_izinara_guide .nav-tabs .nav-link.active { border-top: 3px solid $izinara-red; }
 }
 
-// Menu utama (home): navy bergaris diagonal dengan pita merah
 .o_home_menu_background {
-    background:
-        linear-gradient(115deg, transparent 0 62%, rgba(200, 16, 46, 0.85) 62% 63.2%, transparent 63.2% 64.4%,
-                        rgba(255, 255, 255, 0.5) 64.4% 64.8%, transparent 64.8%),
-        $izinara-diagonal,
-        linear-gradient(160deg, $izinara-navy-deep 0%, $izinara-navy-dark 55%, $izinara-navy 100%);
+    background: linear-gradient(160deg, $izinara-black 0%, $izinara-navy-dark 70%, $izinara-navy 100%);
 }

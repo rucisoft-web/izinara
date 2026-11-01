@@ -1,8 +1,8 @@
 {
     "name": "Izinara – Tema Indoguna Group",
-    "summary": "Tema Izinara warna Indoguna Group: biru tua dan merah dengan garis aksen pada navbar, form, "
-               "dashboard dan halaman login (hanya CSS, tanpa font atau gambar tambahan)",
-    "version": "18.0.1.1.0",
+    "summary": "Tema ringan dan sederhana untuk Izinara: navbar hitam dengan garis biru tua, aksen navy, halaman "
+               "login Indoguna Group (hanya CSS, tanpa font atau gambar tambahan)",
+    "version": "18.0.1.0.0",
     "category": "Inventory/Izinara",
     "license": "LGPL-3",
     "author": "Indoguna Group",
