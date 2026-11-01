@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_template_form_permit" model="ir.ui.view">
+        <field name="name">product.template.form.permit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Izin impor" name="import_permit" groups="izinara.group_permit_user">
+                    <group>
+                        <group string="Item master">
+                            <field name="permit_origin_label"/>
+                            <field name="permit_country_id"/>
+                            <field name="permit_category"/>
+                            <field name="permit_group"/>
+                            <field name="permit_subgroup"/>
+                            <field name="permit_brand"/>
+                            <field name="permit_hs_code"/>
+                        </group>
+                        <group string="Pengurusan">
+                            <field name="permit_is_import"/>
+                            <field name="permit_non_halal"/>
+                            <field name="permit_food_group"/>
+                            <field name="permit_product_kind"/>
+                            <field name="permit_template_id"/>
+                            <field name="permit_template_manual"/>
+                            <field name="permit_type_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_template_permit_list" model="ir.ui.view">
+        <field name="name">product.template.permit.list</field>
+        <field name="model">product.template</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list editable="bottom" create="0">
+                <field name="default_code" readonly="1"/>
+                <field name="name" readonly="1"/>
+                <field name="permit_origin_label" readonly="1"/>
+                <field name="permit_group" readonly="1"/>
+                <field name="permit_subgroup" readonly="1"/>
+                <field name="permit_hs_code"/>
+                <field name="permit_product_kind"/>
+                <field name="permit_non_halal"/>
+                <field name="permit_food_group"/>
+                <field name="permit_template_id"/>
+                <field name="permit_template_manual"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_product_template_permit_search" model="ir.ui.view">
+        <field name="name">product.template.permit.search</field>
+        <field name="model">product.template</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="default_code" string="Item code"/>
+                <field name="name"/>
+                <field name="permit_hs_code"/>
+                <field name="permit_template_id"/>
+                <filter name="import" string="Impor" domain="[('permit_is_import', '=', True)]"/>
+                <filter name="local" string="Lokal" domain="[('permit_is_import', '=', False)]"/>
+                <filter name="non_halal" string="Non-halal" domain="[('permit_non_halal', '=', True)]"/>
+                <filter name="no_template" string="Tanpa template" domain="[('permit_template_id', '=', False)]"/>
+                <filter name="manual" string="Template manual" domain="[('permit_template_manual', '=', True)]"/>
+                <group>
+                    <filter name="group_food" string="Kelompok pengurusan" context="{'group_by': 'permit_food_group'}"/>
+                    <filter name="group_kind" string="Jenis produk" context="{'group_by': 'permit_product_kind'}"/>
+                    <filter name="group_template" string="Template" context="{'group_by': 'permit_template_id'}"/>
+                    <filter name="group_group" string="Grup" context="{'group_by': 'permit_group'}"/>
+                    <filter name="group_origin" string="Negara asal" context="{'group_by': 'permit_origin_label'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_product_permit" model="ir.actions.act_window">
+        <field name="name">Item code &amp; template izin</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_product_template_permit_list"/>
+        <field name="search_view_id" ref="view_product_template_permit_search"/>
+        <field name="domain">[('permit_group', '!=', False)]</field>
+        <field name="context">{'search_default_group_food': 1, 'search_default_group_template': 1}</field>
+    </record>
+    <record id="action_server_apply_permit_rules" model="ir.actions.server">
+        <field name="name">Terapkan aturan pemetaan izin</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="binding_view_types">list</field>
+        <field name="groups_id" eval="[(4, ref('group_permit_manager'))]"/>
+        <field name="state">code</field>
+        <field name="code">action = records.action_apply_permit_rules_notify()</field>
+    </record>
+</odoo>

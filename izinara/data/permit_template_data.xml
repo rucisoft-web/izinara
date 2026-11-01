@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="template_t_meat_halal" model="izinara.template">
+        <field name="name">Daging merah impor (halal)</field>
+        <field name="code">T_MEAT_HALAL</field>
+        <field name="food_group">psah</field>
+        <field name="sequence">10</field>
+        <field name="description">Sapi, wagyu, kerbau, domba, veal, venison dan jeroan beku/dingin.</field>
+    </record>
+    <record id="template_t_meat_halal_line_nib_api" model="izinara.template.line">
+        <field name="template_id" ref="template_t_meat_halal"/>
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_meat_halal_line_lartas_check" model="izinara.template.line">
+        <field name="template_id" ref="template_t_meat_halal"/>
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_meat_halal_line_customs_pib" model="izinara.template.line">
+        <field name="template_id" ref="template_t_meat_halal"/>
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">30</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_meat_halal_line_coo" model="izinara.template.line">
+        <field name="template_id" ref="template_t_meat_halal"/>
+        <field name="type_id" ref="type_coo"/>
+        <field name="sequence">40</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_meat_halal_line_nkv" model="izinara.template.line">
+        <field name="template_id" ref="template_t_meat_halal"/>
+        <field name="type_id" ref="type_nkv"/>
+        <field name="sequence">50</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_meat_halal_line_est_approval" model="izinara.template.line">
+        <field name="template_id" ref="template_t_meat_halal"/>
+        <field name="type_id" ref="type_est_approval"/>
+        <field name="sequence">60</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_meat_halal_line_rp_kementan" model="izinara.template.line">
+        <field name="template_id" ref="template_t_meat_halal"/>
+        <field name="type_id" ref="type_rp_kementan"/>
+        <field name="sequence">70</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_meat_halal_line_pi_kemendag" model="izinara.template.line">
+        <field name="template_id" ref="template_t_meat_halal"/>
+        <field name="type_id" ref="type_pi_kemendag"/>
+        <field name="sequence">80</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_meat_halal_line_shln" model="izinara.template.line">
+        <field name="template_id" ref="template_t_meat_halal"/>
+        <field name="type_id" ref="type_shln"/>
+        <field name="sequence">90</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_meat_halal_line_quarantine_animal" model="izinara.template.line">
+        <field name="template_id" ref="template_t_meat_halal"/>
+        <field name="type_id" ref="type_quarantine_animal"/>
+        <field name="sequence">100</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_meat_halal_line_halal_sh" model="izinara.template.line">
+        <field name="template_id" ref="template_t_meat_halal"/>
+        <field name="type_id" ref="type_halal_sh"/>
+        <field name="sequence">110</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_pork" model="izinara.template">
+        <field name="name">Daging babi impor (non-halal)</field>
+        <field name="code">T_PORK</field>
+        <field name="food_group">psah</field>
+        <field name="sequence">20</field>
+        <field name="description">Daging babi beku/dingin.</field>
+    </record>
+    <record id="template_t_pork_line_nib_api" model="izinara.template.line">
+        <field name="template_id" ref="template_t_pork"/>
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_pork_line_lartas_check" model="izinara.template.line">
+        <field name="template_id" ref="template_t_pork"/>
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_pork_line_customs_pib" model="izinara.template.line">
+        <field name="template_id" ref="template_t_pork"/>
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">30</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_pork_line_coo" model="izinara.template.line">
+        <field name="template_id" ref="template_t_pork"/>
+        <field name="type_id" ref="type_coo"/>
+        <field name="sequence">40</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_pork_line_nkv" model="izinara.template.line">
+        <field name="template_id" ref="template_t_pork"/>
+        <field name="type_id" ref="type_nkv"/>
+        <field name="sequence">50</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_pork_line_est_approval" model="izinara.template.line">
+        <field name="template_id" ref="template_t_pork"/>
+        <field name="type_id" ref="type_est_approval"/>
+        <field name="sequence">60</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_pork_line_rp_kementan" model="izinara.template.line">
+        <field name="template_id" ref="template_t_pork"/>
+        <field name="type_id" ref="type_rp_kementan"/>
+        <field name="sequence">70</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_pork_line_pi_kemendag" model="izinara.template.line">
+        <field name="template_id" ref="template_t_pork"/>
+        <field name="type_id" ref="type_pi_kemendag"/>
+        <field name="sequence">80</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_pork_line_nonhalal" model="izinara.template.line">
+        <field name="template_id" ref="template_t_pork"/>
+        <field name="type_id" ref="type_nonhalal"/>
+        <field name="sequence">90</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_pork_line_quarantine_animal" model="izinara.template.line">
+        <field name="template_id" ref="template_t_pork"/>
+        <field name="type_id" ref="type_quarantine_animal"/>
+        <field name="sequence">100</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_poultry" model="izinara.template">
+        <field name="name">Unggas impor (halal)</field>
+        <field name="code">T_POULTRY</field>
+        <field name="food_group">psah</field>
+        <field name="sequence">30</field>
+        <field name="description">Ayam, bebek dan unggas lain.</field>
+    </record>
+    <record id="template_t_poultry_line_nib_api" model="izinara.template.line">
+        <field name="template_id" ref="template_t_poultry"/>
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_poultry_line_lartas_check" model="izinara.template.line">
+        <field name="template_id" ref="template_t_poultry"/>
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_poultry_line_customs_pib" model="izinara.template.line">
+        <field name="template_id" ref="template_t_poultry"/>
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">30</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_poultry_line_coo" model="izinara.template.line">
+        <field name="template_id" ref="template_t_poultry"/>
+        <field name="type_id" ref="type_coo"/>
+        <field name="sequence">40</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_poultry_line_nkv" model="izinara.template.line">
+        <field name="template_id" ref="template_t_poultry"/>
+        <field name="type_id" ref="type_nkv"/>
+        <field name="sequence">50</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_poultry_line_est_approval" model="izinara.template.line">
+        <field name="template_id" ref="template_t_poultry"/>
+        <field name="type_id" ref="type_est_approval"/>
+        <field name="sequence">60</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_poultry_line_rp_kementan" model="izinara.template.line">
+        <field name="template_id" ref="template_t_poultry"/>
+        <field name="type_id" ref="type_rp_kementan"/>
+        <field name="sequence">70</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_poultry_line_pi_kemendag" model="izinara.template.line">
+        <field name="template_id" ref="template_t_poultry"/>
+        <field name="type_id" ref="type_pi_kemendag"/>
+        <field name="sequence">80</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_poultry_line_shln" model="izinara.template.line">
+        <field name="template_id" ref="template_t_poultry"/>
+        <field name="type_id" ref="type_shln"/>
+        <field name="sequence">90</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_poultry_line_quarantine_animal" model="izinara.template.line">
+        <field name="template_id" ref="template_t_poultry"/>
+        <field name="type_id" ref="type_quarantine_animal"/>
+        <field name="sequence">100</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_seafood" model="izinara.template">
+        <field name="name">Ikan &amp; seafood impor</field>
+        <field name="code">T_SEAFOOD</field>
+        <field name="food_group">psai</field>
+        <field name="sequence">40</field>
+        <field name="description">Ikan, udang, cumi, kerang, kepiting, lobster segar/beku.</field>
+    </record>
+    <record id="template_t_seafood_line_nib_api" model="izinara.template.line">
+        <field name="template_id" ref="template_t_seafood"/>
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_seafood_line_lartas_check" model="izinara.template.line">
+        <field name="template_id" ref="template_t_seafood"/>
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_seafood_line_customs_pib" model="izinara.template.line">
+        <field name="template_id" ref="template_t_seafood"/>
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">30</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_seafood_line_coo" model="izinara.template.line">
+        <field name="template_id" ref="template_t_seafood"/>
+        <field name="type_id" ref="type_coo"/>
+        <field name="sequence">40</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_seafood_line_rphp_kkp" model="izinara.template.line">
+        <field name="template_id" ref="template_t_seafood"/>
+        <field name="type_id" ref="type_rphp_kkp"/>
+        <field name="sequence">50</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_seafood_line_pi_kemendag" model="izinara.template.line">
+        <field name="template_id" ref="template_t_seafood"/>
+        <field name="type_id" ref="type_pi_kemendag"/>
+        <field name="sequence">60</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_seafood_line_quarantine_fish" model="izinara.template.line">
+        <field name="template_id" ref="template_t_seafood"/>
+        <field name="type_id" ref="type_quarantine_fish"/>
+        <field name="sequence">70</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_meat" model="izinara.template">
+        <field name="name">Olahan daging impor (halal)</field>
+        <field name="code">T_PROC_MEAT</field>
+        <field name="food_group">ml</field>
+        <field name="sequence">50</field>
+        <field name="description">Sosis, cold cut, bakso, daging olahan HS 1601/1602.</field>
+    </record>
+    <record id="template_t_proc_meat_line_nib_api" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_meat"/>
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_meat_line_lartas_check" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_meat"/>
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_meat_line_customs_pib" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_meat"/>
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">30</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_meat_line_coo" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_meat"/>
+        <field name="type_id" ref="type_coo"/>
+        <field name="sequence">40</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_proc_meat_line_est_approval" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_meat"/>
+        <field name="type_id" ref="type_est_approval"/>
+        <field name="sequence">50</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_meat_line_rp_kementan" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_meat"/>
+        <field name="type_id" ref="type_rp_kementan"/>
+        <field name="sequence">60</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_meat_line_pi_kemendag" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_meat"/>
+        <field name="type_id" ref="type_pi_kemendag"/>
+        <field name="sequence">70</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_meat_line_ml_bpom" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_meat"/>
+        <field name="type_id" ref="type_ml_bpom"/>
+        <field name="sequence">80</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_meat_line_shln" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_meat"/>
+        <field name="type_id" ref="type_shln"/>
+        <field name="sequence">90</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_meat_line_ski_bpom" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_meat"/>
+        <field name="type_id" ref="type_ski_bpom"/>
+        <field name="sequence">100</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_meat_line_label_id" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_meat"/>
+        <field name="type_id" ref="type_label_id"/>
+        <field name="sequence">110</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_meat_line_quarantine_animal" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_meat"/>
+        <field name="type_id" ref="type_quarantine_animal"/>
+        <field name="sequence">120</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_pork" model="izinara.template">
+        <field name="name">Olahan daging babi impor (non-halal)</field>
+        <field name="code">T_PROC_PORK</field>
+        <field name="food_group">ml</field>
+        <field name="sequence">55</field>
+        <field name="description">Bacon, ham, salami, sosis babi.</field>
+    </record>
+    <record id="template_t_proc_pork_line_nib_api" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_pork"/>
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_pork_line_lartas_check" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_pork"/>
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_pork_line_customs_pib" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_pork"/>
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">30</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_pork_line_coo" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_pork"/>
+        <field name="type_id" ref="type_coo"/>
+        <field name="sequence">40</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_proc_pork_line_est_approval" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_pork"/>
+        <field name="type_id" ref="type_est_approval"/>
+        <field name="sequence">50</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_pork_line_rp_kementan" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_pork"/>
+        <field name="type_id" ref="type_rp_kementan"/>
+        <field name="sequence">60</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_pork_line_pi_kemendag" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_pork"/>
+        <field name="type_id" ref="type_pi_kemendag"/>
+        <field name="sequence">70</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_pork_line_ml_bpom" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_pork"/>
+        <field name="type_id" ref="type_ml_bpom"/>
+        <field name="sequence">80</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_pork_line_nonhalal" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_pork"/>
+        <field name="type_id" ref="type_nonhalal"/>
+        <field name="sequence">90</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_pork_line_ski_bpom" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_pork"/>
+        <field name="type_id" ref="type_ski_bpom"/>
+        <field name="sequence">100</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_pork_line_label_id" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_pork"/>
+        <field name="type_id" ref="type_label_id"/>
+        <field name="sequence">110</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_pork_line_quarantine_animal" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_pork"/>
+        <field name="type_id" ref="type_quarantine_animal"/>
+        <field name="sequence">120</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_seafood" model="izinara.template">
+        <field name="name">Olahan ikan/seafood impor</field>
+        <field name="code">T_PROC_SEAFOOD</field>
+        <field name="food_group">ml</field>
+        <field name="sequence">60</field>
+        <field name="description">Seafood olahan, kaviar, ikan asap/kaleng (HS 1604/1605).</field>
+    </record>
+    <record id="template_t_proc_seafood_line_nib_api" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_seafood"/>
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_seafood_line_lartas_check" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_seafood"/>
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_seafood_line_customs_pib" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_seafood"/>
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">30</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_seafood_line_coo" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_seafood"/>
+        <field name="type_id" ref="type_coo"/>
+        <field name="sequence">40</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_proc_seafood_line_ml_bpom" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_seafood"/>
+        <field name="type_id" ref="type_ml_bpom"/>
+        <field name="sequence">50</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_seafood_line_shln" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_seafood"/>
+        <field name="type_id" ref="type_shln"/>
+        <field name="sequence">60</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_seafood_line_ski_bpom" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_seafood"/>
+        <field name="type_id" ref="type_ski_bpom"/>
+        <field name="sequence">70</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_seafood_line_label_id" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_seafood"/>
+        <field name="type_id" ref="type_label_id"/>
+        <field name="sequence">80</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_proc_seafood_line_quarantine_fish" model="izinara.template.line">
+        <field name="template_id" ref="template_t_proc_seafood"/>
+        <field name="type_id" ref="type_quarantine_fish"/>
+        <field name="sequence">90</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_dairy" model="izinara.template">
+        <field name="name">Susu &amp; olahan susu impor</field>
+        <field name="code">T_DAIRY</field>
+        <field name="food_group">ml</field>
+        <field name="sequence">70</field>
+        <field name="description">Mentega, keju, krim, susu, yoghurt, es krim.</field>
+    </record>
+    <record id="template_t_dairy_line_nib_api" model="izinara.template.line">
+        <field name="template_id" ref="template_t_dairy"/>
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_dairy_line_lartas_check" model="izinara.template.line">
+        <field name="template_id" ref="template_t_dairy"/>
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_dairy_line_customs_pib" model="izinara.template.line">
+        <field name="template_id" ref="template_t_dairy"/>
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">30</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_dairy_line_coo" model="izinara.template.line">
+        <field name="template_id" ref="template_t_dairy"/>
+        <field name="type_id" ref="type_coo"/>
+        <field name="sequence">40</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_dairy_line_ml_bpom" model="izinara.template.line">
+        <field name="template_id" ref="template_t_dairy"/>
+        <field name="type_id" ref="type_ml_bpom"/>
+        <field name="sequence">50</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_dairy_line_shln" model="izinara.template.line">
+        <field name="template_id" ref="template_t_dairy"/>
+        <field name="type_id" ref="type_shln"/>
+        <field name="sequence">60</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_dairy_line_ski_bpom" model="izinara.template.line">
+        <field name="template_id" ref="template_t_dairy"/>
+        <field name="type_id" ref="type_ski_bpom"/>
+        <field name="sequence">70</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_dairy_line_label_id" model="izinara.template.line">
+        <field name="template_id" ref="template_t_dairy"/>
+        <field name="type_id" ref="type_label_id"/>
+        <field name="sequence">80</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_dairy_line_quarantine_animal" model="izinara.template.line">
+        <field name="template_id" ref="template_t_dairy"/>
+        <field name="type_id" ref="type_quarantine_animal"/>
+        <field name="sequence">90</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_fresh_plant" model="izinara.template">
+        <field name="name">Sayur &amp; buah beku impor</field>
+        <field name="code">T_FRESH_PLANT</field>
+        <field name="food_group">psat</field>
+        <field name="sequence">80</field>
+        <field name="description">Sayur dan buah beku HS 07/08 tanpa pengolahan lanjut.</field>
+    </record>
+    <record id="template_t_fresh_plant_line_nib_api" model="izinara.template.line">
+        <field name="template_id" ref="template_t_fresh_plant"/>
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_fresh_plant_line_lartas_check" model="izinara.template.line">
+        <field name="template_id" ref="template_t_fresh_plant"/>
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_fresh_plant_line_customs_pib" model="izinara.template.line">
+        <field name="template_id" ref="template_t_fresh_plant"/>
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">30</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_fresh_plant_line_coo" model="izinara.template.line">
+        <field name="template_id" ref="template_t_fresh_plant"/>
+        <field name="type_id" ref="type_coo"/>
+        <field name="sequence">40</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_fresh_plant_line_psat" model="izinara.template.line">
+        <field name="template_id" ref="template_t_fresh_plant"/>
+        <field name="type_id" ref="type_psat"/>
+        <field name="sequence">50</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_fresh_plant_line_riph" model="izinara.template.line">
+        <field name="template_id" ref="template_t_fresh_plant"/>
+        <field name="type_id" ref="type_riph"/>
+        <field name="sequence">60</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_fresh_plant_line_quarantine_plant" model="izinara.template.line">
+        <field name="template_id" ref="template_t_fresh_plant"/>
+        <field name="type_id" ref="type_quarantine_plant"/>
+        <field name="sequence">70</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_processed" model="izinara.template">
+        <field name="name">Pangan olahan impor (halal)</field>
+        <field name="code">T_PROCESSED</field>
+        <field name="food_group">ml</field>
+        <field name="sequence">90</field>
+        <field name="description">Kentang goreng beku, saus, pasta, snack, minuman, bahan pastry dan grocery lain.</field>
+    </record>
+    <record id="template_t_processed_line_nib_api" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed"/>
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_processed_line_lartas_check" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed"/>
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_processed_line_customs_pib" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed"/>
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">30</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_processed_line_coo" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed"/>
+        <field name="type_id" ref="type_coo"/>
+        <field name="sequence">40</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_processed_line_ml_bpom" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed"/>
+        <field name="type_id" ref="type_ml_bpom"/>
+        <field name="sequence">50</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_processed_line_shln" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed"/>
+        <field name="type_id" ref="type_shln"/>
+        <field name="sequence">60</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_processed_line_ski_bpom" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed"/>
+        <field name="type_id" ref="type_ski_bpom"/>
+        <field name="sequence">70</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_processed_line_label_id" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed"/>
+        <field name="type_id" ref="type_label_id"/>
+        <field name="sequence">80</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_processed_nh" model="izinara.template">
+        <field name="name">Pangan olahan impor (non-halal)</field>
+        <field name="code">T_PROCESSED_NH</field>
+        <field name="food_group">ml</field>
+        <field name="sequence">95</field>
+        <field name="description">Pangan olahan yang mengandung bahan non-halal.</field>
+    </record>
+    <record id="template_t_processed_nh_line_nib_api" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed_nh"/>
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_processed_nh_line_lartas_check" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed_nh"/>
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_processed_nh_line_customs_pib" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed_nh"/>
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">30</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_processed_nh_line_coo" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed_nh"/>
+        <field name="type_id" ref="type_coo"/>
+        <field name="sequence">40</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_processed_nh_line_ml_bpom" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed_nh"/>
+        <field name="type_id" ref="type_ml_bpom"/>
+        <field name="sequence">50</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_processed_nh_line_nonhalal" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed_nh"/>
+        <field name="type_id" ref="type_nonhalal"/>
+        <field name="sequence">60</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_processed_nh_line_ski_bpom" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed_nh"/>
+        <field name="type_id" ref="type_ski_bpom"/>
+        <field name="sequence">70</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_processed_nh_line_label_id" model="izinara.template.line">
+        <field name="template_id" ref="template_t_processed_nh"/>
+        <field name="type_id" ref="type_label_id"/>
+        <field name="sequence">80</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_nonfood" model="izinara.template">
+        <field name="name">Kemasan &amp; non-pangan impor</field>
+        <field name="code">T_NONFOOD</field>
+        <field name="food_group">non_food</field>
+        <field name="sequence">100</field>
+        <field name="description">Kemasan dan barang non-pangan.</field>
+    </record>
+    <record id="template_t_nonfood_line_nib_api" model="izinara.template.line">
+        <field name="template_id" ref="template_t_nonfood"/>
+        <field name="type_id" ref="type_nib_api"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_nonfood_line_lartas_check" model="izinara.template.line">
+        <field name="template_id" ref="template_t_nonfood"/>
+        <field name="type_id" ref="type_lartas_check"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_nonfood_line_customs_pib" model="izinara.template.line">
+        <field name="template_id" ref="template_t_nonfood"/>
+        <field name="type_id" ref="type_customs_pib"/>
+        <field name="sequence">30</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_nonfood_line_coo" model="izinara.template.line">
+        <field name="template_id" ref="template_t_nonfood"/>
+        <field name="type_id" ref="type_coo"/>
+        <field name="sequence">40</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_local_psah" model="izinara.template">
+        <field name="name">Daging &amp; unggas lokal (PSAH)</field>
+        <field name="code">T_LOCAL_PSAH</field>
+        <field name="food_group">psah</field>
+        <field name="sequence">110</field>
+        <field name="description">Daging, jeroan dan unggas dari pemasok Indonesia.</field>
+    </record>
+    <record id="template_t_local_psah_line_local_supplier" model="izinara.template.line">
+        <field name="template_id" ref="template_t_local_psah"/>
+        <field name="type_id" ref="type_local_supplier"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_local_psah_line_nkv" model="izinara.template.line">
+        <field name="template_id" ref="template_t_local_psah"/>
+        <field name="type_id" ref="type_nkv"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_local_psah_line_halal_sh" model="izinara.template.line">
+        <field name="template_id" ref="template_t_local_psah"/>
+        <field name="type_id" ref="type_halal_sh"/>
+        <field name="sequence">30</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_local_psai" model="izinara.template">
+        <field name="name">Ikan &amp; seafood lokal (PSAI)</field>
+        <field name="code">T_LOCAL_PSAI</field>
+        <field name="food_group">psai</field>
+        <field name="sequence">111</field>
+        <field name="description">Ikan, krustasea dan moluska dari pemasok Indonesia.</field>
+    </record>
+    <record id="template_t_local_psai_line_local_supplier" model="izinara.template.line">
+        <field name="template_id" ref="template_t_local_psai"/>
+        <field name="type_id" ref="type_local_supplier"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_local_psat" model="izinara.template">
+        <field name="name">Sayur &amp; buah lokal (PSAT)</field>
+        <field name="code">T_LOCAL_PSAT</field>
+        <field name="food_group">psat</field>
+        <field name="sequence">112</field>
+        <field name="description">Sayur dan buah dari pemasok Indonesia.</field>
+    </record>
+    <record id="template_t_local_psat_line_local_supplier" model="izinara.template.line">
+        <field name="template_id" ref="template_t_local_psat"/>
+        <field name="type_id" ref="type_local_supplier"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_local_psat_line_psat" model="izinara.template.line">
+        <field name="template_id" ref="template_t_local_psat"/>
+        <field name="type_id" ref="type_psat"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_local_md" model="izinara.template">
+        <field name="name">Pangan olahan dalam negeri (BPOM MD)</field>
+        <field name="code">T_LOCAL_MD</field>
+        <field name="food_group">md</field>
+        <field name="sequence">113</field>
+        <field name="description">Pangan olahan produksi Indonesia, termasuk produk bermerek Indoguna.</field>
+    </record>
+    <record id="template_t_local_md_line_md_bpom" model="izinara.template.line">
+        <field name="template_id" ref="template_t_local_md"/>
+        <field name="type_id" ref="type_md_bpom"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_local_md_line_local_supplier" model="izinara.template.line">
+        <field name="template_id" ref="template_t_local_md"/>
+        <field name="type_id" ref="type_local_supplier"/>
+        <field name="sequence">20</field>
+        <field name="mandatory" eval="True"/>
+    </record>
+    <record id="template_t_local_md_line_halal_sh" model="izinara.template.line">
+        <field name="template_id" ref="template_t_local_md"/>
+        <field name="type_id" ref="type_halal_sh"/>
+        <field name="sequence">30</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <record id="template_t_local_nonfood" model="izinara.template">
+        <field name="name">Kemasan &amp; non-pangan lokal</field>
+        <field name="code">T_LOCAL_NONFOOD</field>
+        <field name="food_group">non_food</field>
+        <field name="sequence">114</field>
+        <field name="description">Kemasan dan barang non-pangan lokal.</field>
+    </record>
+    <record id="template_t_local_nonfood_line_local_supplier" model="izinara.template.line">
+        <field name="template_id" ref="template_t_local_nonfood"/>
+        <field name="type_id" ref="type_local_supplier"/>
+        <field name="sequence">10</field>
+        <field name="mandatory" eval="False"/>
+    </record>
+    <function model="izinara.template" name="action_load_standard_activities" eval="[[ref('template_t_meat_halal'), ref('template_t_pork'), ref('template_t_poultry'), ref('template_t_seafood'), ref('template_t_proc_meat'), ref('template_t_proc_pork'), ref('template_t_proc_seafood'), ref('template_t_dairy'), ref('template_t_fresh_plant'), ref('template_t_processed'), ref('template_t_processed_nh'), ref('template_t_nonfood'), ref('template_t_local_psah'), ref('template_t_local_psai'), ref('template_t_local_psat'), ref('template_t_local_md'), ref('template_t_local_nonfood')]]"/>
+</odoo>

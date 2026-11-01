@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_permit_memo_form" model="ir.ui.view">
+        <field name="name">izinara.memo.form</field>
+        <field name="model">izinara.memo</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_send" type="object" string="Kirim" class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_answer" type="object" string="Kirim jawaban" class="btn-primary"
+                            invisible="state != 'open'"/>
+                    <button name="action_close" type="object" string="Selesai" invisible="state != 'answered'"/>
+                    <button name="action_reopen" type="object" string="Buka lagi" invisible="state not in ('answered', 'closed')"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <div class="text-muted"><field name="name" readonly="1"/></div>
+                        <h2><field name="priority" widget="priority" class="me-2"/><field name="subject" placeholder="Perihal"/></h2>
+                    </div>
+                    <div class="alert alert-danger" role="alert" invisible="not overdue">Lewat tenggat jawab.</div>
+                    <group>
+                        <group>
+                            <field name="kind"/>
+                            <field name="from_party_id"/>
+                            <field name="to_party_id"/>
+                            <field name="assignee_id" widget="many2one_avatar_user"/>
+                            <field name="user_id" widget="many2one_avatar_user" readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="date_deadline"/>
+                            <field name="shipment_id"/>
+                            <field name="application_id"/>
+                            <field name="step_id"/>
+                            <field name="overdue" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="Isi">
+                        <field name="body" nolabel="1" colspan="2" readonly="state != 'draft'"/>
+                    </group>
+                    <group string="Jawaban" invisible="state == 'draft'">
+                        <field name="answer" nolabel="1" colspan="2" readonly="state != 'open'"/>
+                    </group>
+                    <group invisible="state not in ('answered', 'closed')">
+                        <group>
+                            <field name="date_sent"/>
+                            <field name="date_answered"/>
+                        </group>
+                        <group>
+                            <field name="response_hours"/>
+                            <field name="on_time"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="view_permit_memo_list" model="ir.ui.view">
+        <field name="name">izinara.memo.list</field>
+        <field name="model">izinara.memo</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="overdue" decoration-muted="state == 'closed'">
+                <field name="overdue" column_invisible="1"/>
+                <field name="priority" widget="priority" nolabel="1"/>
+                <field name="name"/>
+                <field name="subject"/>
+                <field name="kind" optional="show"/>
+                <field name="from_party_id"/>
+                <field name="to_party_id"/>
+                <field name="assignee_id" widget="many2one_avatar_user"/>
+                <field name="shipment_id" optional="show"/>
+                <field name="date_deadline"/>
+                <field name="response_hours" optional="show"/>
+                <field name="on_time" optional="hide"/>
+                <field name="state" widget="badge" decoration-warning="state == 'open'" decoration-success="state == 'answered'"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_permit_memo_kanban" model="ir.ui.view">
+        <field name="name">izinara.memo.kanban</field>
+        <field name="model">izinara.memo</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="to_party_id" quick_create="0" group_create="0">
+                <field name="overdue"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between">
+                            <field name="name" class="text-muted small"/>
+                            <field name="priority" widget="priority"/>
+                        </div>
+                        <field name="subject" class="fw-bold"/>
+                        <div class="small">Dari: <field name="from_party_id"/></div>
+                        <field name="shipment_id" class="small text-muted"/>
+                        <footer>
+                            <field name="date_deadline" t-att-class="record.overdue.raw_value ? 'text-danger fw-bold' : ''"/>
+                            <div class="ms-auto d-flex gap-1">
+                                <field name="state" widget="label_selection"
+                                       options="{'classes': {'open': 'warning', 'answered': 'success', 'closed': 'default'}}"/>
+                                <field name="assignee_id" widget="many2one_avatar_user"/>
+                            </div>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="view_permit_memo_search" model="ir.ui.view">
+        <field name="name">izinara.memo.search</field>
+        <field name="model">izinara.memo</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="subject"/>
+                <field name="name"/>
+                <field name="shipment_id"/>
+                <filter name="inbox" string="Masuk ke bagian saya" domain="[('to_party_id.user_ids', 'in', uid)]"/>
+                <filter name="sent" string="Dikirim bagian saya" domain="[('from_party_id.user_ids', 'in', uid)]"/>
+                <separator/>
+                <filter name="open" string="Menunggu jawaban" domain="[('state', '=', 'open')]"/>
+                <filter name="overdue" string="Lewat tenggat" domain="[('overdue', '=', True)]"/>
+                <group>
+                    <filter name="group_to" string="Kepada bagian" context="{'group_by': 'to_party_id'}"/>
+                    <filter name="group_from" string="Dari bagian" context="{'group_by': 'from_party_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="view_permit_memo_pivot" model="ir.ui.view">
+        <field name="name">izinara.memo.pivot</field>
+        <field name="model">izinara.memo</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="to_party_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="response_hours" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    <record id="action_permit_memo" model="ir.actions.act_window">
+        <field name="name">Memo antar bagian</field>
+        <field name="res_model">izinara.memo</field>
+        <field name="view_mode">kanban,list,form,pivot</field>
+        <field name="context">{'search_default_open': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Kirim permintaan atau pertanyaan ke bagian lain</p>
+            <p>Setiap memo punya penerima, tenggat jawab dan riwayat diskusi. Waktu respons tiap bagian tercatat
+               supaya mutu komunikasi bisa dipantau.</p>
+        </field>
+    </record>
+</odoo>

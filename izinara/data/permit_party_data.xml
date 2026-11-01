@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="party_pangan" model="izinara.party">
+        <field name="name">Bagian Makanan Luar (Izin Edar ML BPOM)</field>
+        <field name="code">pangan</field>
+        <field name="sequence">10</field>
+        <field name="responsibility">Registrasi izin edar ML pangan olahan di BPOM, rancangan label Bahasa Indonesia, SKI BPOM per pengapalan, registrasi PSAT.</field>
+    </record>
+    <record id="party_halal" model="izinara.party">
+        <field name="name">Bagian Sertifikasi Halal</field>
+        <field name="code">halal</field>
+        <field name="sequence">20</field>
+        <field name="responsibility">Registrasi Sertifikat Halal Luar Negeri (SHLN) di BPJPH, sertifikasi halal produk yang dikemas ulang, Sistem Jaminan Produk Halal, keterangan tidak halal dan pemisahan produk babi.</field>
+    </record>
+    <record id="party_perizinan" model="izinara.party">
+        <field name="name">Bagian Perizinan (Kementan, KKP, Barantin)</field>
+        <field name="code">perizinan</field>
+        <field name="sequence">30</field>
+        <field name="responsibility">NIB/API dan NKV, persetujuan unit usaha asal, Rekomendasi Pemasukan Kementan (daging, unggas, olahan), rekomendasi KKP (ikan), RIPH, karantina hewan/ikan/tumbuhan.</field>
+    </record>
+    <record id="party_purchasing" model="izinara.party">
+        <field name="name">Purchasing (Procurement)</field>
+        <field name="code">purchasing</field>
+        <field name="sequence">40</field>
+        <field name="responsibility">Satu-satunya bagian yang berhubungan dengan prinsipal/eksportir luar negeri: rencana impor, PO, permintaan dokumen (LoA, health certificate, CoA, sertifikat halal, data establishment, SKA, dokumen pengapalan asli) dan data tambahan yang diminta instansi. Juga verifikasi pemasok lokal.</field>
+    </record>
+    <record id="party_impor" model="izinara.party">
+        <field name="name">Bagian Impor &amp; Kepabeanan</field>
+        <field name="code">impor</field>
+        <field name="sequence">50</field>
+        <field name="responsibility">Cek lartas HS di INSW, Persetujuan Impor (PI) Kemendag, PIB/BC 2.0, pembayaran BM &amp; PDRI, jalur pemeriksaan, SPPB dan pengeluaran kontainer.</field>
+    </record>
+</odoo>

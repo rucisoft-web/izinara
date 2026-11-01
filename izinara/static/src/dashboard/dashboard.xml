@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="izinara.Dashboard">
+        <div class="o_permit_dashboard o_action h-100 overflow-auto p-3">
+            <t t-if="state.data" t-set="d" t-value="state.data"/>
+            <div t-if="!state.data" class="text-muted p-4">Memuat…</div>
+            <t t-if="state.data">
+                <div class="d-flex align-items-center mb-3">
+                    <h2 class="m-0">Progres pengurusan izin impor</h2>
+                    <button class="btn btn-secondary btn-sm ms-auto" t-on-click="load"><i class="fa fa-refresh"/> Muat ulang</button>
+                </div>
+
+                <div class="o_permit_kpis mb-4">
+                    <div class="o_permit_kpi" t-on-click="() => this.openKpi('shipments')">
+                        <div class="o_permit_kpi_value" t-esc="d.kpi.shipments"/>
+                        <div class="o_permit_kpi_label">Pengapalan berjalan</div>
+                        <div t-if="d.kpi.shipments_risk" class="o_permit_kpi_sub text-danger"><t t-esc="d.kpi.shipments_risk"/> berisiko (ETA ≤ 14 hari, izin belum lengkap)</div>
+                    </div>
+                    <div class="o_permit_kpi" t-on-click="() => this.openKpi('apps_open')">
+                        <div class="o_permit_kpi_value" t-esc="d.kpi.apps_open"/>
+                        <div class="o_permit_kpi_label">Pengurusan berjalan</div>
+                        <div class="o_permit_kpi_sub" t-att-class="d.kpi.apps_late ? 'text-danger' : 'text-muted'"
+                             t-on-click.stop="() => this.openKpi('apps_late')"><t t-esc="d.kpi.apps_late"/> lewat target</div>
+                    </div>
+                    <div class="o_permit_kpi" t-on-click="() => this.openKpi('steps_open')">
+                        <div class="o_permit_kpi_value" t-esc="d.kpi.steps_open"/>
+                        <div class="o_permit_kpi_label">Aktivitas terbuka</div>
+                        <div class="o_permit_kpi_sub" t-att-class="d.kpi.steps_late ? 'text-danger' : 'text-muted'"
+                             t-on-click.stop="() => this.openKpi('steps_late')"><t t-esc="d.kpi.steps_late"/> terlambat</div>
+                    </div>
+                    <div class="o_permit_kpi" t-on-click="() => this.openKpi('docs_review')">
+                        <div class="o_permit_kpi_value" t-esc="d.kpi.docs_review"/>
+                        <div class="o_permit_kpi_label">Dokumen menunggu verifikasi</div>
+                        <div class="o_permit_kpi_sub text-muted" t-on-click.stop="() => this.openKpi('docs_rejected')"><t t-esc="d.kpi.docs_rejected"/> ditolak, perlu perbaikan</div>
+                    </div>
+                    <div class="o_permit_kpi" t-on-click="() => this.openKpi('memos_open')">
+                        <div class="o_permit_kpi_value" t-esc="d.kpi.memos_open"/>
+                        <div class="o_permit_kpi_label">Memo menunggu jawaban</div>
+                        <div class="o_permit_kpi_sub" t-att-class="d.kpi.memos_late ? 'text-danger' : 'text-muted'"
+                             t-on-click.stop="() => this.openKpi('memos_late')"><t t-esc="d.kpi.memos_late"/> lewat tenggat</div>
+                    </div>
+                    <div class="o_permit_kpi" t-on-click="() => this.openKpi('licenses_expiring')">
+                        <div class="o_permit_kpi_value" t-esc="d.kpi.licenses_expiring"/>
+                        <div class="o_permit_kpi_label">Izin habis ≤ 90 hari</div>
+                        <div class="o_permit_kpi_sub text-muted"><t t-esc="d.kpi.approved_30d"/> izin terbit 30 hari terakhir</div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-12 col-xl-7">
+                        <div class="o_permit_card">
+                            <h4>Kesiapan izin per pengapalan</h4>
+                            <table class="table table-sm align-middle mb-0">
+                                <thead><tr><th>Pengapalan</th><th>Eksportir</th><th>ETA</th><th style="width:35%">Kesiapan</th><th>Kurang</th></tr></thead>
+                                <tbody>
+                                    <tr t-foreach="d.shipments" t-as="s" t-key="s.id" class="o_permit_row"
+                                        t-on-click="() => this.openRecord('izinara.shipment', s.id)">
+                                        <td><span t-esc="s.name"/><div class="small text-muted" t-esc="s.state"/></td>
+                                        <td t-esc="s.partner"/>
+                                        <td>
+                                            <span t-esc="s.eta"/>
+                                            <div class="small" t-att-class="s.risk ? 'text-danger fw-bold' : 'text-muted'" t-if="s.eta"><t t-esc="s.days_to_eta"/> hari</div>
+                                        </td>
+                                        <td>
+                                            <div class="progress" style="height: 0.9rem">
+                                                <div class="progress-bar" t-att-class="s.readiness == 100 ? 'bg-success' : (s.risk ? 'bg-danger' : 'bg-info')"
+                                                     t-att-style="'width:' + s.readiness + '%'"><t t-esc="s.readiness"/>%</div>
+                                            </div>
+                                        </td>
+                                        <td t-esc="s.missing"/>
+                                    </tr>
+                                    <tr t-if="!d.shipments.length"><td colspan="5" class="text-muted">Belum ada pengapalan berjalan.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-5">
+                        <div class="o_permit_card">
+                            <h4>Beban kerja &amp; komunikasi per bagian</h4>
+                            <table class="table table-sm align-middle mb-0">
+                                <thead><tr><th>Bagian</th><th title="Aktivitas terbuka">Tugas</th><th title="Aktivitas terlambat">Telat</th><th title="Dokumen menunggu verifikasi bagian ini">Verif.</th><th title="Memo masuk belum dijawab">Memo</th><th title="Rata-rata waktu jawab memo">Respons</th></tr></thead>
+                                <tbody>
+                                    <tr t-foreach="d.parties" t-as="p" t-key="p.id">
+                                        <td t-esc="p.name"/>
+                                        <td><a href="#" t-on-click.prevent="() => this.openParty(p, 'open')" t-esc="p.open"/></td>
+                                        <td><a href="#" t-att-class="p.late ? 'text-danger fw-bold' : ''" t-on-click.prevent="() => this.openParty(p, 'late')" t-esc="p.late"/></td>
+                                        <td><a href="#" t-on-click.prevent="() => this.openParty(p, 'docs')" t-esc="p.docs_review"/></td>
+                                        <td><a href="#" t-on-click.prevent="() => this.openParty(p, 'memos')" t-esc="p.memos_open"/></td>
+                                        <td class="small">
+                                            <t t-if="p.memo_hours !== null"><t t-esc="p.memo_hours"/> jam · <t t-esc="p.memo_on_time"/>% tepat</t>
+                                            <span t-else="" class="text-muted">–</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="o_permit_card">
+                            <h4>Progres per kelompok pengurusan</h4>
+                            <div class="o_permit_groups">
+                                <div t-foreach="d.groups" t-as="g" t-key="g.code" class="o_permit_group"
+                                     t-on-click="() => this.openGroup(g)">
+                                    <div class="fw-bold" t-esc="g.name"/>
+                                    <div class="small text-muted"><t t-esc="g.items"/> item code · <t t-esc="g.total"/> pengurusan</div>
+                                    <div class="progress my-1" style="height: 0.6rem">
+                                        <div class="progress-bar bg-success" t-att-style="'width:' + g.pct + '%'"/>
+                                    </div>
+                                    <div class="small"><t t-esc="g.approved"/> terbit · <t t-esc="g.open"/> berjalan
+                                        <span t-if="g.late" class="text-danger"> · <t t-esc="g.late"/> terlambat</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-7">
+                        <div class="o_permit_card">
+                            <h4>Status pengurusan per jenis izin</h4>
+                            <div t-foreach="d.types" t-as="t" t-key="t.id" class="mb-2">
+                                <div class="d-flex small">
+                                    <a href="#" t-on-click.prevent="() => this.openType(t)" t-esc="t.name"/>
+                                    <span class="ms-auto text-muted"><t t-esc="t.party"/> · <t t-esc="t.total"/></span>
+                                </div>
+                                <div class="progress o_permit_stack" style="height: 0.8rem">
+                                    <div class="progress-bar bg-success" t-att-style="'width:' + pct(t, 'approved') + '%'" title="Terbit" t-on-click="() => this.openType(t, 'approved')"/>
+                                    <div class="progress-bar bg-warning" t-att-style="'width:' + pct(t, 'submitted') + '%'" title="Diajukan" t-on-click="() => this.openType(t, 'submitted')"/>
+                                    <div class="progress-bar bg-info" t-att-style="'width:' + pct(t, 'progress') + '%'" title="Diproses" t-on-click="() => this.openType(t, 'progress')"/>
+                                    <div class="progress-bar bg-danger" t-att-style="'width:' + pct(t, 'rejected') + '%'" title="Ditolak" t-on-click="() => this.openType(t, 'rejected')"/>
+                                    <div class="progress-bar bg-secondary" t-att-style="'width:' + pct(t, 'draft') + '%'" title="Draf" t-on-click="() => this.openType(t, 'draft')"/>
+                                </div>
+                            </div>
+                            <div class="small text-muted mt-2">
+                                <span class="badge text-bg-success">Terbit</span> <span class="badge text-bg-warning">Diajukan</span>
+                                <span class="badge text-bg-info">Diproses</span> <span class="badge text-bg-danger">Ditolak</span>
+                                <span class="badge text-bg-secondary">Draf</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-5">
+                        <div class="o_permit_card mb-3">
+                            <h4>Aktivitas paling terlambat</h4>
+                            <ul class="list-unstyled mb-0">
+                                <li t-foreach="d.late_steps" t-as="s" t-key="s.id" class="o_permit_row py-1 border-bottom"
+                                    t-on-click="() => this.openRecord('izinara.application.step', s.id)">
+                                    <span class="badge text-bg-danger me-1"><t t-esc="s.days"/> hari</span>
+                                    <t t-esc="s.name"/>
+                                    <div class="small text-muted"><t t-esc="s.app"/> · <t t-esc="s.party"/><t t-if="s.user"> · <t t-esc="s.user"/></t></div>
+                                </li>
+                                <li t-if="!d.late_steps.length" class="text-muted">Tidak ada aktivitas terlambat.</li>
+                            </ul>
+                        </div>
+                        <div class="o_permit_card">
+                            <h4>Izin segera habis</h4>
+                            <ul class="list-unstyled mb-0">
+                                <li t-foreach="d.licenses" t-as="l" t-key="l.id" class="o_permit_row py-1 border-bottom"
+                                    t-on-click="() => this.openRecord('izinara.license', l.id)">
+                                    <span class="badge me-1" t-att-class="l.expired ? 'text-bg-danger' : 'text-bg-warning'">
+                                        <t t-if="l.expired">habis</t><t t-else=""><t t-esc="l.days"/> hari</t>
+                                    </span>
+                                    <t t-esc="l.name"/>
+                                    <div class="small text-muted"><t t-esc="l.type"/> · <t t-esc="l.expiry"/></div>
+                                </li>
+                                <li t-if="!d.licenses.length" class="text-muted">Tidak ada izin yang habis dalam 90 hari.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_permit_shipment_list" model="ir.ui.view">
+        <field name="name">izinara.shipment.list</field>
+        <field name="model">izinara.shipment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="po_ref"/>
+                <field name="partner_id"/>
+                <field name="country_id"/>
+                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="etd" optional="hide"/>
+                <field name="eta"/>
+                <field name="days_to_eta" optional="show"/>
+                <field name="readiness" widget="progressbar"/>
+                <field name="missing_count" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="state" widget="badge" decoration-info="state == 'permits'"
+                       decoration-success="state in ('ready', 'cleared', 'done')"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_permit_shipment_form" model="ir.ui.view">
+        <field name="name">izinara.shipment.form</field>
+        <field name="model">izinara.shipment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_compute_requirements" type="object" string="Hitung izin yang diperlukan"
+                            class="btn-primary" invisible="state not in ('draft', 'permits')"/>
+                    <button name="action_create_applications" type="object" string="Buat &amp; mulai pengurusan"
+                            invisible="state != 'permits'"/>
+                    <button name="action_check_ready" type="object" string="Cek siap clearance"
+                            invisible="state != 'permits'"/>
+                    <button name="action_cleared" type="object" string="Barang keluar (SPPB)"
+                            invisible="state != 'ready'"/>
+                    <button name="action_done" type="object" string="Selesai" invisible="state != 'cleared'"/>
+                    <button name="action_cancel" type="object" string="Batal"
+                            invisible="state in ('done', 'cancel')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,permits,ready,cleared,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_applications" type="object" class="oe_stat_button" icon="fa-tasks">
+                            <field name="application_count" widget="statinfo" string="Pengurusan"/>
+                        </button>
+                        <button name="action_view_documents" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                            <field name="doc_review_count" widget="statinfo" string="Perlu verifikasi"/>
+                        </button>
+                        <button name="action_view_memos" type="object" class="oe_stat_button" icon="fa-envelope-o">
+                            <field name="memo_count" widget="statinfo" string="Memo"/>
+                        </button>
+                        <button name="action_open_channel" type="object" class="oe_stat_button" icon="fa-comments">
+                            <span class="o_stat_text">Ruang diskusi</span>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <div class="alert alert-warning" role="alert" invisible="not no_template_count">
+                        <field name="no_template_count"/> barang belum punya template izin. Lengkapi di menu Item code
+                        &amp; template izin.
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="producer_id"/>
+                            <field name="country_id"/>
+                            <field name="po_ref"/>
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="transport"/>
+                            <field name="port"/>
+                            <field name="etd"/>
+                            <field name="eta"/>
+                            <field name="days_to_eta"/>
+                            <field name="readiness" widget="progressbar"/>
+                            <field name="missing_count"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Barang" name="lines">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="product_tmpl_id"/>
+                                    <field name="default_code"/>
+                                    <field name="hs_code"/>
+                                    <field name="permit_template_id"/>
+                                    <field name="food_group"/>
+                                    <field name="product_kind"/>
+                                    <field name="non_halal"/>
+                                    <field name="qty_kg" sum="Total"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Kebutuhan izin" name="requirements">
+                            <field name="requirement_ids">
+                                <list create="0" delete="0" decoration-success="state == 'covered'"
+                                      decoration-info="state == 'progress'" decoration-danger="state in ('missing', 'rejected') and mandatory"
+                                      decoration-muted="not mandatory">
+                                    <field name="type_id"/>
+                                    <field name="party_id"/>
+                                    <field name="scope"/>
+                                    <field name="product_tmpl_id"/>
+                                    <field name="mandatory"/>
+                                    <field name="license_id"/>
+                                    <field name="application_id"/>
+                                    <field name="state" widget="badge" decoration-success="state == 'covered'"
+                                           decoration-info="state == 'progress'" decoration-danger="state in ('missing', 'rejected')"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Catatan" name="note">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="view_permit_shipment_search" model="ir.ui.view">
+        <field name="name">izinara.shipment.search</field>
+        <field name="model">izinara.shipment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="po_ref"/>
+                <field name="partner_id"/>
+                <filter name="open" string="Berjalan" domain="[('state', 'in', ('draft', 'permits', 'ready'))]"/>
+                <filter name="mine" string="PIC saya" domain="[('user_id', '=', uid)]"/>
+                <group>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_country" string="Negara" context="{'group_by': 'country_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="view_permit_shipment_calendar" model="ir.ui.view">
+        <field name="name">izinara.shipment.calendar</field>
+        <field name="model">izinara.shipment</field>
+        <field name="arch" type="xml">
+            <calendar date_start="eta" color="state" mode="month" quick_create="0">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="readiness"/>
+            </calendar>
+        </field>
+    </record>
+    <record id="action_permit_shipment" model="ir.actions.act_window">
+        <field name="name">Pengapalan impor</field>
+        <field name="res_model">izinara.shipment</field>
+        <field name="view_mode">list,form,calendar</field>
+        <field name="context">{'search_default_open': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Catat rencana impor</p>
+            <p>Masukkan eksportir, ETA dan item code. Tombol "Hitung izin yang diperlukan" membaca template izin tiap
+               item, lalu "Buat &amp; mulai pengurusan" membagi aktivitas ke tiap bagian.</p>
+        </field>
+    </record>
+</odoo>

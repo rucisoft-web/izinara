@@ -1,0 +1,40 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_party_user,party user,model_izinara_party,group_permit_user,1,0,0,0
+access_party_manager,party manager,model_izinara_party,group_permit_manager,1,1,1,1
+access_type_user,type user,model_izinara_type,group_permit_user,1,0,0,0
+access_type_manager,type manager,model_izinara_type,group_permit_manager,1,1,1,1
+access_type_step_user,type_step user,model_izinara_type_step,group_permit_user,1,0,0,0
+access_type_step_manager,type_step manager,model_izinara_type_step,group_permit_manager,1,1,1,1
+access_template_user,template user,model_izinara_template,group_permit_user,1,0,0,0
+access_template_manager,template manager,model_izinara_template,group_permit_manager,1,1,1,1
+access_template_line_user,template_line user,model_izinara_template_line,group_permit_user,1,0,0,0
+access_template_line_manager,template_line manager,model_izinara_template_line,group_permit_manager,1,1,1,1
+access_template_activity_user,template_activity user,model_izinara_template_activity,group_permit_user,1,0,0,0
+access_template_activity_manager,template_activity manager,model_izinara_template_activity,group_permit_manager,1,1,1,1
+access_rule_user,rule user,model_izinara_rule,group_permit_user,1,0,0,0
+access_rule_manager,rule manager,model_izinara_rule,group_permit_manager,1,1,1,1
+access_license_user,license user,model_izinara_license,group_permit_user,1,1,1,0
+access_license_manager,license manager,model_izinara_license,group_permit_manager,1,1,1,1
+access_application_user,application user,model_izinara_application,group_permit_user,1,1,1,1
+access_application_manager,application manager,model_izinara_application,group_permit_manager,1,1,1,1
+access_application_step_user,application_step user,model_izinara_application_step,group_permit_user,1,1,1,1
+access_application_step_manager,application_step manager,model_izinara_application_step,group_permit_manager,1,1,1,1
+access_shipment_user,shipment user,model_izinara_shipment,group_permit_user,1,1,1,1
+access_shipment_manager,shipment manager,model_izinara_shipment,group_permit_manager,1,1,1,1
+access_shipment_line_user,shipment_line user,model_izinara_shipment_line,group_permit_user,1,1,1,1
+access_shipment_line_manager,shipment_line manager,model_izinara_shipment_line,group_permit_manager,1,1,1,1
+access_requirement_user,requirement user,model_izinara_requirement,group_permit_user,1,1,1,1
+access_requirement_manager,requirement manager,model_izinara_requirement,group_permit_manager,1,1,1,1
+access_item_import_manager,item_import manager,model_izinara_item_import,group_permit_manager,1,1,1,1
+access_product_template_permit_manager,product template permit manager,product.model_product_template,group_permit_manager,1,1,1,0
+access_product_product_permit_manager,product product permit manager,product.model_product_product,group_permit_manager,1,1,1,0
+access_regulation_user,regulation user,model_izinara_regulation,group_permit_user,1,0,0,0
+access_regulation_manager,regulation manager,model_izinara_regulation,group_permit_manager,1,1,1,1
+access_doc_spec_user,doc_spec user,model_izinara_doc_spec,group_permit_user,1,0,0,0
+access_doc_spec_manager,doc_spec manager,model_izinara_doc_spec,group_permit_manager,1,1,1,1
+access_document_user,document user,model_izinara_document,group_permit_user,1,1,1,1
+access_document_manager,document manager,model_izinara_document,group_permit_manager,1,1,1,1
+access_document_check_user,document_check user,model_izinara_document_check,group_permit_user,1,1,1,1
+access_document_check_manager,document_check manager,model_izinara_document_check,group_permit_manager,1,1,1,1
+access_memo_user,memo user,model_izinara_memo,group_permit_user,1,1,1,1
+access_memo_manager,memo manager,model_izinara_memo,group_permit_manager,1,1,1,1

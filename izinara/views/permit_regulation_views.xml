@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_permit_regulation_list" model="ir.ui.view">
+        <field name="name">izinara.regulation.list</field>
+        <field name="model">izinara.regulation</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="title"/>
+                <field name="issuer" optional="show"/>
+                <field name="year"/>
+                <field name="url" widget="url"/>
+                <field name="note"/>
+                <field name="code" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_permit_regulation_search" model="ir.ui.view">
+        <field name="name">izinara.regulation.search</field>
+        <field name="model">izinara.regulation</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="title"/>
+                <group>
+                    <filter name="group_issuer" string="Penerbit" context="{'group_by': 'issuer'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_permit_regulation" model="ir.actions.act_window">
+        <field name="name">Referensi peraturan</field>
+        <field name="res_model">izinara.regulation</field>
+        <field name="view_mode">list</field>
+        <field name="help" type="html">
+            <p>Daftar peraturan yang menjadi dasar setiap aktivitas. Peraturan bertanda "cek versi terbaru" perlu
+               dikonfirmasi ke JDIH instansi sebelum dipakai.</p>
+        </field>
+    </record>
+</odoo>

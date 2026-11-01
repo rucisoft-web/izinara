@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_permit_document_form" model="ir.ui.view">
+        <field name="name">izinara.document.form</field>
+        <field name="model">izinara.document</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_submit_review" type="object" string="Ajukan verifikasi" class="btn-primary"
+                            invisible="state not in ('missing', 'rejected')"/>
+                    <button name="action_verify" type="object" string="Sesuai, verifikasi" class="btn-primary"
+                            invisible="state != 'review'"/>
+                    <button name="action_reject" type="object" string="Tolak, minta perbaikan"
+                            invisible="state != 'review'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h2><field name="name"/></h2>
+                        <div class="text-muted"><field name="step_id" readonly="1"/></div>
+                    </div>
+                    <group>
+                        <group string="Unggah">
+                            <field name="attachment_ids" widget="many2many_binary" string="File (boleh lebih dari satu)"/>
+                            <field name="extensions"/>
+                            <field name="doc_number"/>
+                            <field name="date_expiry" required="check_expiry and state in ('missing', 'rejected')"/>
+                            <field name="check_expiry"/>
+                            <field name="required"/>
+                        </group>
+                        <group string="Verifikasi">
+                            <field name="verifier_party_id"/>
+                            <field name="uploader_party_id"/>
+                            <field name="uploaded_by_id"/>
+                            <field name="uploaded_date"/>
+                            <field name="verified_by_id"/>
+                            <field name="verified_date"/>
+                            <field name="revision"/>
+                        </group>
+                    </group>
+                    <div class="alert alert-info" role="status" invisible="not auto_check">
+                        <strong>Cek otomatis: </strong><field name="auto_check"/>
+                    </div>
+                    <div class="alert alert-danger" role="alert" invisible="state != 'rejected'">
+                        <strong>Perlu perbaikan: </strong><field name="reject_reason" readonly="1"/>
+                    </div>
+                    <notebook>
+                        <page string="Checklist verifikasi" name="checks">
+                            <field name="check_ids">
+                                <list editable="bottom" create="0" delete="0" decoration-success="ok">
+                                    <field name="name" readonly="1"/>
+                                    <field name="ok" widget="boolean_toggle" readonly="parent.state != 'review'"/>
+                                    <field name="note"/>
+                                </list>
+                            </field>
+                            <group invisible="state != 'review'">
+                                <field name="reject_reason" string="Catatan perbaikan (bila ditolak)"/>
+                            </group>
+                        </page>
+                        <page string="Kriteria" name="criteria">
+                            <field name="criteria" readonly="state != 'missing'"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="view_permit_document_list" model="ir.ui.view">
+        <field name="name">izinara.document.list</field>
+        <field name="model">izinara.document</field>
+        <field name="arch" type="xml">
+            <list create="0" decoration-success="state == 'verified'" decoration-warning="state == 'review'"
+                  decoration-danger="state == 'rejected'">
+                <field name="name"/>
+                <field name="step_id"/>
+                <field name="application_id" optional="show"/>
+                <field name="shipment_id" optional="show"/>
+                <field name="uploader_party_id"/>
+                <field name="verifier_party_id"/>
+                <field name="file_count"/>
+                <field name="date_expiry" optional="hide"/>
+                <field name="uploaded_date" optional="show"/>
+                <field name="activity_ids" widget="list_activity" optional="show"/>
+                <field name="state" widget="badge" decoration-success="state == 'verified'"
+                       decoration-warning="state == 'review'" decoration-danger="state == 'rejected'"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_permit_document_search" model="ir.ui.view">
+        <field name="name">izinara.document.search</field>
+        <field name="model">izinara.document</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="application_id"/>
+                <field name="shipment_id"/>
+                <filter name="to_verify" string="Perlu saya verifikasi"
+                        domain="[('state', '=', 'review'), ('verifier_party_id.user_ids', 'in', uid)]"/>
+                <filter name="review" string="Menunggu verifikasi" domain="[('state', '=', 'review')]"/>
+                <filter name="rejected" string="Ditolak" domain="[('state', '=', 'rejected')]"/>
+                <filter name="missing" string="Belum diunggah" domain="[('state', '=', 'missing'), ('required', '=', True)]"/>
+                <group>
+                    <filter name="group_verifier" string="Verifikator" context="{'group_by': 'verifier_party_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_permit_document" model="ir.actions.act_window">
+        <field name="name">Verifikasi dokumen</field>
+        <field name="res_model">izinara.document</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_review': 1, 'search_default_group_verifier': 1}</field>
+    </record>
+
+    <!-- Form aktivitas: dokumen, peraturan dan diskusi per aktivitas -->
+    <record id="view_permit_step_form" model="ir.ui.view">
+        <field name="name">izinara.application.step.form</field>
+        <field name="model">izinara.application.step</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_done" type="object" string="Tandai selesai" class="btn-primary"
+                            invisible="done or app_state not in ('progress', 'submitted')"/>
+                    <button name="action_new_memo" type="object" string="Kirim memo ke bagian lain" icon="fa-envelope"/>
+                    <button name="action_undo" type="object" string="Batalkan selesai"
+                            invisible="not done or app_state == 'approved'"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h2><field name="name"/></h2>
+                        <div><field name="application_id" readonly="1"/> · <field name="type_id" readonly="1"/></div>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="party_id"/>
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                            <field name="date_planned"/>
+                            <field name="shipment_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="app_state"/>
+                            <field name="done"/>
+                            <field name="done_date"/>
+                            <field name="done_by_id"/>
+                            <field name="doc_status"/>
+                        </group>
+                    </group>
+                    <group string="Petunjuk" invisible="not instructions">
+                        <field name="instructions" nolabel="1" colspan="2" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Dokumen" name="documents">
+                            <field name="document_ids" context="{'default_step_id': id}">
+                                <list decoration-success="state == 'verified'"
+                                      decoration-warning="state == 'review'" decoration-danger="state == 'rejected'">
+                                    <field name="name"/>
+                                    <field name="required"/>
+                                    <field name="file_count" string="File"/>
+                                    <field name="doc_number" optional="show"/>
+                                    <field name="date_expiry" optional="show"/>
+                                    <field name="verifier_party_id" optional="show"/>
+                                    <field name="state" widget="badge" decoration-success="state == 'verified'"
+                                           decoration-warning="state == 'review'" decoration-danger="state == 'rejected'"/>
+                                    <button name="action_submit_review" type="object" string="Ajukan" icon="fa-paper-plane"
+                                            invisible="state not in ('missing', 'rejected')"/>
+                                    <button name="action_open" type="object" string="Verifikasi" icon="fa-check-square-o"
+                                            invisible="state != 'review'"/>
+                                    <button name="action_open" type="object" icon="fa-external-link" title="Buka"
+                                            invisible="state == 'review'"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Referensi peraturan" name="regulations">
+                            <field name="regulation_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="title"/>
+                                    <field name="url" widget="url"/>
+                                    <field name="note"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Catatan" name="note">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+</odoo>

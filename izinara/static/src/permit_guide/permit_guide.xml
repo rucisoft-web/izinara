@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="izinara.RegBadges">
+        <t t-foreach="regulations" t-as="reg" t-key="reg.id">
+            <a t-if="reg.url" class="o_badge_reg" t-att-href="reg.url" target="_blank" t-att-title="reg.title"><t t-esc="reg.name"/></a>
+            <span t-else="" class="o_badge_reg" t-att-title="reg.title"><t t-esc="reg.name"/></span>
+        </t>
+    </t>
+
+    <t t-name="izinara.PermitGuide">
+        <div class="o_action h-100">
+        <div class="o_izinara_pg" t-if="state.data">
+            <div class="o_izinara_pg_side">
+                <input type="search" class="form-control form-control-sm" placeholder="Cari izin atau instansi..."
+                       t-model="state.search"/>
+                <t t-foreach="state.data.scopes" t-as="scope" t-key="scope.code">
+                    <t t-set="items" t-value="typesOf(scope.code)"/>
+                    <t t-if="items.length">
+                        <div class="o_scope"><t t-esc="scope.name"/></div>
+                        <a t-foreach="items" t-as="t" t-key="t.id" class="o_item"
+                           t-att-class="{ active: t.id === state.selected }" t-on-click.prevent="() => this.select(t.id)">
+                            <t t-esc="t.name"/>
+                        </a>
+                    </t>
+                </t>
+            </div>
+
+            <div class="o_izinara_pg_detail">
+                <div t-if="current">
+                    <t t-set="t" t-value="current"/>
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h2><t t-esc="t.name"/></h2>
+                            <div class="text-muted mb-3"><t t-esc="t.code"/> · <t t-esc="t.scope_label"/></div>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" t-on-click="openType">Ubah langkah standar</button>
+                    </div>
+
+                    <div class="o_izinara_pg_facts mb-3">
+                        <div><div class="o_k">Instansi penerbit</div><div class="o_v"><t t-esc="t.authority or '–'"/></div></div>
+                        <div><div class="o_k">Sistem / portal</div><div class="o_v"><t t-esc="t.system or '–'"/></div></div>
+                        <div><div class="o_k">Bagian penanggung jawab</div><div class="o_v"><t t-esc="t.party"/></div></div>
+                        <div><div class="o_k">Perkiraan waktu</div><div class="o_v"><t t-esc="t.lead_days"/> hari (langkah: <t t-esc="totalDays"/> hari kerja)</div></div>
+                        <div><div class="o_k">Masa berlaku</div><div class="o_v"><t t-if="t.validity_months"><t t-esc="t.validity_months"/> bulan</t><t t-else="">Tidak kedaluwarsa / mengikuti dokumen</t></div></div>
+                        <div t-if="t.groups.length"><div class="o_k">Kelompok yang memakai</div><div class="o_v"><t t-esc="t.groups.join(', ')"/></div></div>
+                    </div>
+
+                    <h3>Keterangan</h3>
+                    <t t-foreach="paragraphs" t-as="p" t-key="p_index">
+                        <div t-if="p.label" class="o_izinara_pg_note" t-att-class="{ o_warn: p.label === 'Perhatian' }">
+                            <b><t t-esc="p.label"/>:</b> <t t-esc="p.text"/>
+                        </div>
+                        <p t-else=""><t t-esc="p.text"/></p>
+                    </t>
+
+                    <h3>Langkah-langkah</h3>
+                    <div class="o_izinara_pg_step" t-foreach="t.steps" t-as="s" t-key="s.id">
+                        <div class="o_num"><t t-esc="s_index + 1"/></div>
+                        <div>
+                            <div class="fw-bold"><t t-esc="s.name"/></div>
+                            <div class="o_meta">
+                                <i class="fa fa-user me-1"/><t t-esc="s.party"/>
+                                <span class="mx-2">·</span><i class="fa fa-clock-o me-1"/><t t-esc="s.days"/> hari
+                                <t t-if="s.deliverable"><span class="mx-2">·</span><i class="fa fa-file-o me-1"/>Hasil: <t t-esc="s.deliverable"/></t>
+                            </div>
+                            <div t-if="s.instructions"><t t-esc="s.instructions"/></div>
+                            <div class="o_doc" t-foreach="s.docs" t-as="doc" t-key="doc_index">
+                                <i class="fa fa-paperclip me-1"/><b><t t-esc="doc.name"/></b>
+                                <span class="text-muted">
+                                    · <t t-esc="doc.required ? 'wajib' : 'opsional'"/>
+                                    <t t-if="doc.check_expiry"> · cek masa berlaku sampai ETA</t>
+                                    <t t-if="doc.verifier"> · diverifikasi <t t-esc="doc.verifier"/></t>
+                                </span>
+                                <ul t-if="doc.criteria.length">
+                                    <li t-foreach="doc.criteria" t-as="c" t-key="c_index"><t t-esc="c"/></li>
+                                </ul>
+                            </div>
+                            <div class="mt-1" t-if="s.regulations.length">
+                                <t t-call="izinara.RegBadges"><t t-set="regulations" t-value="s.regulations"/></t>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Dasar hukum</h3>
+                    <p t-if="t.legal_basis"><t t-esc="t.legal_basis"/></p>
+                    <table class="table table-sm" t-if="t.regulations.length">
+                        <tbody>
+                            <tr t-foreach="t.regulations" t-as="reg" t-key="reg.id">
+                                <td style="width:30%"><a t-if="reg.url" t-att-href="reg.url" target="_blank"><t t-esc="reg.name"/></a><t t-else=""><t t-esc="reg.name"/></t></td>
+                                <td><t t-esc="reg.title"/><div t-if="reg.note" class="text-muted small"><t t-esc="reg.note"/></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <t t-if="t.templates.length">
+                        <h3>Dipakai di template</h3>
+                        <ul>
+                            <li t-foreach="t.templates" t-as="tl" t-key="tl_index"><t t-esc="tl.name"/> <span class="text-muted">(<t t-esc="tl.mandatory ? 'wajib' : 'opsional'"/>)</span></li>
+                        </ul>
+                    </t>
+                    <p class="text-muted small mt-4">Langkah dan dokumen di halaman ini sama dengan langkah standar yang dipakai saat pengurusan
+                        dimulai. Perubahan di Konfigurasi &gt; Jenis izin langsung tampil di sini.</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </t>
+</templates>

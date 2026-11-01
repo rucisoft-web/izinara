@@ -1,0 +1,67 @@
+.o_izinara_exec {
+    background-color: $o-view-background-color;
+    .o_izinara_exec_body { max-width: 1100px; }
+    h2 { font-weight: 600; }
+    h3 {
+        font-size: 1.15rem;
+        margin: 1.75rem 0 0.75rem;
+        padding-bottom: 0.35rem;
+        border-bottom: 2px solid #0f2c59;
+        display: inline-block;
+    }
+    .o_izinara_exec_lead { font-size: 1.05rem; max-width: 900px; }
+    .o_izinara_exec_grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 0.75rem;
+    }
+    .o_izinara_exec_charts {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+        gap: 1rem;
+    }
+    .o_izinara_exec_kpi, .o_izinara_exec_card, .o_izinara_exec_chart {
+        border: 1px solid $border-color;
+        border-radius: 6px;
+        padding: 0.85rem 1rem;
+        background-color: $o-view-background-color;
+    }
+    .o_izinara_exec_kpi {
+        border-top: 3px solid #0f2c59;
+        .o_value { font-size: 1.9rem; font-weight: 600; line-height: 1.15; color: #0f2c59; }
+        .o_label { font-weight: 500; }
+        .o_sub { font-size: 0.8rem; color: $text-muted; margin-top: 0.2rem; }
+    }
+    .o_izinara_exec_card {
+        h4 { font-size: 0.98rem; margin-bottom: 0.4rem; color: #0f2c59; }
+        i.fa { color: #2a5aa0; margin-right: 0.4rem; }
+    }
+    .o_izinara_exec_chart h4 { font-size: 0.95rem; margin-bottom: 0.75rem; }
+    .o_bar_row {
+        display: grid;
+        grid-template-columns: 170px 1fr 90px;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.82rem;
+        margin-bottom: 0.4rem;
+        .o_bar_label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .o_bar_track { background-color: #eef2f7; border-radius: 3px; height: 14px; display: flex; overflow: hidden; }
+        .o_bar_fill { height: 100%; }
+        .o_bar_value { text-align: right; color: $text-muted; }
+    }
+    .o_donut_wrap { display: flex; align-items: center; gap: 1.25rem; }
+    .o_donut { width: 150px; height: 150px; flex-shrink: 0; }
+    .o_legend { font-size: 0.82rem; }
+    .o_legend .o_dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 0.4rem; }
+    .o_chart_note { font-size: 0.78rem; color: $text-muted; margin-top: 0.5rem; }
+    table.o_izinara_exec_table {
+        th { background-color: #0f2c59; color: #fff; font-weight: 500; }
+        td, th { padding: 0.45rem 0.65rem; vertical-align: top; font-size: 0.88rem; }
+    }
+    .o_izinara_figure_row {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+        gap: 1rem;
+        .o_izinara_figure { margin: 0; }
+    }
+}

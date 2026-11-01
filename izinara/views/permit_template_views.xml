@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_permit_template_list" model="ir.ui.view">
+        <field name="name">izinara.template.list</field>
+        <field name="model">izinara.template</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="food_group"/>
+                <field name="description"/>
+                <field name="total_days"/>
+                <field name="product_count"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_permit_template_form" model="ir.ui.view">
+        <field name="name">izinara.template.form</field>
+        <field name="model">izinara.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_load_standard_activities" type="object" string="Muat aktivitas standar"
+                            help="Tambahkan langkah standar untuk jenis izin yang belum punya aktivitas di template ini."/>
+                    <button name="action_reset_activities" type="object" string="Reset aktivitas"
+                            confirm="Semua aktivitas template ini diganti dengan langkah standar. Lanjutkan?"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_products" type="object" class="oe_stat_button" icon="fa-cubes">
+                            <field name="product_count" widget="statinfo" string="Item code"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="mis. Daging merah impor (halal)"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="food_group"/>
+                            <field name="total_days"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Izin yang diperlukan" name="lines">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="type_id"/>
+                                    <field name="party_id"/>
+                                    <field name="scope"/>
+                                    <field name="mandatory"/>
+                                    <field name="note"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Aktivitas pengurusan" name="activities">
+                            <field name="activity_ids">
+                                <list editable="bottom">
+                                    <field name="type_id"/>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="party_id"/>
+                                    <field name="duration_days" sum="Total"/>
+                                    <field name="deliverable"/>
+                                    <field name="doc_count" string="Dok."/>
+                                    <field name="regulation_ids" widget="many2many_tags" optional="show"/>
+                                    <field name="instructions" optional="hide"/>
+                                    <button name="action_open" type="object" icon="fa-pencil-square-o" title="Dokumen &amp; kriteria"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Item code" name="products">
+                            <field name="product_tmpl_ids" readonly="1">
+                                <list>
+                                    <field name="default_code"/>
+                                    <field name="name"/>
+                                    <field name="permit_group"/>
+                                    <field name="permit_subgroup"/>
+                                    <field name="permit_hs_code"/>
+                                    <field name="permit_origin_label"/>
+                                    <field name="permit_non_halal"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="view_permit_template_activity_form" model="ir.ui.view">
+        <field name="name">izinara.template.activity.form</field>
+        <field name="model">izinara.template.activity</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title"><h2><field name="name"/></h2></div>
+                    <group>
+                        <group>
+                            <field name="template_id" readonly="1"/>
+                            <field name="type_id"/>
+                            <field name="party_id"/>
+                        </group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="duration_days"/>
+                            <field name="deliverable"/>
+                        </group>
+                    </group>
+                    <group string="Petunjuk">
+                        <field name="instructions" nolabel="1" colspan="2"/>
+                    </group>
+                    <notebook>
+                        <page string="Dokumen wajib &amp; kriteria verifikasi" name="docs">
+                            <field name="doc_spec_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="required"/>
+                                    <field name="extensions"/>
+                                    <field name="check_expiry"/>
+                                    <field name="verifier_party_id"/>
+                                    <field name="criteria"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Referensi peraturan" name="regs">
+                            <field name="regulation_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="title"/>
+                                    <field name="url" widget="url"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_permit_template" model="ir.actions.act_window">
+        <field name="name">Template pengurusan</field>
+        <field name="res_model">izinara.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Buat template aktivitas pengurusan izin</p>
+            <p>Satu template berisi daftar izin dan aktivitas tiap bagian. Pasang template ke item code di menu Barang
+               atau lewat aturan pemetaan.</p>
+        </field>
+    </record>
+</odoo>

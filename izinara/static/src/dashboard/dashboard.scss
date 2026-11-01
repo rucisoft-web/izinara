@@ -1,0 +1,37 @@
+.o_permit_dashboard {
+    background-color: $o-view-background-color;
+
+    .o_permit_kpis {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+        gap: 0.75rem;
+    }
+    .o_permit_kpi, .o_permit_card {
+        border: 1px solid $border-color;
+        border-radius: 0.5rem;
+        background-color: $o-view-background-color;
+        padding: 0.75rem 1rem;
+    }
+    .o_permit_kpi {
+        cursor: pointer;
+        &:hover { border-color: $o-action; }
+    }
+    .o_permit_kpi_value { font-size: 1.8rem; font-weight: 600; line-height: 1.2; }
+    .o_permit_kpi_label { font-weight: 500; }
+    .o_permit_kpi_sub { font-size: 0.8rem; margin-top: 0.25rem; }
+    .o_permit_groups {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 0.75rem;
+    }
+    .o_permit_group {
+        border-left: 3px solid $o-action;
+        padding: 0.25rem 0.75rem;
+        cursor: pointer;
+        &:hover { background-color: $gray-100; }
+    }
+    .o_permit_card h4 { font-size: 1rem; margin-bottom: 0.75rem; }
+    .o_permit_row { cursor: pointer; }
+    .o_permit_row:hover { background-color: $gray-100; }
+    .o_permit_stack .progress-bar { cursor: pointer; }
+}
